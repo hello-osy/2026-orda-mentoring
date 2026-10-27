@@ -1,0 +1,35 @@
+{"event": "controller_state", "elapsed": 0.0, "state": "waiting for answer"}
+{"event": "checkpoint", "elapsed": 0.0, "name": "start", "point": [1.25, 5.570000000000002]}
+{"event": "controller_state", "elapsed": 0.126, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 0.48200000000000004, "state": "lane"}
+{"event": "checkpoint", "elapsed": 12.342, "name": "bump_exit", "point": [3.153561564014418, 5.581967315650706]}
+{"event": "controller_state", "elapsed": 18.632, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 19.983999999999998, "state": "lane"}
+{"event": "controller_state", "elapsed": 20.436, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 21.012, "state": "lane"}
+{"event": "controller_state", "elapsed": 24.184, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 24.396, "state": "lane"}
+{"event": "controller_state", "elapsed": 25.0, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 25.232, "state": "lane"}
+{"event": "controller_state", "elapsed": 26.836, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 26.942, "state": "lane"}
+{"event": "controller_state", "elapsed": 38.436, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 38.653999999999996, "state": "lane"}
+{"event": "checkpoint", "elapsed": 39.136, "name": "first_corner", "point": [9.451926156175103, 5.307347324386625]}
+{"event": "controller_state", "elapsed": 46.152, "state": "pedestrian_approach"}
+{"event": "controller_state", "elapsed": 50.688, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 50.906, "state": "pedestrian_approach"}
+{"event": "checkpoint", "elapsed": 55.048, "name": "zigzag_exit", "point": [9.581551340744712, 3.040420408548427]}
+{"event": "pedestrian_line_crossed", "elapsed": 58.644, "speed": 0.035835838674466394, "signal": "traffic_yellow", "hold_before_crossing": 0.0}
+{"event": "controller_state", "elapsed": 59.144, "state": "pedestrian_hold"}
+{"event": "controller_state", "elapsed": 59.736, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 60.592, "state": "pedestrian_hold"}
+{"event": "controller_state", "elapsed": 63.746, "state": "lane"}
+{"event": "controller_state", "elapsed": 64.098, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 64.204, "state": "lane"}
+{"event": "checkpoint", "elapsed": 67.388, "name": "pedestrian_exit", "point": [9.59657693417156, 2.119229795459292]}
+{"event": "controller_state", "elapsed": 69.38, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 69.834, "state": "lane"}
+{"event": "controller_state", "elapsed": 72.582, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 73.084, "state": "lane"}
+{"event": "finished", "elapsed": 87.472, "reason": "stationary_timeout"}

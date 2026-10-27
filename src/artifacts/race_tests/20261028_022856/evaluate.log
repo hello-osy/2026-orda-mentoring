@@ -1,0 +1,40 @@
+평가 시작: /home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/evaluations/run_20261028_022856_675496
+{"event": "controller_state", "elapsed": 0.0, "state": "waiting for answer"}
+{"event": "checkpoint", "elapsed": 0.0, "name": "start", "point": [1.25, 5.570000000000002]}
+{"event": "controller_state", "elapsed": 0.11, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 0.48000000000000004, "state": "lane"}
+{"event": "checkpoint", "elapsed": 12.446, "name": "bump_exit", "point": [3.1574841633098436, 5.57910689753536]}
+{"event": "checkpoint", "elapsed": 37.942, "name": "first_corner", "point": [9.432784915952041, 5.291766652241902]}
+{"event": "controller_state", "elapsed": 45.234, "state": "pedestrian_approach"}
+{"event": "checkpoint", "elapsed": 53.99, "name": "zigzag_exit", "point": [9.582880092400913, 3.0369469779563247]}
+{"event": "controller_state", "elapsed": 57.356, "state": "pedestrian_hold"}
+{"event": "controller_state", "elapsed": 60.542, "state": "lane"}
+{"event": "pedestrian_line_crossed", "elapsed": 61.256, "speed": 0.15986029448084768, "signal": "traffic_red", "hold_before_crossing": 3.186}
+{"event": "checkpoint", "elapsed": 63.13, "name": "pedestrian_exit", "point": [9.57809708396377, 2.1451188765811517]}
+{"event": "checkpoint", "elapsed": 69.556, "name": "three_lane_entry", "point": [9.232507344141501, 1.0487583798029072]}
+{"event": "controller_state", "elapsed": 73.442, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 73.552, "state": "lane"}
+{"event": "controller_state", "elapsed": 75.542, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 75.79, "state": "lane"}
+{"event": "checkpoint", "elapsed": 101.07, "name": "obstacle_exit", "point": [5.346466551526801, 0.6889316080947774]}
+{"event": "fork_instruction_observed", "elapsed": 102.7, "direction": "right"}
+{"event": "checkpoint", "elapsed": 115.768, "name": "fork_branch", "point": [3.670035416204082, 1.4583702008728965], "branch": "right"}
+{"event": "checkpoint", "elapsed": 133.15, "name": "left_corner", "point": [0.8056798578231248, 1.2615230136823117]}
+{"event": "cone_gate_crossed", "elapsed": 139.1728749188847, "index": 0, "model": "cone_0", "cone": [0.63, 2.1], "required_side": "right", "body_center": [0.8265031444147004, 2.1], "sim_time": 139.1788749188847, "signed_side_clearance_m": 0.1965031444147004, "correct": true}
+{"event": "cone_gate_crossed", "elapsed": 143.24288582358164, "index": 1, "model": "cone_1", "cone": [0.94, 2.6], "required_side": "left", "body_center": [0.6627919783356404, 2.6], "sim_time": 143.24888582358165, "signed_side_clearance_m": 0.27720802166435954, "correct": true}
+{"event": "cone_gate_crossed", "elapsed": 147.8827336636047, "index": 2, "model": "cone_2", "cone": [0.63, 3.1], "required_side": "right", "body_center": [0.4312079231123222, 3.1], "sim_time": 147.8887336636047, "signed_side_clearance_m": -0.1987920768876778, "correct": false}
+{"event": "cone_gate_crossed", "elapsed": 151.82382861851522, "index": 3, "model": "cone_3", "cone": [0.94, 3.6], "required_side": "left", "body_center": [0.4347618045379128, 3.6], "sim_time": 151.82982861851522, "signed_side_clearance_m": 0.5052381954620871, "correct": true}
+{"event": "checkpoint", "elapsed": 152.672, "name": "cones_exit", "point": [0.4710138186826594, 3.6889728466234066]}
+{"event": "checkpoint", "elapsed": 161.39, "name": "traffic_approach", "point": [1.4746392588290993, 4.865497454133209]}
+{"event": "controller_state", "elapsed": 166.182, "state": "traffic_approach"}
+{"event": "controller_state", "elapsed": 170.66, "state": "traffic_hold"}
+{"event": "controller_state", "elapsed": 170.91, "state": "traffic_approach"}
+{"event": "controller_state", "elapsed": 171.46, "state": "lane"}
+{"event": "traffic_line_crossed", "elapsed": 171.46, "speed": 0.3196823254441511, "signal": "traffic_green", "hold_before_crossing": 0.3739999999999952}
+{"event": "checkpoint", "elapsed": 174.222, "name": "traffic_exit", "point": [3.8351307849040484, 4.8402699340690996]}
+{"event": "checkpoint", "elapsed": 181.186, "name": "parking_approach", "point": [5.665179493910973, 4.837723040965597]}
+{"event": "controller_state", "elapsed": 184.23, "state": "parking_align"}
+{"event": "controller_state", "elapsed": 194.056, "state": "parking_sequence"}
+{"event": "controller_state", "elapsed": 209.064, "state": "parked"}
+{"event": "finished", "elapsed": 209.064, "reason": "course_complete"}
+{"report": "/home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/evaluations/run_20261028_022856_675496/report.json", "status": "course_complete", "passed": false}

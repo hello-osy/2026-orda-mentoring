@@ -1,0 +1,219 @@
+{
+  "scope": "Narrow cone reproduction from full09 lower-left entry; not full course. Read-only actual pose audit.",
+  "passed": true,
+  "cone_route": {
+    "passed": true,
+    "missing_gates": [],
+    "wrong_side_gates": [],
+    "crossings": [
+      {
+        "index": 0,
+        "model": "cone_0",
+        "cone": [
+          0.63,
+          2.1
+        ],
+        "required_side": "right",
+        "body_center": [
+          0.8183390989495326,
+          2.1
+        ],
+        "sim_time": 11.861546561223614,
+        "signed_side_clearance_m": 0.1883390989495326,
+        "correct": true
+      },
+      {
+        "index": 1,
+        "model": "cone_1",
+        "cone": [
+          0.94,
+          2.6
+        ],
+        "required_side": "left",
+        "body_center": [
+          0.7502982763488469,
+          2.6
+        ],
+        "sim_time": 16.043257524184998,
+        "signed_side_clearance_m": 0.189701723651153,
+        "correct": true
+      },
+      {
+        "index": 2,
+        "model": "cone_2",
+        "cone": [
+          0.63,
+          3.1
+        ],
+        "required_side": "right",
+        "body_center": [
+          0.8186993010985569,
+          3.1
+        ],
+        "sim_time": 19.986744412288516,
+        "signed_side_clearance_m": 0.18869930109855693,
+        "correct": true
+      },
+      {
+        "index": 3,
+        "model": "cone_3",
+        "cone": [
+          0.94,
+          3.6
+        ],
+        "required_side": "left",
+        "body_center": [
+          0.7540082046392013,
+          3.6
+        ],
+        "sim_time": 23.827767528804547,
+        "signed_side_clearance_m": 0.18599179536079868,
+        "correct": true
+      }
+    ],
+    "reference": "Body centre at rear axle plus half wheelbase; northbound crossings only."
+  },
+  "last_pose": {
+    "world_pose": [
+      2.038297440425882,
+      4.8413361383291065,
+      -1.9418533420134665e-08,
+      -0.010438864438951536
+    ],
+    "velocity": 0.15999999642311025,
+    "telemetry": {
+      "stamp": 388.6,
+      "age": 0.19999999999998863,
+      "objects": [
+        {
+          "name": "traffic_green",
+          "bbox": [
+            0.2877323865890503,
+            0.11423292160034179,
+            0.35617067813873293,
+            0.3164923350016276
+          ],
+          "truncated": false,
+          "confidence": 0.9914945363998413,
+          "area": 0.013842288703024981,
+          "center": [
+            0.3219515323638916,
+            0.2153626283009847
+          ]
+        },
+        {
+          "name": "parking",
+          "bbox": [
+            0.4331226348876953,
+            0.26762590408325193,
+            0.46007823944091797,
+            0.30735082626342775
+          ],
+          "truncated": false,
+          "confidence": 0.6957428455352783,
+          "area": 0.001070809293196362,
+          "center": [
+            0.44660043716430664,
+            0.28748836517333987
+          ]
+        }
+      ],
+      "control": {
+        "lane_valid": true,
+        "lane_error": 0.023555420667526618,
+        "lane_heading": -0.0648257691245865,
+        "dash_heading": 0.022986626880816277,
+        "traffic_stop_completed": false,
+        "lane_age": 0.14999999999997726,
+        "front": 1.769715428352356,
+        "rear": 12.0,
+        "blocked": false,
+        "avoiding": false,
+        "planner_failed": false,
+        "cone_clearance": true,
+        "narrow_objects": 0,
+        "wide_objects": 0,
+        "narrow_centers": [],
+        "road_memory": false,
+        "road_heading": -0.16063167637799722,
+        "road_center": 0.05877341652608431,
+        "lost_lane_distance": 0.0,
+        "fork_remaining": 0.0,
+        "fork_bias": 0.0,
+        "fork_pending": false,
+        "fork_target": 0.0,
+        "line_distance": 0.9890507539519842,
+        "stop_candidates": [
+          {
+            "distance": 1.013126491646778,
+            "thickness": 0.042959427207637235,
+            "complete": true
+          }
+        ],
+        "stage": "traffic",
+        "speed": 0.16,
+        "published_speed": 0.16
+      },
+      "image_age": 0.19999999999998863,
+      "scan_age": 0.06600000000003092
+    },
+    "command": [
+      0.1599999964237213,
+      0.035355180501937866
+    ],
+    "status": "lane",
+    "elapsed_sim": 36.50200000000001
+  },
+  "actual_cone_positions": [
+    {
+      "index": 0,
+      "shift_m": 1.879052010812644e-07,
+      "tilt_rad": 6.559896678643088e-07,
+      "actual_pose": [
+        0.6299998631264393,
+        2.0999998712599792,
+        0.13999914079649467
+      ]
+    },
+    {
+      "index": 1,
+      "shift_m": 1.713039105498649e-07,
+      "tilt_rad": 5.462855929083701e-07,
+      "actual_pose": [
+        0.9399998702490913,
+        2.5999998881530892,
+        0.13999912940293574
+      ]
+    },
+    {
+      "index": 2,
+      "shift_m": 1.8674359453165368e-07,
+      "tilt_rad": 6.665667666895824e-07,
+      "actual_pose": [
+        0.6299998502609369,
+        3.0999998884142346,
+        0.13999921726457293
+      ]
+    },
+    {
+      "index": 3,
+      "shift_m": 1.3480465139679552e-07,
+      "tilt_rad": 2.45756246186356e-07,
+      "actual_pose": [
+        0.9399998967759007,
+        3.599999913298908,
+        0.13999989296792842
+      ]
+    }
+  ],
+  "obstacle_footprint_overlap_samples": [],
+  "limitations": [
+    "Short reproduction segment: four cone gates and physical cone positions verified; parking not tested.",
+    "Approximately4Hz footprint overlap is a geometry diagnostic, not a contact sensor."
+  ],
+  "partial_validation": true,
+  "full_course_verified": false,
+  "parking_verified": false,
+  "termination": "Stopped at parent request after four verified cone gates to start full-course validation.",
+  "answer_sha256": "5841b1f811d21d6dc108ee21c1595b314b8ba1e3f0bc12aa8484855693395a3d"
+}

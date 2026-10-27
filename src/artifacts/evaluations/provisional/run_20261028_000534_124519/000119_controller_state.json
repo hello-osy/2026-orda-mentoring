@@ -1,0 +1,31 @@
+{
+  "image": "000119_controller_state.jpg",
+  "sim_time": 13.694,
+  "image_stamp": 13.6,
+  "controller_state": "lane",
+  "detections": {
+    "received_sim_time": 13.64,
+    "stamp": 12.268,
+    "age": 1.4260000000000002,
+    "publisher_age": 1.3819999999999997,
+    "objects": [
+      {
+        "name": "traffic_green",
+        "bbox": [
+          0.7449224948883056,
+          0.0013842264811197917,
+          0.8752565383911133,
+          0.319938596089681
+        ],
+        "truncated": true,
+        "confidence": 0.9653503894805908,
+        "area": 0.04151847906657167,
+        "center": [
+          0.8100895166397095,
+          0.1606614112854004
+        ]
+      }
+    ]
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

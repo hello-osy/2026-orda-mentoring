@@ -1,0 +1,64 @@
+{
+  "image": "000774_interval.jpg",
+  "sim_time": 88.994,
+  "image_stamp": 88.934,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 88.734,
+    "age": 0.2600000000000051,
+    "objects": [
+      {
+        "name": "right",
+        "bbox": [
+          0.45334253311157224,
+          0.21455049514770508,
+          0.5162798881530761,
+          0.30202423731486
+        ],
+        "truncated": false,
+        "confidence": 0.5526543855667114,
+        "area": 0.005505365967583203,
+        "center": [
+          0.48481121063232424,
+          0.25828736623128257
+        ]
+      },
+      {
+        "name": "left",
+        "bbox": [
+          0.45450654029846194,
+          0.21607863108317057,
+          0.516859769821167,
+          0.3018414815266927
+        ],
+        "truncated": false,
+        "confidence": 0.5071464776992798,
+        "area": 0.005347590698226365,
+        "center": [
+          0.48568315505981446,
+          0.25896005630493163
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.0772352431301627,
+      "lane_heading": 0.1533904129779716,
+      "lane_age": 0.04999999999999716,
+      "front": 0.9067218899726868,
+      "rear": 1.297568440437317,
+      "blocked": true,
+      "avoiding": true,
+      "planner_failed": false,
+      "line_distance": null,
+      "stage": "fork",
+      "speed": 0.13,
+      "published_speed": 0.13
+    },
+    "image_age": 0.03200000000001069,
+    "scan_age": 0.03200000000001069,
+    "received_sim_time": 88.892,
+    "publisher_age": 0.16600000000001103
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

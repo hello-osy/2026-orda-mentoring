@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+src/runtime/
+src/artifacts/bags/
+src/artifacts/dataset/
+src/artifacts/dataset_*/
+src/artifacts/training/
+src/artifacts/models/*provisional*.pt
+src/artifacts/generated/
+src/artifacts/logs/
+build/
+install/
+log/

@@ -1,0 +1,89 @@
+{
+  "image": "000171_interval.jpg",
+  "sim_time": 19.77,
+  "image_stamp": 19.468,
+  "controller_state": "traffic_hold",
+  "detections": {
+    "stamp": 19.468,
+    "age": 0.3019999999999996,
+    "objects": [
+      {
+        "name": "parking",
+        "bbox": [
+          0.4470995903015137,
+          0.258657964070638,
+          0.478867244720459,
+          0.3051556269327799
+        ],
+        "truncated": false,
+        "confidence": 0.9744044542312622,
+        "area": 0.0014771216850931524,
+        "center": [
+          0.4629834175109863,
+          0.281906795501709
+        ]
+      },
+      {
+        "name": "traffic_yellow",
+        "bbox": [
+          0.02131197452545166,
+          0.0,
+          0.19982359409332276,
+          0.3243372917175293
+        ],
+        "truncated": true,
+        "confidence": 0.6983286738395691,
+        "area": 0.05789797523075322,
+        "center": [
+          0.11056778430938721,
+          0.16216864585876464
+        ]
+      },
+      {
+        "name": "traffic_red",
+        "bbox": [
+          0.021509861946105956,
+          0.0,
+          0.19991664886474608,
+          0.326730219523112
+        ],
+        "truncated": true,
+        "confidence": 0.5559956431388855,
+        "area": 0.05829088865434035,
+        "center": [
+          0.11071325540542602,
+          0.163365109761556
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": 0.03165040262824277,
+      "lane_heading": -0.46121555359642186,
+      "lane_age": 0.08200000000000074,
+      "front": 3.2537057399749756,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": true,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "line_distance": 0.5799522673031026,
+      "stop_candidates": [
+        {
+          "distance": 0.5799522673031026,
+          "thickness": 0.03579952267303103,
+          "complete": true
+        }
+      ],
+      "stage": "traffic",
+      "speed": 0.0,
+      "published_speed": 0.0
+    },
+    "image_age": 0.13200000000000145,
+    "scan_age": 0.0660000000000025,
+    "received_sim_time": 19.588,
+    "publisher_age": 0.13200000000000145
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

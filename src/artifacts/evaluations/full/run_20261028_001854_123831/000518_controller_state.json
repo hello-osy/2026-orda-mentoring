@@ -1,0 +1,31 @@
+{
+  "image": "000518_controller_state.jpg",
+  "sim_time": 58.976,
+  "image_stamp": 58.934,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 58.734,
+    "age": 0.24199999999999733,
+    "objects": [],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.2391852563987294,
+      "lane_heading": 0.047058328938710585,
+      "lane_age": 0.0659999999999954,
+      "front": 12.0,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "line_distance": 0.039290676830240685,
+      "stage": "pedestrian",
+      "speed": 0.0,
+      "published_speed": 0.0
+    },
+    "image_age": 0.05000000000000426,
+    "scan_age": 0.05000000000000426,
+    "received_sim_time": 58.846000000000004,
+    "publisher_age": 0.11599999999999966
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

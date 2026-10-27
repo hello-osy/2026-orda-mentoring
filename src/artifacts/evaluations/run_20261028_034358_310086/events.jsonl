@@ -1,0 +1,36 @@
+{"event": "controller_state", "elapsed": 0.0, "state": "waiting for answer"}
+{"event": "checkpoint", "elapsed": 0.0, "name": "start", "point": [1.25, 5.57]}
+{"event": "controller_state", "elapsed": 0.136, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 0.622, "state": "lane"}
+{"event": "checkpoint", "elapsed": 13.02, "name": "bump_exit", "point": [3.159503835989833, 5.580177343231983]}
+{"event": "checkpoint", "elapsed": 38.192, "name": "first_corner", "point": [9.430885076138926, 5.293604107222899]}
+{"event": "controller_state", "elapsed": 45.589999999999996, "state": "pedestrian_approach"}
+{"event": "checkpoint", "elapsed": 54.134, "name": "zigzag_exit", "point": [9.584194815652218, 3.0467929500869184]}
+{"event": "controller_state", "elapsed": 57.582, "state": "pedestrian_hold"}
+{"event": "controller_state", "elapsed": 60.763999999999996, "state": "lane"}
+{"event": "pedestrian_line_crossed", "elapsed": 61.47, "speed": 0.15545228319223994, "signal": "traffic_red", "hold_before_crossing": 3.181999999999995}
+{"event": "checkpoint", "elapsed": 63.546, "name": "pedestrian_exit", "point": [9.577770340764676, 2.1376297086467364]}
+{"event": "checkpoint", "elapsed": 69.674, "name": "three_lane_entry", "point": [9.23173143529369, 1.0470364925612121]}
+{"event": "checkpoint", "elapsed": 100.308, "name": "obstacle_exit", "point": [5.357001057284057, 0.6884579933445129]}
+{"event": "fork_instruction_observed", "elapsed": 102.006, "direction": "left"}
+{"event": "controller_state", "elapsed": 103.562, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 103.696, "state": "lane"}
+{"event": "checkpoint", "elapsed": 111.884, "name": "fork_branch", "point": [3.6747399011724484, 0.43439583690341704], "branch": "left"}
+{"event": "checkpoint", "elapsed": 129.226, "name": "left_corner", "point": [0.8127593825710605, 1.2690966588627588]}
+{"event": "cone_gate_crossed", "elapsed": 135.02457256655225, "index": 0, "model": "cone_0", "cone": [0.63, 2.1], "required_side": "right", "body_center": [0.819193703163569, 2.1], "sim_time": 135.02657256655226, "signed_side_clearance_m": 0.18919370316356898, "correct": true}
+{"event": "cone_gate_crossed", "elapsed": 139.0147116614415, "index": 1, "model": "cone_1", "cone": [0.94, 2.6], "required_side": "left", "body_center": [0.7516212713986072, 2.6], "sim_time": 139.01671166144152, "signed_side_clearance_m": 0.1883787286013927, "correct": true}
+{"event": "cone_gate_crossed", "elapsed": 142.9117216518226, "index": 2, "model": "cone_2", "cone": [0.63, 3.1], "required_side": "right", "body_center": [0.8187623513452651, 3.1], "sim_time": 142.9137216518226, "signed_side_clearance_m": 0.1887623513452651, "correct": true}
+{"event": "cone_gate_crossed", "elapsed": 146.86730437393382, "index": 3, "model": "cone_3", "cone": [0.94, 3.6], "required_side": "left", "body_center": [0.7574570374505308, 3.6], "sim_time": 146.86930437393383, "signed_side_clearance_m": 0.1825429625494691, "correct": true}
+{"event": "checkpoint", "elapsed": 147.266, "name": "cones_exit", "point": [0.7624264438816883, 3.5689610162825893]}
+{"event": "checkpoint", "elapsed": 157.262, "name": "traffic_approach", "point": [1.4600139233702036, 4.854715843328493]}
+{"event": "controller_state", "elapsed": 162.816, "state": "traffic_approach"}
+{"event": "controller_state", "elapsed": 167.44199999999998, "state": "traffic_hold"}
+{"event": "controller_state", "elapsed": 168.648, "state": "traffic_approach"}
+{"event": "controller_state", "elapsed": 169.146, "state": "lane"}
+{"event": "traffic_line_crossed", "elapsed": 169.146, "speed": 0.30574926239029193, "signal": "traffic_green", "hold_before_crossing": 1.2060000000000173}
+{"event": "checkpoint", "elapsed": 171.79399999999998, "name": "traffic_exit", "point": [3.8183472985541065, 4.840384453381373]}
+{"event": "checkpoint", "elapsed": 178.892, "name": "parking_approach", "point": [5.659042096151889, 4.838778987563962]}
+{"event": "controller_state", "elapsed": 181.99599999999998, "state": "parking_align"}
+{"event": "controller_state", "elapsed": 191.096, "state": "parking_sequence"}
+{"event": "controller_state", "elapsed": 206.088, "state": "parked"}
+{"event": "finished", "elapsed": 206.088, "reason": "course_complete"}

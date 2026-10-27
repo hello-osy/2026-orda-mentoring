@@ -1,0 +1,14 @@
+{
+  "image": "000546_controller_state.jpg",
+  "sim_time": 64.104,
+  "image_stamp": 64.068,
+  "controller_state": "waiting for fresh sensors / detector",
+  "detections": {
+    "received_sim_time": 63.932,
+    "stamp": 63.334,
+    "age": 0.769999999999996,
+    "publisher_age": 0.6159999999999997,
+    "objects": []
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

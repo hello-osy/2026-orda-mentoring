@@ -1,0 +1,51 @@
+{
+  "image": "000466_checkpoint.jpg",
+  "sim_time": 53.19,
+  "image_stamp": 53.134,
+  "controller_state": "pedestrian_approach",
+  "detections": {
+    "stamp": 53.0,
+    "age": 0.18999999999999773,
+    "objects": [],
+    "control": {
+      "lane_valid": true,
+      "lane_error": 0.00722933485142093,
+      "lane_heading": 0.09240664925718457,
+      "lane_age": 0.04999999999999716,
+      "front": 12.0,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "line_distance": 0.34791527470144523,
+      "stop_candidates": [
+        {
+          "distance": 0.3544152744630071,
+          "thickness": 0.03579952267303103,
+          "complete": true
+        },
+        {
+          "distance": 0.8985680190930787,
+          "thickness": 0.03221957040572792,
+          "complete": true
+        }
+      ],
+      "stage": "pedestrian",
+      "speed": 0.13,
+      "published_speed": 0.13
+    },
+    "image_age": 0.10000000000000142,
+    "scan_age": 0.03200000000000358,
+    "received_sim_time": 53.098,
+    "publisher_age": 0.10000000000000142
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

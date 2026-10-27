@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "logs": "/home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/race_tests/20261028_021606",
+  "evaluation_log": "/home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/race_tests/20261028_021606/evaluate.log",
+  "process_exit_codes": {
+    "simulator": 0,
+    "evaluate": 1,
+    "answer": 0
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "image": "000004_controller_state.jpg",
+  "sim_time": 0.35200000000000004,
+  "image_stamp": 0.334,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 0.2,
+    "age": 0.15200000000000002,
+    "objects": [
+      {
+        "name": "slow",
+        "bbox": [
+          0.7488739013671875,
+          0.03837025960286458,
+          0.9379716873168945,
+          0.2824822107950846
+        ],
+        "truncated": false,
+        "confidence": 0.9837017059326172,
+        "area": 0.04616102949431176,
+        "center": [
+          0.843422794342041,
+          0.16042623519897461
+        ]
+      },
+      {
+        "name": "traffic_red",
+        "bbox": [
+          0.5902449607849121,
+          0.17513877550760906,
+          0.6334485054016114,
+          0.3136367162068685
+        ],
+        "truncated": false,
+        "confidence": 0.888887882232666,
+        "area": 0.005983601960321418,
+        "center": [
+          0.6118467330932618,
+          0.24438774585723877
+        ]
+      }
+    ],
+    "control": {
+      "published_speed": 0.0,
+      "speed": 0.0
+    },
+    "image_age": 0.04999999999999999,
+    "scan_age": 0.04999999999999999,
+    "received_sim_time": 0.24200000000000002,
+    "publisher_age": 0.04999999999999999
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

@@ -1,0 +1,55 @@
+{
+  "image": "001174_cone_gate_crossed.jpg",
+  "sim_time": 133.624,
+  "image_stamp": 133.134,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 133.134,
+    "age": 0.4900000000000091,
+    "objects": [],
+    "control": {
+      "lane_valid": false,
+      "lane_error": 0.0,
+      "lane_heading": 0.0,
+      "dash_heading": 0.1875066838686697,
+      "traffic_stop_completed": false,
+      "lane_age": 1.0159999999999911,
+      "front": 0.5259844660758972,
+      "rear": 12.0,
+      "blocked": true,
+      "avoiding": true,
+      "planner_failed": false,
+      "cone_clearance": true,
+      "narrow_objects": 2,
+      "wide_objects": 0,
+      "narrow_centers": [
+        [
+          1.5128435087654075,
+          0.1392055501828021
+        ],
+        [
+          0.9706723753630622,
+          0.35381000811854657
+        ]
+      ],
+      "road_memory": true,
+      "road_heading": 0.1661508663891169,
+      "road_center": 0.09026871299365279,
+      "lost_lane_distance": 0.09749999643066329,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": null,
+      "stop_candidates": [],
+      "stage": "traffic",
+      "speed": 0.13,
+      "published_speed": 0.13
+    },
+    "image_age": 0.26600000000001955,
+    "scan_age": 0.0660000000000025,
+    "received_sim_time": 133.394,
+    "publisher_age": 0.26600000000001955
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

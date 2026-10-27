@@ -1,0 +1,150 @@
+{
+  "model": "YOLOv8",
+  "ultralytics_version": "8.3.228",
+  "checkpoint": "/home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/models/best.pt",
+  "sha256": "d38071be8e8d3e2b7809d0bb9dd7d8f159b709efd44068029fce1a4bfd613c6e",
+  "training_directory": "/home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/training/yolov8_20261027T145100_263153",
+  "dataset": "/home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/dataset_final",
+  "dataset_quality": {
+    "min_box_pixels": 14,
+    "min_clipped_fraction": 0.5,
+    "minimum_object_contrast": 6.0,
+    "traffic_quality": {
+      "dark_value_max": 70,
+      "minimum_dark_fraction": 0.75,
+      "saturation_min": 100,
+      "value_min": 60,
+      "minimum_color_fraction": 0.015,
+      "minimum_blob_fill": 0.45,
+      "hue_ranges": {
+        "traffic_red": [
+          [
+            0,
+            12
+          ],
+          [
+            168,
+            179
+          ]
+        ],
+        "traffic_yellow": [
+          [
+            18,
+            40
+          ]
+        ],
+        "traffic_green": [
+          [
+            40,
+            95
+          ]
+        ]
+      }
+    },
+    "sync_tolerance": 0.01
+  },
+  "data_source": "Gazebo camera images recorded into rosbag2 and extracted with visible-2D GT",
+  "split_unit": "independent collection run",
+  "classes": [
+    "traffic_red",
+    "traffic_yellow",
+    "traffic_green",
+    "left",
+    "right",
+    "pedestrian",
+    "slow",
+    "parking"
+  ],
+  "epochs_requested": 30,
+  "epochs_completed": 30,
+  "metrics": {
+    "metrics/precision(B)": 0.9864434453556206,
+    "metrics/recall(B)": 0.9727346446551624,
+    "metrics/mAP50(B)": 0.9888291855203619,
+    "metrics/mAP50-95(B)": 0.9597744482126839,
+    "fitness": 0.9597744482126839
+  },
+  "per_class": [
+    {
+      "Class": "traffic_red",
+      "Images": 20,
+      "Instances": 20,
+      "Box-P": 0.9853,
+      "Box-R": 1.0,
+      "Box-F1": 0.99259,
+      "mAP50": 0.995,
+      "mAP50-95": 0.98614
+    },
+    {
+      "Class": "traffic_yellow",
+      "Images": 29,
+      "Instances": 29,
+      "Box-P": 0.98798,
+      "Box-R": 1.0,
+      "Box-F1": 0.99395,
+      "mAP50": 0.995,
+      "mAP50-95": 0.99165
+    },
+    {
+      "Class": "traffic_green",
+      "Images": 31,
+      "Instances": 31,
+      "Box-P": 1.0,
+      "Box-R": 0.97221,
+      "Box-F1": 0.98591,
+      "mAP50": 0.995,
+      "mAP50-95": 0.96127
+    },
+    {
+      "Class": "left",
+      "Images": 16,
+      "Instances": 16,
+      "Box-P": 0.9962,
+      "Box-R": 1.0,
+      "Box-F1": 0.9981,
+      "mAP50": 0.995,
+      "mAP50-95": 0.96193
+    },
+    {
+      "Class": "right",
+      "Images": 18,
+      "Instances": 18,
+      "Box-P": 0.97475,
+      "Box-R": 0.94444,
+      "Box-F1": 0.95936,
+      "mAP50": 0.95269,
+      "mAP50-95": 0.93012
+    },
+    {
+      "Class": "pedestrian",
+      "Images": 17,
+      "Instances": 17,
+      "Box-P": 0.97163,
+      "Box-R": 1.0,
+      "Box-F1": 0.98561,
+      "mAP50": 0.995,
+      "mAP50-95": 0.995
+    },
+    {
+      "Class": "slow",
+      "Images": 29,
+      "Instances": 29,
+      "Box-P": 0.97569,
+      "Box-R": 1.0,
+      "Box-F1": 0.98769,
+      "mAP50": 0.995,
+      "mAP50-95": 0.96386
+    },
+    {
+      "Class": "parking",
+      "Images": 26,
+      "Instances": 26,
+      "Box-P": 1.0,
+      "Box-R": 0.86522,
+      "Box-F1": 0.92774,
+      "mAP50": 0.98794,
+      "mAP50-95": 0.88822
+    }
+  ],
+  "limits": "Simulation-only validation; does not establish real-track accuracy or mission completion."
+}

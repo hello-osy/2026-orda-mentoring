@@ -1,0 +1,68 @@
+[INFO] [1793113031.169418752] [orda_answer]: 정답 코드 시작: YOLO + camera lane + lidar; absolute pose is unused.
+[INFO] [1793113032.426222577] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113033.291308495] [orda_answer]: lane
+[INFO] [1793113034.482308531] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113036.412081569] [orda_answer]: lane
+[INFO] [1793113037.185917066] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113037.672118249] [orda_answer]: lane
+[INFO] [1793113038.023605445] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113038.128983556] [orda_answer]: lane
+[INFO] [1793113042.018121365] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113042.187548567] [orda_answer]: lane
+[INFO] [1793113044.625731431] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113044.840502137] [orda_answer]: lane
+[INFO] [1793113047.948914701] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113048.007397523] [orda_answer]: lane
+[INFO] [1793113048.727644827] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113049.201558873] [orda_answer]: lane
+[INFO] [1793113050.392552543] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113050.550521805] [orda_answer]: lane
+[INFO] [1793113052.820398082] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113053.246730863] [orda_answer]: lane
+[INFO] [1793113053.604039540] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113053.717065421] [orda_answer]: lane
+[INFO] [1793113054.792510773] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113055.419200595] [orda_answer]: lane
+[INFO] [1793113055.621108624] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113055.782062991] [orda_answer]: lane
+[INFO] [1793113059.082735596] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113059.391465249] [orda_answer]: lane
+[INFO] [1793113061.112219031] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113061.312648151] [orda_answer]: lane
+[INFO] [1793113065.747529694] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113066.393397210] [orda_answer]: lane
+[INFO] [1793113066.545033408] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113066.807456108] [orda_answer]: lane
+[INFO] [1793113068.374569241] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113069.046749646] [orda_answer]: lane
+[INFO] [1793113069.200705071] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113069.358003032] [orda_answer]: lane
+[INFO] [1793113069.812797105] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113069.868515337] [orda_answer]: lane
+[INFO] [1793113070.865697757] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113070.921337361] [orda_answer]: lane
+[INFO] [1793113071.699419639] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113071.909956132] [orda_answer]: lane
+[INFO] [1793113072.570557043] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113072.830602277] [orda_answer]: lane
+[INFO] [1793113074.186744580] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113074.503354919] [orda_answer]: lane
+[INFO] [1793113076.057966167] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113076.521488664] [orda_answer]: lane
+[INFO] [1793113076.876158280] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113076.940986729] [orda_answer]: lane
+[INFO] [1793113077.242500809] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113077.405061268] [orda_answer]: lane
+[INFO] [1793113077.766899539] [orda_answer]: pedestrian_approach
+[INFO] [1793113085.926372116] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113088.206649660] [orda_answer]: pedestrian_approach
+[INFO] [1793113089.038242780] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113089.141783377] [orda_answer]: pedestrian_approach
+[INFO] [1793113090.842283354] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113090.946752252] [orda_answer]: pedestrian_approach
+[INFO] [1793113091.626666610] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113092.104650039] [orda_answer]: pedestrian_approach
+[INFO] [1793113092.463798041] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113092.567552178] [orda_answer]: pedestrian_approach
+[INFO] [1793113093.500752445] [orda_answer]: fault: stop line not reached
+terminate called without an active exception

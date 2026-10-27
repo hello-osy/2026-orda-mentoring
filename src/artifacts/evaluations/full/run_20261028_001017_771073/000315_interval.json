@@ -1,0 +1,14 @@
+{
+  "image": "000315_interval.jpg",
+  "sim_time": 36.948,
+  "image_stamp": 36.868,
+  "controller_state": "lane",
+  "detections": {
+    "received_sim_time": 36.84,
+    "stamp": 36.6,
+    "age": 0.347999999999999,
+    "publisher_age": 0.25,
+    "objects": []
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

@@ -1,0 +1,31 @@
+{
+  "image": "000689_interval.jpg",
+  "sim_time": 78.994,
+  "image_stamp": 78.934,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 78.6,
+    "age": 0.39400000000000546,
+    "objects": [],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.2475720669316874,
+      "lane_heading": -0.25489683856042383,
+      "lane_age": 0.25,
+      "front": 0.5225952863693237,
+      "rear": 12.0,
+      "blocked": true,
+      "avoiding": true,
+      "planner_failed": false,
+      "line_distance": null,
+      "stage": "fork",
+      "speed": 0.13,
+      "published_speed": 0.13
+    },
+    "image_age": 0.03200000000001069,
+    "scan_age": 0.03200000000001069,
+    "received_sim_time": 78.892,
+    "publisher_age": 0.30000000000001137
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

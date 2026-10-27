@@ -1,0 +1,30 @@
+{
+  "updated_at": "2026-10-28 · 최종 기본 코스 + 수정 구간 검증",
+  "verified": [
+    "최종 기본 코스 무개입 완주",
+    "13개 체크포인트·9개 기준 통과",
+    "카메라2초 중단 주차 시험 통과",
+    "정지선 ±5cm·콘4개 안쪽 통과",
+    "77개 테스트·YOLO mAP50 0.9888"
+  ],
+  "unverified": [
+    "최종 소스의 우측 전체 재시험",
+    "여러 배치·조명에서의 반복 성공률",
+    "실물 LIMO 성능·공식 채점"
+  ],
+  "tests_passed": 77,
+  "full_run": {
+    "folder": "run_20261028_034358_310086",
+    "log": "20261028_034357",
+    "seconds": 206.088,
+    "pedestrian_error_cm": 3.5022303985982717,
+    "pedestrian_hold_seconds": 3.181999999999995,
+    "traffic_error_cm": 3.5177639265213667,
+    "traffic_hold_seconds": 1.2060000000000173,
+    "parking_margin_cm": 10.609470026158885,
+    "provenance": {
+      "answer_sha256": "97d89f19eb905a382a9eb65ee341687fce58ac66a6c5b0966138b98a7b2a5f47",
+      "weights_sha256": "d38071be8e8d3e2b7809d0bb9dd7d8f159b709efd44068029fce1a4bfd613c6e"
+    }
+  }
+}

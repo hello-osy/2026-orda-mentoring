@@ -1,0 +1,56 @@
+{
+  "image": "000466_interval.jpg",
+  "sim_time": 53.636,
+  "image_stamp": 53.6,
+  "controller_state": "pedestrian_approach",
+  "detections": {
+    "stamp": 53.4,
+    "age": 0.2360000000000042,
+    "objects": [],
+    "control": {
+      "lane_valid": true,
+      "lane_error": 0.0023428309780263133,
+      "lane_heading": 0.09341338481269622,
+      "dash_heading": null,
+      "traffic_stop_completed": false,
+      "lane_age": 0.015999999999998238,
+      "front": 12.0,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "wide_objects": 0,
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": 0.3881347972123725,
+      "stop_candidates": [
+        {
+          "distance": 0.39021479713603807,
+          "thickness": 0.03579952267303103,
+          "complete": true
+        },
+        {
+          "distance": 0.9307875894988067,
+          "thickness": 0.03579952267303103,
+          "complete": true
+        }
+      ],
+      "stage": "pedestrian",
+      "speed": 0.13,
+      "published_speed": 0.13
+    },
+    "image_age": 0.0660000000000025,
+    "scan_age": 0.0660000000000025,
+    "received_sim_time": 53.592,
+    "publisher_age": 0.20000000000000284
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

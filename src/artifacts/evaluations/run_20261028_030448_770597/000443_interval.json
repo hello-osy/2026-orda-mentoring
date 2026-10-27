@@ -1,0 +1,74 @@
+{
+  "image": "000443_interval.jpg",
+  "sim_time": 50.298,
+  "image_stamp": 50.2,
+  "controller_state": "pedestrian_approach",
+  "detections": {
+    "stamp": 50.0,
+    "age": 0.2980000000000018,
+    "objects": [
+      {
+        "name": "pedestrian",
+        "bbox": [
+          0.8773367881774903,
+          0.0024194717407226562,
+          0.9995991706848144,
+          0.2760075887044271
+        ],
+        "truncated": true,
+        "confidence": 0.9714104533195496,
+        "area": 0.03344953500567499,
+        "center": [
+          0.9384679794311523,
+          0.13921353022257488
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.011308121219146159,
+      "lane_heading": 0.0812509548822013,
+      "dash_heading": null,
+      "traffic_stop_completed": false,
+      "lane_age": 0.04999999999999716,
+      "front": 12.0,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "wide_objects": 0,
+      "narrow_centers": [],
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": 0.6915906923625431,
+      "stop_candidates": [
+        {
+          "distance": 0.698090692124105,
+          "thickness": 0.03579952267303103,
+          "complete": true
+        },
+        {
+          "distance": 1.2422434367541766,
+          "thickness": 0.04653937947494033,
+          "complete": true
+        }
+      ],
+      "stage": "pedestrian",
+      "speed": 0.13,
+      "published_speed": 0.13
+    },
+    "image_age": 0.10000000000000142,
+    "scan_age": 0.03200000000000358,
+    "received_sim_time": 50.098,
+    "publisher_age": 0.10000000000000142
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

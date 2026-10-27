@@ -1,0 +1,54 @@
+{
+  "image": "000208_checkpoint.jpg",
+  "sim_time": 23.61,
+  "image_stamp": 23.6,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 23.4,
+    "age": 0.21000000000000085,
+    "objects": [
+      {
+        "name": "parking",
+        "bbox": [
+          0.41812782287597655,
+          0.24958248138427735,
+          0.4566549301147461,
+          0.3004512151082357
+        ],
+        "truncated": false,
+        "confidence": 0.8434152603149414,
+        "area": 0.001959825159283355,
+        "center": [
+          0.4373913764953613,
+          0.2750168482462565
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": 0.0004448754764626983,
+      "lane_heading": 0.009790491194102337,
+      "lane_age": 0.15000000000000213,
+      "front": 2.4417724609375,
+      "rear": 1.50877845287323,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "line_distance": null,
+      "stop_candidates": [],
+      "stage": "parking",
+      "speed": 0.2666666666666629,
+      "published_speed": 0.2666666666666629
+    },
+    "image_age": 0.20000000000000284,
+    "scan_age": 0.0660000000000025,
+    "received_sim_time": 23.598,
+    "publisher_age": 0.20000000000000284
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

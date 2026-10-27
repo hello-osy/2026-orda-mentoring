@@ -1,0 +1,31 @@
+{
+  "image": "000433_controller_state.jpg",
+  "sim_time": 50.694,
+  "image_stamp": 49.868,
+  "controller_state": "waiting for fresh sensors / detector",
+  "detections": {
+    "received_sim_time": 50.59,
+    "stamp": 49.868,
+    "age": 0.8260000000000005,
+    "publisher_age": 0.7319999999999993,
+    "objects": [
+      {
+        "name": "pedestrian",
+        "bbox": [
+          0.724506425857544,
+          0.03900554180145264,
+          0.917462158203125,
+          0.28636258443196616
+        ],
+        "truncated": false,
+        "confidence": 0.9925917387008667,
+        "area": 0.047728959311607845,
+        "center": [
+          0.8209842920303345,
+          0.16268406311670938
+        ]
+      }
+    ]
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

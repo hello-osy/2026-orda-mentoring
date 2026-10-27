@@ -1,0 +1,177 @@
+{
+  "scope": "Obstacle-entry through right/B branch, cones and traffic exit. Stopped for next full-course test before parking; not a full-course or parking pass. Read-only approximate 4Hz actual pose audit.",
+  "elapsed_sim_seconds": 105.75399999999999,
+  "branch_crossings": [
+    {
+      "elapsed": 44.033338657168834,
+      "x": 3.4,
+      "y": 1.4844268929427287
+    }
+  ],
+  "cone_route": {
+    "passed": true,
+    "missing_gates": [],
+    "wrong_side_gates": [],
+    "crossings": [
+      {
+        "index": 0,
+        "model": "cone_0",
+        "cone": [
+          0.63,
+          2.1
+        ],
+        "required_side": "right",
+        "body_center": [
+          0.8252354117095578,
+          2.1
+        ],
+        "sim_time": 63.83372073468843,
+        "signed_side_clearance_m": 0.19523541170955783,
+        "correct": true
+      },
+      {
+        "index": 1,
+        "model": "cone_1",
+        "cone": [
+          0.94,
+          2.6
+        ],
+        "required_side": "left",
+        "body_center": [
+          0.7239667863080458,
+          2.6
+        ],
+        "sim_time": 67.78815552488521,
+        "signed_side_clearance_m": 0.21603321369195416,
+        "correct": true
+      },
+      {
+        "index": 2,
+        "model": "cone_2",
+        "cone": [
+          0.63,
+          3.1
+        ],
+        "required_side": "right",
+        "body_center": [
+          0.8316226943887115,
+          3.1
+        ],
+        "sim_time": 71.74832601174452,
+        "signed_side_clearance_m": 0.2016226943887115,
+        "correct": true
+      },
+      {
+        "index": 3,
+        "model": "cone_3",
+        "cone": [
+          0.94,
+          3.6
+        ],
+        "required_side": "left",
+        "body_center": [
+          0.7549068077904895,
+          3.6
+        ],
+        "sim_time": 75.67581589720925,
+        "signed_side_clearance_m": 0.18509319220951048,
+        "correct": true
+      }
+    ],
+    "reference": "Body centre at rear axle plus half wheelbase; northbound crossings only."
+  },
+  "static_obstacle_footprint_overlap_samples": [],
+  "last_pose": {
+    "world_pose": [
+      5.737142506023923,
+      4.838309668648731,
+      -1.904160974730562e-08,
+      0.006225086787887149
+    ],
+    "velocity": 0.18303031213235954,
+    "telemetry": {
+      "stamp": 199.8,
+      "age": 0.09999999999999432,
+      "objects": [
+        {
+          "name": "parking",
+          "bbox": [
+            0.3456389904022217,
+            0.1881315549214681,
+            0.4266221523284912,
+            0.3000133196512858
+          ],
+          "truncated": false,
+          "confidence": 0.9529377222061157,
+          "area": 0.00906053906971162,
+          "center": [
+            0.38613057136535645,
+            0.24407243728637695
+          ]
+        },
+        {
+          "name": "pedestrian",
+          "bbox": [
+            0.3458357334136963,
+            0.18819497426350912,
+            0.42519373893737794,
+            0.30066324869791666
+          ],
+          "truncated": false,
+          "confidence": 0.5088182091712952,
+          "area": 0.008925257943804657,
+          "center": [
+            0.3855147361755371,
+            0.2444291114807129
+          ]
+        }
+      ],
+      "control": {
+        "lane_valid": true,
+        "lane_error": 0.002888630358728932,
+        "lane_heading": -0.05102016632444323,
+        "dash_heading": -0.0018544412565495382,
+        "traffic_stop_completed": true,
+        "lane_age": 0.04999999999998295,
+        "front": 1.6006040573120117,
+        "rear": 1.6764663457870483,
+        "blocked": false,
+        "avoiding": false,
+        "planner_failed": false,
+        "cone_clearance": false,
+        "narrow_objects": 0,
+        "wide_objects": 2,
+        "road_memory": false,
+        "road_heading": -0.17950384530012725,
+        "road_center": 0.026050420224508156,
+        "lost_lane_distance": 0.0,
+        "fork_remaining": 0.0,
+        "fork_bias": 0.0,
+        "fork_pending": false,
+        "fork_target": 0.0,
+        "line_distance": null,
+        "stop_candidates": [],
+        "stage": "parking",
+        "speed": 0.16,
+        "published_speed": 0.16
+      },
+      "image_age": 0.03200000000001069,
+      "scan_age": 0.03200000000001069
+    },
+    "command": [
+      0.1599999964237213,
+      -0.005371083039790392
+    ],
+    "status": "lane",
+    "elapsed_sim": 105.75399999999999
+  },
+  "limitations": [
+    "4Hz footprint sampling cannot assert absence of every short physics contact.",
+    "No final cone pose file was recorded for this segment; full09 separately measures actual cone movement."
+  ],
+  "partial_validation": true,
+  "full_course_verified": false,
+  "parking_verified": false,
+  "termination": "Stopped at parent request to begin a full-course right-branch test; controller cleaned up before simulator exit.",
+  "answer_sha256": "4b0c74e5d0662a11eb607e0e03f66997640d0e001584fab385f39c2a79d85588"
+}

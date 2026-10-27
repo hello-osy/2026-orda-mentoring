@@ -1,0 +1,94 @@
+{
+  "metrics": {
+    "metrics/precision(B)": 0.7882773432753332,
+    "metrics/recall(B)": 0.836444503545714,
+    "metrics/mAP50(B)": 0.8326496172310257,
+    "metrics/mAP50-95(B)": 0.7512881495836197,
+    "fitness": 0.7512881495836197
+  },
+  "per_class": [
+    {
+      "Class": "traffic_red",
+      "Images": 8,
+      "Instances": 8,
+      "Box-P": 0.31164,
+      "Box-R": 1.0,
+      "Box-F1": 0.47519,
+      "mAP50": 0.81086,
+      "mAP50-95": 0.76755
+    },
+    {
+      "Class": "traffic_yellow",
+      "Images": 17,
+      "Instances": 17,
+      "Box-P": 0.67355,
+      "Box-R": 1.0,
+      "Box-F1": 0.80493,
+      "mAP50": 0.78186,
+      "mAP50-95": 0.73989
+    },
+    {
+      "Class": "traffic_green",
+      "Images": 20,
+      "Instances": 20,
+      "Box-P": 0.80204,
+      "Box-R": 0.81069,
+      "Box-F1": 0.80634,
+      "mAP50": 0.95254,
+      "mAP50-95": 0.84258
+    },
+    {
+      "Class": "left",
+      "Images": 16,
+      "Instances": 16,
+      "Box-P": 0.88617,
+      "Box-R": 1.0,
+      "Box-F1": 0.93965,
+      "mAP50": 0.98458,
+      "mAP50-95": 0.94124
+    },
+    {
+      "Class": "right",
+      "Images": 18,
+      "Instances": 18,
+      "Box-P": 0.75908,
+      "Box-R": 0.94444,
+      "Box-F1": 0.84168,
+      "mAP50": 0.95447,
+      "mAP50-95": 0.92569
+    },
+    {
+      "Class": "pedestrian",
+      "Images": 51,
+      "Instances": 51,
+      "Box-P": 0.90155,
+      "Box-R": 0.33333,
+      "Box-F1": 0.48671,
+      "mAP50": 0.41482,
+      "mAP50-95": 0.34362
+    },
+    {
+      "Class": "slow",
+      "Images": 29,
+      "Instances": 29,
+      "Box-P": 0.97219,
+      "Box-R": 0.96552,
+      "Box-F1": 0.96884,
+      "mAP50": 0.96506,
+      "mAP50-95": 0.91137
+    },
+    {
+      "Class": "parking",
+      "Images": 63,
+      "Instances": 63,
+      "Box-P": 1.0,
+      "Box-R": 0.63758,
+      "Box-F1": 0.77868,
+      "mAP50": 0.797,
+      "mAP50-95": 0.53836
+    }
+  ],
+  "status": "superseded preliminary model; ambiguous signal training examples",
+  "checkpoint": "src/artifacts/training/yolov8_20261027T143326_572218/weights/best.pt",
+  "sha256": "e1f13d8fb1154fa12fc7d07ba69e1861918e969d773668dabc78685a14456ace"
+}

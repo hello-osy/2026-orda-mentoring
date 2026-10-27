@@ -1,0 +1,31 @@
+{
+  "image": "000394_controller_state.jpg",
+  "sim_time": 46.158,
+  "image_stamp": 46.134,
+  "controller_state": "pedestrian_approach",
+  "detections": {
+    "received_sim_time": 46.086,
+    "stamp": 45.468,
+    "age": 0.6899999999999977,
+    "publisher_age": 0.6319999999999979,
+    "objects": [
+      {
+        "name": "pedestrian",
+        "bbox": [
+          0.635526180267334,
+          0.14862327575683593,
+          0.744959545135498,
+          0.2959465026855469
+        ],
+        "truncated": false,
+        "confidence": 0.9991015195846558,
+        "area": 0.016122076446044957,
+        "center": [
+          0.690242862701416,
+          0.2222848892211914
+        ]
+      }
+    ]
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

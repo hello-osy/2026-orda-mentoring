@@ -1,0 +1,75 @@
+{
+  "image": "001579_controller_state.jpg",
+  "sim_time": 181.998,
+  "image_stamp": 181.868,
+  "controller_state": "parking_align",
+  "detections": {
+    "stamp": 181.734,
+    "age": 0.2639999999999816,
+    "objects": [
+      {
+        "name": "parking",
+        "bbox": [
+          0.2678439855575562,
+          0.1270952860514323,
+          0.39349424839019775,
+          0.2934966723124186
+        ],
+        "truncated": false,
+        "confidence": 0.9743238687515259,
+        "area": 0.02090837791940885,
+        "center": [
+          0.33066911697387696,
+          0.21029597918192547
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.012785157918236508,
+      "lane_heading": -0.00299551840996225,
+      "dash_heading": null,
+      "traffic_stop_completed": true,
+      "lane_age": 0.015999999999991132,
+      "front": 1.488568663597107,
+      "rear": 2.30672550201416,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 1,
+      "wide_objects": 1,
+      "narrow_centers": [
+        [
+          1.462511156868927,
+          0.30464508731548023
+        ]
+      ],
+      "road_memory": false,
+      "road_heading": -0.17016597496287772,
+      "road_center": 0.05405985035472147,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": 0.8673684010118685,
+      "stop_candidates": [
+        {
+          "distance": 0.869928400954654,
+          "thickness": 0.021479713603818618,
+          "complete": true
+        }
+      ],
+      "stage": "parking",
+      "speed": 0.3129280995083365,
+      "published_speed": 0.3129280995083365,
+      "required_camera": true
+    },
+    "image_age": 0.0660000000000025,
+    "scan_age": 0.0660000000000025,
+    "received_sim_time": 181.796,
+    "publisher_age": 0.0660000000000025
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

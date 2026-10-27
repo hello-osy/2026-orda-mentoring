@@ -1,0 +1,74 @@
+{
+  "run": "full03",
+  "source": "trajectory.csv, control_live.jsonl and exact cad_paths.json",
+  "control_capture_sim_range": [
+    47.1,
+    87.4
+  ],
+  "pedestrian": {
+    "cad_first_stop_line_y": 2.51,
+    "cad_far_edge_y": 2.48,
+    "dxf_handles": [
+      "18DB",
+      "18DD"
+    ],
+    "crosswalk_exit_line_y": [
+      1.97,
+      1.94
+    ],
+    "actual_stopped_front_error_m": -0.06508682437820035,
+    "hold_state_duration_seconds": 4.494,
+    "position_passed": false,
+    "same_candidate_repeated": {
+      "times": [
+        55.45,
+        55.7,
+        55.95
+      ],
+      "tracked_distance_m": 0.31145584725536984,
+      "image_age_seconds": [
+        0.05,
+        0.3,
+        0.55
+      ]
+    },
+    "cause_evidence": "Old RGB candidate repeatedly overwrote odometry-updated remaining distance. Later tracked distance stayed about10.5cm ahead of actual distance; not a55cm jump to the next stripe."
+  },
+  "bottom_corner": {
+    "first_avoidance_seconds": [
+      64.15,
+      66.4
+    ],
+    "near_zero_steering_seconds": [
+      68.9,
+      69.65
+    ],
+    "large_error_first_seen": 69.9,
+    "avoidance_reactivation": 70.15,
+    "lane_invalid_first_seen": 71.9,
+    "lane_lost_stop": 73.15,
+    "cause_evidence": "Late turn command, then avoidance chose milder steering. After lane loss, avoidance briefly chose straight steering; lost-lane timeout stopped the vehicle. Raw lidar points were not recorded, so exact blocked point is unproven.",
+    "stale_image_evidence": {
+      "times": [
+        68.9,
+        69.15,
+        69.4,
+        69.65
+      ],
+      "image_age_seconds": [
+        0.3,
+        0.55,
+        0.8,
+        1.05
+      ],
+      "reused_heading_rad": -0.4713752295,
+      "reused_lateral_error_m": 0.0062,
+      "actual_distance_covered_before_sensor_wait_m": 0.182,
+      "fresh_image_time": 69.9,
+      "fresh_heading_rad": -1.2664,
+      "fresh_lateral_error_m": -0.3478
+    },
+    "telemetry_caution": "control.speed is last computed driver value and can remain stale during sensor-wait. Actual sent command must be read from trajectory.csv."
+  },
+  "scope": "No control, teleport or ground-truth feedback. Source timestamps are preserved; trajectory interpolation is for this audit only."
+}

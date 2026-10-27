@@ -1,0 +1,262 @@
+{
+  "status": "controller_fault: sensor lost during parking",
+  "passed": false,
+  "course_complete": false,
+  "criteria": {
+    "ordered_checkpoints_and_parked": false,
+    "slow_speed": true,
+    "pedestrian_stop_3_seconds_at_line": true,
+    "traffic_crossed_on_green": true,
+    "correct_fork": true,
+    "cones_undisturbed": true,
+    "cone_route_correct": true,
+    "no_obstacle_footprint_overlap_proxy": true,
+    "traffic_stop_at_line": true
+  },
+  "elapsed_sim_seconds": 202.096,
+  "checkpoints_passed": [
+    {
+      "name": "start",
+      "elapsed": 0.0,
+      "point": [
+        1.25,
+        5.570000000000002
+      ]
+    },
+    {
+      "name": "bump_exit",
+      "elapsed": 12.39,
+      "point": [
+        3.1609477275862163,
+        5.578699690858674
+      ]
+    },
+    {
+      "name": "first_corner",
+      "elapsed": 37.79,
+      "point": [
+        9.434614855539907,
+        5.298260382876566
+      ]
+    },
+    {
+      "name": "zigzag_exit",
+      "elapsed": 53.524,
+      "point": [
+        9.58394529640481,
+        3.0373780617886346
+      ]
+    },
+    {
+      "name": "pedestrian_exit",
+      "elapsed": 62.944,
+      "point": [
+        9.578825597144343,
+        2.120531235715859
+      ]
+    },
+    {
+      "name": "three_lane_entry",
+      "elapsed": 68.93599999999999,
+      "point": [
+        9.229651639608939,
+        1.0641093616642427
+      ]
+    },
+    {
+      "name": "obstacle_exit",
+      "elapsed": 99.386,
+      "point": [
+        5.352335618310833,
+        0.6901120721176875
+      ]
+    },
+    {
+      "name": "fork_branch",
+      "elapsed": 114.25,
+      "point": [
+        3.6760667367093696,
+        1.4791157943190711
+      ],
+      "branch": "right"
+    },
+    {
+      "name": "left_corner",
+      "elapsed": 131.764,
+      "point": [
+        0.8068521923596095,
+        1.2679400221875492
+      ]
+    },
+    {
+      "name": "cones_exit",
+      "elapsed": 149.86,
+      "point": [
+        0.7632575112254639,
+        3.561829619361376
+      ]
+    },
+    {
+      "name": "traffic_approach",
+      "elapsed": 159.268,
+      "point": [
+        1.4514151601409417,
+        4.856029637165344
+      ]
+    },
+    {
+      "name": "traffic_exit",
+      "elapsed": 171.836,
+      "point": [
+        3.8153041321486403,
+        4.840048043330297
+      ]
+    },
+    {
+      "name": "parking_approach",
+      "elapsed": 178.894,
+      "point": [
+        5.679469829697156,
+        4.8376527362638
+      ]
+    }
+  ],
+  "next_checkpoint": "park_inside_bay",
+  "expected_fork": "right",
+  "pedestrian": {
+    "best_hold": 3.2859999999999943,
+    "closest_stopped_error": 0.03363124067947254,
+    "hold_since": null,
+    "crossed": true,
+    "crossing": {
+      "elapsed": 60.786,
+      "speed": 0.15959895721417636,
+      "signal": "traffic_red",
+      "hold_before_crossing": 3.2859999999999943
+    },
+    "previous_distance": -0.8088806954284484
+  },
+  "traffic": {
+    "best_hold": 0.3199999999999932,
+    "closest_stopped_error": 0.037220753619692015,
+    "hold_since": null,
+    "crossed": true,
+    "crossing": {
+      "elapsed": 169.398,
+      "speed": 0.3194998552360005,
+      "signal": "traffic_green",
+      "hold_before_crossing": 0.3199999999999932
+    },
+    "previous_distance": -0.7816430158563108
+  },
+  "traffic_stop_policy": {
+    "required_at_line": true,
+    "minimum_hold_seconds": 0.2,
+    "rule": "Stop once at the line and cross on green."
+  },
+  "red_or_yellow_encountered_on_approach": true,
+  "slow_max_measured_speed": 0.16502946519434797,
+  "cones_disturbed": [],
+  "cone_route": {
+    "passed": true,
+    "missing_gates": [],
+    "wrong_side_gates": [],
+    "crossings": [
+      {
+        "index": 0,
+        "model": "cone_0",
+        "cone": [
+          0.63,
+          2.1
+        ],
+        "required_side": "right",
+        "body_center": [
+          0.818485088599872,
+          2.1
+        ],
+        "sim_time": 137.65064499987756,
+        "signed_side_clearance_m": 0.188485088599872,
+        "correct": true
+      },
+      {
+        "index": 1,
+        "model": "cone_1",
+        "cone": [
+          0.94,
+          2.6
+        ],
+        "required_side": "left",
+        "body_center": [
+          0.7489530690816447,
+          2.6
+        ],
+        "sim_time": 141.5856727474411,
+        "signed_side_clearance_m": 0.19104693091835523,
+        "correct": true
+      },
+      {
+        "index": 2,
+        "model": "cone_2",
+        "cone": [
+          0.63,
+          3.1
+        ],
+        "required_side": "right",
+        "body_center": [
+          0.8170728860111007,
+          3.1
+        ],
+        "sim_time": 145.72345255119362,
+        "signed_side_clearance_m": 0.18707288601110073,
+        "correct": true
+      },
+      {
+        "index": 3,
+        "model": "cone_3",
+        "cone": [
+          0.94,
+          3.6
+        ],
+        "required_side": "left",
+        "body_center": [
+          0.7576539856510193,
+          3.6
+        ],
+        "sim_time": 149.47237951656132,
+        "signed_side_clearance_m": 0.18234601434898068,
+        "correct": true
+      }
+    ],
+    "reference": "Body centre at rear axle plus half wheelbase; northbound crossings only."
+  },
+  "obstacle_overlap_proxy": [],
+  "outside_approximate_corridor_samples": 0,
+  "non_exempt_lane_samples": 1637,
+  "last_pose": {
+    "elapsed": 202.096,
+    "sim_time": 202.102,
+    "x": 6.84775026695374,
+    "y": 4.234128440206141,
+    "z": -1.9956411884125558e-08,
+    "yaw": 1.5688151652180198,
+    "roll": -1.4978727092326777e-13,
+    "pitch": -2.09761085524694e-09,
+    "speed_measured": 0.09111552904915197,
+    "speed_command": 0.0,
+    "steering_command": -0.5199999809265137,
+    "state": "fault: sensor lost during parking",
+    "checkpoint_index": 13,
+    "traffic": "traffic_red",
+    "fork": "right",
+    "outside_reference_corridor": false,
+    "cone_gates_crossed": 4,
+    "cone_route_correct": true,
+    "four_corners_inside_bay": true
+  },
+  "limitations": [
+    "Reference corridor is approximate and is not official lane departure scoring.",
+    "Footprint overlap is a geometry proxy; no physics contact score is asserted.",
+    "Facilities and their evaluation positions are practice assumptions in config.yaml.",
+    "This observer never publishes commands or supplies ground truth to answer.py."
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "status": "stationary_timeout",
+  "passed": false,
+  "course_complete": false,
+  "criteria": {
+    "ordered_checkpoints_and_parked": false,
+    "slow_speed": false,
+    "pedestrian_stop_3_seconds_at_line": false,
+    "traffic_stop_when_required": true,
+    "traffic_crossed_on_green": false,
+    "correct_fork": false,
+    "cones_undisturbed": true,
+    "no_obstacle_footprint_overlap_proxy": true
+  },
+  "elapsed_sim_seconds": 17.398,
+  "checkpoints_passed": [
+    {
+      "name": "traffic_approach",
+      "elapsed": 0.0,
+      "point": [
+        1.8,
+        4.84
+      ]
+    }
+  ],
+  "next_checkpoint": "traffic_exit",
+  "expected_fork": null,
+  "pedestrian": {
+    "best_hold": 0.0,
+    "closest_stopped_error": null,
+    "hold_since": null,
+    "crossed": false,
+    "crossing": null,
+    "previous_distance": null
+  },
+  "traffic": {
+    "best_hold": 0.0,
+    "closest_stopped_error": 0.9294032728917876,
+    "hold_since": null,
+    "crossed": false,
+    "crossing": null,
+    "previous_distance": 0.9294032728917876
+  },
+  "red_or_yellow_encountered_on_approach": false,
+  "slow_max_measured_speed": null,
+  "cones_disturbed": [],
+  "obstacle_overlap_proxy": [],
+  "outside_approximate_corridor_samples": 0,
+  "non_exempt_lane_samples": 153,
+  "last_pose": {
+    "elapsed": 17.398,
+    "sim_time": 17.4,
+    "x": 2.0736094921976633,
+    "y": 4.839697449991368,
+    "z": -1.9450027935463687e-08,
+    "yaw": -0.0008067803561820458,
+    "roll": -7.350018584530215e-12,
+    "pitch": 2.956125995089776e-09,
+    "speed_measured": 0.0,
+    "speed_command": 0.0,
+    "steering_command": -0.001706782029941678,
+    "state": "traffic_hold",
+    "checkpoint_index": 1,
+    "traffic": "traffic_red",
+    "fork": "left",
+    "outside_reference_corridor": false,
+    "four_corners_inside_bay": false
+  },
+  "limitations": [
+    "Reference corridor is approximate and is not official lane departure scoring.",
+    "Footprint overlap is a geometry proxy; no physics contact score is asserted.",
+    "Facilities and their evaluation positions are practice assumptions in config.yaml.",
+    "This observer never publishes commands or supplies ground truth to answer.py."
+  ]
+}

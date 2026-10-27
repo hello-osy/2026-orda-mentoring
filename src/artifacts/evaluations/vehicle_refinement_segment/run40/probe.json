@@ -1,0 +1,132 @@
+{
+  "scan_summary": {
+    "points": 415,
+    "front": 0.5941373705863953
+  },
+  "desired": 0.3380047663980097,
+  "lane": {
+    "valid": true,
+    "error": -0.2560640770568062,
+    "forward": 0.65,
+    "heading": -0.0015675340633240302,
+    "center_fit": [
+      0.0,
+      -0.0015675353472208802,
+      0.012494472746679868
+    ],
+    "fit_near": 0.0,
+    "fit_far": 2.0,
+    "road_memory": true,
+    "road_center": -0.325510309001805
+  },
+  "results": [
+    {
+      "samples": 33,
+      "turn_distance": 0.1,
+      "result": 0.03249999999999997,
+      "ms": 36.581547999958275
+    },
+    {
+      "samples": 33,
+      "turn_distance": 0.25,
+      "result": 0.03249999999999997,
+      "ms": 41.369676000613254
+    },
+    {
+      "samples": 33,
+      "turn_distance": 0.4,
+      "result": null,
+      "ms": 35.07286800231668
+    },
+    {
+      "samples": 33,
+      "turn_distance": 0.55,
+      "result": null,
+      "ms": 33.6375209990365
+    },
+    {
+      "samples": 33,
+      "turn_distance": 0.7,
+      "result": null,
+      "ms": 33.39635199881741
+    },
+    {
+      "samples": 33,
+      "turn_distance": 1.0,
+      "result": null,
+      "ms": 30.353614998603007
+    },
+    {
+      "samples": 65,
+      "turn_distance": 0.1,
+      "result": 0.016249999999999987,
+      "ms": 139.98517599975457
+    },
+    {
+      "samples": 65,
+      "turn_distance": 0.25,
+      "result": 0.016249999999999987,
+      "ms": 158.2232210021175
+    },
+    {
+      "samples": 65,
+      "turn_distance": 0.4,
+      "result": 0.016249999999999987,
+      "ms": 136.87948100050562
+    },
+    {
+      "samples": 65,
+      "turn_distance": 0.55,
+      "result": 0.016249999999999987,
+      "ms": 131.40005400055088
+    },
+    {
+      "samples": 65,
+      "turn_distance": 0.7,
+      "result": 0.016249999999999987,
+      "ms": 133.03565299793263
+    },
+    {
+      "samples": 65,
+      "turn_distance": 1.0,
+      "result": 0.016249999999999987,
+      "ms": 130.44746299783583
+    },
+    {
+      "samples": 129,
+      "turn_distance": 0.1,
+      "result": 0.024375000000000036,
+      "ms": 575.3210969996871
+    },
+    {
+      "samples": 129,
+      "turn_distance": 0.25,
+      "result": 0.024375000000000036,
+      "ms": 654.848836002202
+    },
+    {
+      "samples": 129,
+      "turn_distance": 0.4,
+      "result": 0.016249999999999987,
+      "ms": 552.0610460007447
+    },
+    {
+      "samples": 129,
+      "turn_distance": 0.55,
+      "result": 0.016249999999999987,
+      "ms": 538.3589599987317
+    },
+    {
+      "samples": 129,
+      "turn_distance": 0.7,
+      "result": 0.008125000000000049,
+      "ms": 531.2351030006539
+    },
+    {
+      "samples": 129,
+      "turn_distance": 1.0,
+      "result": 0.008125000000000049,
+      "ms": 502.25283299732837
+    }
+  ]
+}

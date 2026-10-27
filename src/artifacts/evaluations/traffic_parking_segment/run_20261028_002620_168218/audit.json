@@ -1,0 +1,17 @@
+{
+  "scope": "Independent traffic-to-parking segment; not a full-course run. Actual trained YOLO and sensors; scenario starts at[1.8,4.84].",
+  "outcome": "stationary_timeout before green because warning marking was selected as stop line.",
+  "traffic_hold_started": 3.6420000000000003,
+  "front_axle_x": 2.2736094271082123,
+  "actual_stop_line_x": 3.2030127,
+  "early_stop_distance_m": 0.9294032728917876,
+  "parking_reached": false,
+  "perception_evidence": "traffic_red correctly recognized at~.99confidence. Thick-warning-line image clipping made simple stripe-thickness thresholds unreliable.",
+  "source_files": [
+    "trajectory.csv",
+    "detections.jsonl",
+    "000004_controller_state.jpg",
+    "000033_controller_state.jpg",
+    "report.json"
+  ]
+}

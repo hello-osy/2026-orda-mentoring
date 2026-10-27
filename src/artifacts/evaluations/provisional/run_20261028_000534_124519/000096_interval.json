@@ -1,0 +1,31 @@
+{
+  "image": "000096_interval.jpg",
+  "sim_time": 10.954,
+  "image_stamp": 10.468,
+  "controller_state": "lane",
+  "detections": {
+    "received_sim_time": 10.884,
+    "stamp": 10.468,
+    "age": 0.48600000000000065,
+    "publisher_age": 0.4320000000000004,
+    "objects": [
+      {
+        "name": "traffic_green",
+        "bbox": [
+          0.7018765449523926,
+          0.04211985270182292,
+          0.8045718193054199,
+          0.3181037267049154
+        ],
+        "truncated": false,
+        "confidence": 0.9967435002326965,
+        "area": 0.028342239657758908,
+        "center": [
+          0.7532241821289063,
+          0.18011178970336914
+        ]
+      }
+    ]
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

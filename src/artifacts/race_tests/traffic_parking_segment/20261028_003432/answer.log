@@ -1,0 +1,11 @@
+[INFO] [1793115274.209784538] [orda_answer]: 정답 코드 시작: YOLO + camera lane + lidar; absolute pose is unused.
+[INFO] [1793115275.620026393] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793115275.877741108] [orda_answer]: lane
+[INFO] [1793115283.119487758] [orda_answer]: traffic_approach
+[INFO] [1793115291.289620105] [orda_answer]: traffic_hold
+[INFO] [1793115309.622824003] [orda_answer]: traffic_approach
+[INFO] [1793115310.624353777] [orda_answer]: lane
+[INFO] [1793115334.869764541] [orda_answer]: parking_align
+[INFO] [1793115350.959789811] [orda_answer]: parking_sequence
+[INFO] [1793115367.293375343] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793115367.629242567] [orda_answer]: fault: sensor lost during parking

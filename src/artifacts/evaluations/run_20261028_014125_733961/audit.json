@@ -1,0 +1,28 @@
+{
+  "scope": "Read-only full-left run audit; source/configuration unchanged.",
+  "status": "outside_track_mat",
+  "passed": false,
+  "elapsed_sim_seconds": 47.538,
+  "checkpoints_passed": [
+    "start",
+    "bump_exit",
+    "first_corner"
+  ],
+  "all_criteria": {
+    "ordered_checkpoints_and_parked": false,
+    "slow_speed": true,
+    "pedestrian_stop_3_seconds_at_line": false,
+    "traffic_stop_when_required": true,
+    "traffic_crossed_on_green": false,
+    "correct_fork": false,
+    "cones_undisturbed": true,
+    "cone_route_correct": false,
+    "no_obstacle_footprint_overlap_proxy": true
+  },
+  "slow_max_speed_mps": 0.16219567448421351,
+  "maximum_actual_speed_mps": 0.31998749652310665,
+  "pedestrian_traffic_parking": "Not reached; no stop or parking success claim.",
+  "direct_failure_evidence": "At42.592s lane_error-.011m jumped to+.178m at42.840s and+.456m at43.346s, with steering+.518rad. blocked/avoiding/road_memory were false and RGB ages were fresh. Lane became invalid at45.59s; continued.174m before lost-lane stop, already outside the mat.",
+  "trajectory_visual_check": "Start straight and first corner stayed near lane centre. Departure bends outward at the upper zigzag section, and final camera sees gray background beyond the mat.",
+  "uncertainty": "Intermediate42-44s RGB was not saved by10-second snapshots, so which boundary/paint feature was misclassified is not proven."
+}

@@ -1,0 +1,53 @@
+{
+  "image": "000482_finished.jpg",
+  "sim_time": 55.34,
+  "image_stamp": 55.268,
+  "controller_state": "fault: sensor lost during parking",
+  "detections": {
+    "stamp": 55.268,
+    "age": 0.07200000000000273,
+    "objects": [],
+    "control": {
+      "lane_valid": false,
+      "lane_error": 0.0,
+      "lane_heading": 0.0,
+      "lane_age": 2.6999999999999957,
+      "front": 12.0,
+      "rear": 2.870826482772827,
+      "blocked": false,
+      "avoiding": true,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "line_distance": 0.5513126491646778,
+      "stop_candidates": [
+        {
+          "distance": 0.5513126491646778,
+          "thickness": 0.025059665871121718,
+          "complete": true
+        },
+        {
+          "distance": 0.77326968973747,
+          "thickness": 0.021479713603818618,
+          "complete": true
+        },
+        {
+          "distance": 1.3031026252983293,
+          "thickness": 0.017899761336515514,
+          "complete": true
+        }
+      ],
+      "stage": "parking",
+      "speed": 0.0,
+      "published_speed": 0.0
+    },
+    "image_age": 0.08200000000000074,
+    "scan_age": 0.015999999999998238,
+    "received_sim_time": 55.34,
+    "publisher_age": 0.08200000000000074
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

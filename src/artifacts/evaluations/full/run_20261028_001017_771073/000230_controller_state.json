@@ -1,0 +1,31 @@
+{
+  "image": "000230_controller_state.jpg",
+  "sim_time": 26.948,
+  "image_stamp": 26.868,
+  "controller_state": "lane",
+  "detections": {
+    "received_sim_time": 26.842,
+    "stamp": 26.0,
+    "age": 0.9480000000000004,
+    "publisher_age": 0.8500000000000014,
+    "objects": [
+      {
+        "name": "parking",
+        "bbox": [
+          0.6939716339111328,
+          0.10703983306884765,
+          0.8351409912109375,
+          0.29361464182535807
+        ],
+        "truncated": false,
+        "confidence": 0.9647478461265564,
+        "area": 0.026338645840490546,
+        "center": [
+          0.7645563125610352,
+          0.20032723744710287
+        ]
+      }
+    ]
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

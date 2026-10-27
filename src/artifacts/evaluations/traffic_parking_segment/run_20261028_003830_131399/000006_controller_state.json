@@ -1,0 +1,69 @@
+{
+  "image": "000006_controller_state.jpg",
+  "sim_time": 0.55,
+  "image_stamp": 0.534,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 0.4,
+    "age": 0.15000000000000002,
+    "objects": [
+      {
+        "name": "slow",
+        "bbox": [
+          3.708600997924805e-05,
+          0.0024311145146687827,
+          0.09272849559783936,
+          0.2500757217407227
+        ],
+        "truncated": true,
+        "confidence": 0.9972496628761292,
+        "area": 0.0229545277206149,
+        "center": [
+          0.0463827908039093,
+          0.12625341812769572
+        ]
+      },
+      {
+        "name": "traffic_red",
+        "bbox": [
+          0.3237649917602539,
+          0.13754409154256184,
+          0.38422555923461915,
+          0.3155047098795573
+        ],
+        "truncated": false,
+        "confidence": 0.9707655310630798,
+        "area": 0.010759599972743672,
+        "center": [
+          0.35399527549743653,
+          0.22652440071105956
+        ]
+      },
+      {
+        "name": "parking",
+        "bbox": [
+          0.44645986557006834,
+          0.26872889200846356,
+          0.47309465408325196,
+          0.30633023579915364
+        ],
+        "truncated": false,
+        "confidence": 0.9423307180404663,
+        "area": 0.00100150383967654,
+        "center": [
+          0.4597772598266602,
+          0.28752956390380857
+        ]
+      }
+    ],
+    "control": {
+      "published_speed": 0.0,
+      "speed": 0.0
+    },
+    "image_age": 0.04999999999999999,
+    "scan_age": 0.04999999999999999,
+    "received_sim_time": 0.438,
+    "publisher_age": 0.04999999999999999
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

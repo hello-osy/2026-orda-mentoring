@@ -1,0 +1,83 @@
+{
+  "status": "controller_fault: stop line not reached",
+  "passed": false,
+  "course_complete": false,
+  "criteria": {
+    "ordered_checkpoints_and_parked": false,
+    "slow_speed": true,
+    "pedestrian_stop_3_seconds_at_line": false,
+    "traffic_stop_when_required": true,
+    "traffic_crossed_on_green": false,
+    "correct_fork": false,
+    "cones_undisturbed": true,
+    "no_obstacle_footprint_overlap_proxy": true
+  },
+  "elapsed_sim_seconds": 58.518,
+  "checkpoints_passed": [
+    {
+      "name": "start",
+      "elapsed": 0.0,
+      "point": [
+        1.25,
+        5.570000000000002
+      ]
+    },
+    {
+      "name": "bump_exit",
+      "elapsed": 19.31,
+      "point": [
+        3.1579688382672835,
+        5.592843291294308
+      ]
+    }
+  ],
+  "next_checkpoint": "first_corner",
+  "expected_fork": null,
+  "pedestrian": {
+    "best_hold": 0.0,
+    "closest_stopped_error": null,
+    "hold_since": null,
+    "crossed": false,
+    "crossing": null,
+    "previous_distance": null
+  },
+  "traffic": {
+    "best_hold": 0.0,
+    "closest_stopped_error": null,
+    "hold_since": null,
+    "crossed": false,
+    "crossing": null,
+    "previous_distance": null
+  },
+  "red_or_yellow_encountered_on_approach": false,
+  "slow_max_measured_speed": 0.13482206526457227,
+  "cones_disturbed": [],
+  "obstacle_overlap_proxy": [],
+  "outside_approximate_corridor_samples": 0,
+  "non_exempt_lane_samples": 506,
+  "last_pose": {
+    "elapsed": 58.518,
+    "sim_time": 58.524,
+    "x": 7.4573565076891715,
+    "y": 5.579670062879523,
+    "z": -1.8883873673103402e-08,
+    "yaw": -0.0001896567692260245,
+    "roll": -2.6694654259366654e-16,
+    "pitch": 8.573566218816554e-09,
+    "speed_measured": 0.0,
+    "speed_command": 0.0,
+    "steering_command": -0.003351127728819847,
+    "state": "fault: stop line not reached",
+    "checkpoint_index": 2,
+    "traffic": "traffic_yellow",
+    "fork": "left",
+    "outside_reference_corridor": false,
+    "four_corners_inside_bay": false
+  },
+  "limitations": [
+    "Reference corridor is approximate and is not official lane departure scoring.",
+    "Footprint overlap is a geometry proxy; no physics contact score is asserted.",
+    "Facilities and their evaluation positions are practice assumptions in config.yaml.",
+    "This observer never publishes commands or supplies ground truth to answer.py."
+  ]
+}

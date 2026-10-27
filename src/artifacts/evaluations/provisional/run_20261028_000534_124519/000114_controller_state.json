@@ -1,0 +1,31 @@
+{
+  "image": "000114_controller_state.jpg",
+  "sim_time": 13.046,
+  "image_stamp": 12.268,
+  "controller_state": "waiting for fresh sensors / detector",
+  "detections": {
+    "received_sim_time": 12.884,
+    "stamp": 12.268,
+    "age": 0.7779999999999987,
+    "publisher_age": 0.6319999999999997,
+    "objects": [
+      {
+        "name": "traffic_green",
+        "bbox": [
+          0.7449224948883056,
+          0.0013842264811197917,
+          0.8752565383911133,
+          0.319938596089681
+        ],
+        "truncated": true,
+        "confidence": 0.9653503894805908,
+        "area": 0.04151847906657167,
+        "center": [
+          0.8100895166397095,
+          0.1606614112854004
+        ]
+      }
+    ]
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

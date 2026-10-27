@@ -1,0 +1,16 @@
+평가 시작: /home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/evaluations/provisional/run_20261028_000534_124519
+{"event": "controller_state", "elapsed": 0.0, "state": "waiting for answer"}
+{"event": "checkpoint", "elapsed": 0.0, "name": "start", "point": [1.25, 5.57]}
+{"event": "controller_state", "elapsed": 0.134, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 0.916, "state": "lane"}
+{"event": "controller_state", "elapsed": 13.043999999999999, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 13.692, "state": "lane"}
+{"event": "controller_state", "elapsed": 15.203999999999999, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 15.314, "state": "lane"}
+{"event": "checkpoint", "elapsed": 16.6, "name": "bump_exit", "point": [3.1536511187054055, 5.586460302756091]}
+{"event": "controller_state", "elapsed": 23.17, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 23.6, "state": "lane"}
+{"event": "controller_state", "elapsed": 51.336, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 51.443999999999996, "state": "lane"}
+{"event": "finished", "elapsed": 55.594, "reason": "stationary_timeout"}
+{"report": "/home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/evaluations/provisional/run_20261028_000534_124519/report.json", "status": "stationary_timeout", "passed": false}

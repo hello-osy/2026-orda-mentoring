@@ -1,0 +1,74 @@
+{
+  "image": "000442_interval.jpg",
+  "sim_time": 50.302,
+  "image_stamp": 50.268,
+  "controller_state": "pedestrian_approach",
+  "detections": {
+    "stamp": 49.934,
+    "age": 0.3680000000000021,
+    "objects": [
+      {
+        "name": "pedestrian",
+        "bbox": [
+          0.864155387878418,
+          0.002213446299235026,
+          1.0,
+          0.2766011555989583
+        ],
+        "truncated": true,
+        "confidence": 0.9869913458824158,
+        "area": 0.03727409194075032,
+        "center": [
+          0.932077693939209,
+          0.13940730094909667
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.013656187100735906,
+      "lane_heading": 0.07799487010872964,
+      "dash_heading": null,
+      "traffic_stop_completed": false,
+      "lane_age": 0.11599999999999966,
+      "front": 12.0,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "wide_objects": 0,
+      "narrow_centers": [],
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": 0.7152302630829673,
+      "stop_candidates": [
+        {
+          "distance": 0.730310262529833,
+          "thickness": 0.03579952267303103,
+          "complete": true
+        },
+        {
+          "distance": 1.2708830548926013,
+          "thickness": 0.03221957040572792,
+          "complete": true
+        }
+      ],
+      "stage": "pedestrian",
+      "speed": 0.13,
+      "published_speed": 0.13
+    },
+    "image_age": 0.03200000000000358,
+    "scan_age": 0.03200000000000358,
+    "received_sim_time": 50.094,
+    "publisher_age": 0.16600000000000392
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

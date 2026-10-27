@@ -1,0 +1,74 @@
+{
+  "image": "001663_interval.jpg",
+  "sim_time": 188.976,
+  "image_stamp": 188.868,
+  "controller_state": "parking_align",
+  "detections": {
+    "stamp": 188.734,
+    "age": 0.24199999999999022,
+    "objects": [
+      {
+        "name": "parking",
+        "bbox": [
+          0.05091121196746826,
+          9.206136067708333e-05,
+          0.28962881565093995,
+          0.281687863667806
+        ],
+        "truncated": true,
+        "confidence": 0.9921985268592834,
+        "area": 0.06722187513408244,
+        "center": [
+          0.1702700138092041,
+          0.14088996251424155
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.006768040990622808,
+      "lane_heading": 0.10521660206163794,
+      "dash_heading": 0.02522258236578377,
+      "traffic_stop_completed": true,
+      "lane_age": 0.11599999999998545,
+      "front": 12.0,
+      "rear": 2.8914108276367188,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 1,
+      "wide_objects": 1,
+      "narrow_centers": [
+        [
+          0.8625080250303916,
+          0.3229903891369688
+        ]
+      ],
+      "road_memory": false,
+      "road_heading": -0.16747620820724113,
+      "road_center": 0.06628042341613737,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": 0.2684956576049856,
+      "stop_candidates": [
+        {
+          "distance": 1.0238663484486874,
+          "thickness": 0.021479713603818618,
+          "complete": true
+        }
+      ],
+      "stage": "parking",
+      "speed": 0.08,
+      "published_speed": 0.08
+    },
+    "image_age": 0.03200000000001069,
+    "scan_age": 0.03200000000001069,
+    "received_sim_time": 188.896,
+    "publisher_age": 0.16599999999999682
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

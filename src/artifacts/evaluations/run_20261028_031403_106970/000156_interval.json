@@ -1,0 +1,63 @@
+{
+  "image": "000156_interval.jpg",
+  "sim_time": 17.698,
+  "image_stamp": 17.668,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 17.468,
+    "age": 0.23000000000000043,
+    "objects": [
+      {
+        "name": "parking",
+        "bbox": [
+          0.5678764343261719,
+          0.24160582224527996,
+          0.6112537384033203,
+          0.29958718617757163
+        ],
+        "truncated": false,
+        "confidence": 0.959113597869873,
+        "area": 0.0025150752540988226,
+        "center": [
+          0.5895650863647461,
+          0.2705965042114258
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": 0.00012484668007118672,
+      "lane_heading": 0.0034810715664473405,
+      "dash_heading": 0.00034831815732993605,
+      "traffic_stop_completed": false,
+      "lane_age": 0.08200000000000074,
+      "front": 3.5545310974121094,
+      "rear": 1.9969295263290405,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "wide_objects": 0,
+      "narrow_centers": [],
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": null,
+      "stop_candidates": [],
+      "stage": "pedestrian",
+      "speed": 0.31994464880386075,
+      "published_speed": 0.31994464880386075
+    },
+    "image_age": 0.13200000000000145,
+    "scan_age": 0.0660000000000025,
+    "received_sim_time": 17.594,
+    "publisher_age": 0.13200000000000145
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

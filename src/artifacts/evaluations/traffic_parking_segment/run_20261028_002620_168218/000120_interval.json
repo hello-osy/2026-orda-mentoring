@@ -1,0 +1,66 @@
+{
+  "image": "000120_interval.jpg",
+  "sim_time": 13.646,
+  "image_stamp": 13.4,
+  "controller_state": "traffic_hold",
+  "detections": {
+    "stamp": 13.4,
+    "age": 0.24600000000000044,
+    "objects": [
+      {
+        "name": "traffic_red",
+        "bbox": [
+          0.28877911567687986,
+          0.10533504486083985,
+          0.3628260135650635,
+          0.31665541330973307
+        ],
+        "truncated": false,
+        "confidence": 0.992583155632019,
+        "area": 0.015647617744228532,
+        "center": [
+          0.3258025646209717,
+          0.21099522908528645
+        ]
+      },
+      {
+        "name": "parking",
+        "bbox": [
+          0.44344263076782225,
+          0.26771424611409506,
+          0.46970281600952146,
+          0.30375925699869794
+        ],
+        "truncated": false,
+        "confidence": 0.7968732118606567,
+        "area": 0.0009465486628687359,
+        "center": [
+          0.4565727233886719,
+          0.2857367515563965
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.002452401803293469,
+      "lane_heading": 0.16340817071923425,
+      "lane_age": 0.1999999999999993,
+      "front": 1.7028512954711914,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "line_distance": 0.9307875894988067,
+      "stage": "traffic",
+      "speed": 0.0,
+      "published_speed": 0.0
+    },
+    "image_age": 0.25,
+    "scan_age": 0.05000000000000071,
+    "received_sim_time": 13.646,
+    "publisher_age": 0.25
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

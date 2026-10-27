@@ -1,0 +1,16 @@
+평가 시작: /home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/evaluations/run_20261028_015556_173572
+{"event": "controller_state", "elapsed": 0.0, "state": "waiting for answer"}
+{"event": "checkpoint", "elapsed": 0.0, "name": "start", "point": [1.25, 5.57]}
+{"event": "controller_state", "elapsed": 0.12000000000000001, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 0.36200000000000004, "state": "lane"}
+{"event": "checkpoint", "elapsed": 12.395999999999999, "name": "bump_exit", "point": [3.163709242760694, 5.579659674148152]}
+{"event": "checkpoint", "elapsed": 37.466, "name": "first_corner", "point": [9.469511974707615, 5.305468208328706]}
+{"event": "controller_state", "elapsed": 44.577999999999996, "state": "pedestrian_approach"}
+{"event": "checkpoint", "elapsed": 53.187999999999995, "name": "zigzag_exit", "point": [9.583408608129684, 3.0372970978955185]}
+{"event": "controller_state", "elapsed": 56.594, "state": "pedestrian_hold"}
+{"event": "controller_state", "elapsed": 59.739999999999995, "state": "lane"}
+{"event": "pedestrian_line_crossed", "elapsed": 60.492, "speed": 0.1598473820502895, "signal": "traffic_red", "hold_before_crossing": 3.2479999999999976}
+{"event": "checkpoint", "elapsed": 63.126, "name": "pedestrian_exit", "point": [9.574162475404878, 2.118390271952555]}
+{"event": "checkpoint", "elapsed": 69.14200000000001, "name": "three_lane_entry", "point": [9.23444759179868, 1.049107241304512]}
+{"event": "finished", "elapsed": 93.84400000000001, "reason": "stationary_timeout"}
+{"report": "/home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/evaluations/run_20261028_015556_173572/report.json", "status": "stationary_timeout", "passed": false}

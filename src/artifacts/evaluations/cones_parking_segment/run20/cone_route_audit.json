@@ -1,0 +1,74 @@
+{
+  "passed": true,
+  "missing_gates": [],
+  "wrong_side_gates": [],
+  "crossings": [
+    {
+      "index": 0,
+      "model": "cone_0",
+      "cone": [
+        0.63,
+        2.1
+      ],
+      "required_side": "right",
+      "body_center": [
+        0.8398698401138877,
+        2.1
+      ],
+      "sim_time": 12.690991396954466,
+      "signed_side_clearance_m": 0.20986984011388765,
+      "correct": true
+    },
+    {
+      "index": 1,
+      "model": "cone_1",
+      "cone": [
+        0.94,
+        2.6
+      ],
+      "required_side": "left",
+      "body_center": [
+        0.7229489689922723,
+        2.6
+      ],
+      "sim_time": 16.936440114379657,
+      "signed_side_clearance_m": 0.2170510310077276,
+      "correct": true
+    },
+    {
+      "index": 2,
+      "model": "cone_2",
+      "cone": [
+        0.63,
+        3.1
+      ],
+      "required_side": "right",
+      "body_center": [
+        0.8452146057655842,
+        3.1
+      ],
+      "sim_time": 20.949887552239378,
+      "signed_side_clearance_m": 0.21521460576558415,
+      "correct": true
+    },
+    {
+      "index": 3,
+      "model": "cone_3",
+      "cone": [
+        0.94,
+        3.6
+      ],
+      "required_side": "left",
+      "body_center": [
+        0.7536528742270822,
+        3.6
+      ],
+      "sim_time": 24.902417793327224,
+      "signed_side_clearance_m": 0.1863471257729178,
+      "correct": true
+    }
+  ],
+  "reference": "Body centre at rear axle plus half wheelbase; northbound crossings only.",
+  "source": "src/artifacts/evaluations/cones_parking_segment/run20/trajectory.json",
+  "scope": "Offline actual-pose route audit only; no controller input or actuation."
+}

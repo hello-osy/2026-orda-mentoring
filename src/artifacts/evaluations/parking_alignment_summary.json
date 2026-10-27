@@ -1,0 +1,74 @@
+{
+  "scope": "Real RGB/lidar/odometry, synthetic parking detection only. Absolute pose is evaluation-only.",
+  "trials": [
+    {
+      "trial": 1,
+      "report": "src/artifacts/evaluations/parking_alignment_01/report.json",
+      "passed": true,
+      "start_pose": [
+        6.4,
+        4.84,
+        0.003,
+        0,
+        0,
+        0.05
+      ],
+      "end_pose": [
+        6.863823688016507,
+        4.152600633238097,
+        -2.0276892220838505e-08,
+        4.926368056146306e-16,
+        -5.286354625031778e-09,
+        1.5525452673371796
+      ],
+      "minimum_margin_m": 0.11960328745617632,
+      "state": "parked"
+    },
+    {
+      "trial": 2,
+      "report": "src/artifacts/evaluations/parking_alignment_02/report.json",
+      "passed": false,
+      "start_pose": [
+        5.8,
+        4.84,
+        0.003,
+        0,
+        0,
+        -0.05
+      ],
+      "end_pose": [
+        6.925414175863363,
+        4.837247659793852,
+        -1.9125544925557847e-08,
+        2.3343340592480925e-11,
+        6.169198127328651e-09,
+        -0.001535616298309283
+      ],
+      "minimum_margin_m": -0.37734120265480176,
+      "state": "fault: parking alignment timeout"
+    },
+    {
+      "trial": 3,
+      "report": "src/artifacts/evaluations/parking_alignment_03/report.json",
+      "passed": true,
+      "start_pose": [
+        5.8,
+        4.84,
+        0.003,
+        0,
+        0,
+        -0.05
+      ],
+      "end_pose": [
+        6.87040266759426,
+        4.141160930793929,
+        -2.0276892220838505e-08,
+        1.3533357323955047e-15,
+        -5.286353830545885e-09,
+        1.5845110125538286
+      ],
+      "minimum_margin_m": 0.10865809938778215,
+      "state": "parked"
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "status": "course_complete",
+  "passed": true,
+  "course_complete": true,
+  "criteria": {
+    "ordered_checkpoints_and_parked": true,
+    "slow_speed": true,
+    "pedestrian_stop_3_seconds_at_line": true,
+    "traffic_crossed_on_green": true,
+    "correct_fork": true,
+    "cones_undisturbed": true,
+    "cone_route_correct": true,
+    "no_obstacle_footprint_overlap_proxy": true,
+    "traffic_stop_at_line": true
+  },
+  "elapsed_sim_seconds": 206.266,
+  "checkpoints_passed": [
+    {
+      "name": "start",
+      "elapsed": 0.0,
+      "point": [
+        1.25,
+        5.57
+      ]
+    },
+    {
+      "name": "bump_exit",
+      "elapsed": 12.388,
+      "point": [
+        3.16279882558968,
+        5.579024360423973
+      ]
+    },
+    {
+      "name": "first_corner",
+      "elapsed": 37.174,
+      "point": [
+        9.447399595209303,
+        5.305670766901484
+      ]
+    },
+    {
+      "name": "zigzag_exit",
+      "elapsed": 52.75,
+      "point": [
+        9.584091168410039,
+        3.0406867425367143
+      ]
+    },
+    {
+      "name": "pedestrian_exit",
+      "elapsed": 64.63000000000001,
+      "point": [
+        9.579009184558748,
+        2.1465294128967702
+      ]
+    },
+    {
+      "name": "three_lane_entry",
+      "elapsed": 71.196,
+      "point": [
+        9.24008695470407,
+        1.0299667349666384
+      ]
+    },
+    {
+      "name": "obstacle_exit",
+      "elapsed": 101.952,
+      "point": [
+        5.335360352532948,
+        0.6377487051524835
+      ]
+    },
+    {
+      "name": "fork_branch",
+      "elapsed": 111.224,
+      "point": [
+        3.6534873535539565,
+        0.42272728039326524
+      ],
+      "branch": "left"
+    },
+    {
+      "name": "left_corner",
+      "elapsed": 127.364,
+      "point": [
+        0.8269009687648468,
+        1.2771034234705911
+      ]
+    },
+    {
+      "name": "cones_exit",
+      "elapsed": 145.47799999999998,
+      "point": [
+        0.762179650731055,
+        3.5616183416660503
+      ]
+    },
+    {
+      "name": "traffic_approach",
+      "elapsed": 155.44799999999998,
+      "point": [
+        1.464202152402324,
+        4.857520646213903
+      ]
+    },
+    {
+      "name": "traffic_exit",
+      "elapsed": 171.47,
+      "point": [
+        3.806309418498974,
+        4.840250327596903
+      ]
+    },
+    {
+      "name": "parking_approach",
+      "elapsed": 178.51999999999998,
+      "point": [
+        5.662465111501544,
+        4.837033394144848
+      ]
+    }
+  ],
+  "next_checkpoint": "park_inside_bay",
+  "expected_fork": "left",
+  "pedestrian": {
+    "best_hold": 5.700000000000003,
+    "closest_stopped_error": 0.0321986045532916,
+    "hold_since": null,
+    "crossed": true,
+    "crossing": {
+      "elapsed": 62.492,
+      "speed": 0.15966154513447792,
+      "signal": "traffic_red",
+      "hold_before_crossing": 5.700000000000003
+    },
+    "previous_distance": -0.7981213968273833
+  },
+  "traffic": {
+    "best_hold": 3.5020000000000095,
+    "closest_stopped_error": 0.03509532441786023,
+    "hold_since": null,
+    "crossed": true,
+    "crossing": {
+      "elapsed": 168.89,
+      "speed": 0.31420062752194905,
+      "signal": "traffic_green",
+      "hold_before_crossing": 3.5020000000000095
+    },
+    "previous_distance": -0.7620305113658428
+  },
+  "traffic_stop_policy": {
+    "required_at_line": true,
+    "minimum_hold_seconds": 0.2,
+    "rule": "Stop once at the line and cross on green."
+  },
+  "red_or_yellow_encountered_on_approach": true,
+  "slow_max_measured_speed": 0.16344269880994616,
+  "cones_disturbed": [],
+  "cone_route": {
+    "passed": true,
+    "missing_gates": [],
+    "wrong_side_gates": [],
+    "crossings": [
+      {
+        "index": 0,
+        "model": "cone_0",
+        "cone": [
+          0.63,
+          2.1
+        ],
+        "required_side": "right",
+        "body_center": [
+          0.8241671471666494,
+          2.1
+        ],
+        "sim_time": 133.10934833905634,
+        "signed_side_clearance_m": 0.1941671471666494,
+        "correct": true
+      },
+      {
+        "index": 1,
+        "model": "cone_1",
+        "cone": [
+          0.94,
+          2.6
+        ],
+        "required_side": "left",
+        "body_center": [
+          0.7374407031300183,
+          2.6
+        ],
+        "sim_time": 137.04687898035874,
+        "signed_side_clearance_m": 0.20255929686998164,
+        "correct": true
+      },
+      {
+        "index": 2,
+        "model": "cone_2",
+        "cone": [
+          0.63,
+          3.1
+        ],
+        "required_side": "right",
+        "body_center": [
+          0.8290602812078272,
+          3.1
+        ],
+        "sim_time": 141.0929777217182,
+        "signed_side_clearance_m": 0.19906028120782715,
+        "correct": true
+      },
+      {
+        "index": 3,
+        "model": "cone_3",
+        "cone": [
+          0.94,
+          3.6
+        ],
+        "required_side": "left",
+        "body_center": [
+          0.7551704207976649,
+          3.6
+        ],
+        "sim_time": 145.05660114317888,
+        "signed_side_clearance_m": 0.184829579202335,
+        "correct": true
+      }
+    ],
+    "reference": "Body centre at rear axle plus half wheelbase; northbound crossings only."
+  },
+  "obstacle_overlap_proxy": [],
+  "outside_approximate_corridor_samples": 0,
+  "non_exempt_lane_samples": 1643,
+  "last_pose": {
+    "elapsed": 206.266,
+    "sim_time": 206.268,
+    "x": 6.849064274629434,
+    "y": 4.1470438741611355,
+    "z": -2.027689194328275e-08,
+    "yaw": 1.5570063936381373,
+    "roll": -7.153019866642078e-16,
+    "pitch": -5.286351609512694e-09,
+    "speed_measured": 0.0,
+    "speed_command": 0.0,
+    "steering_command": 0.0,
+    "state": "parking_sequence",
+    "checkpoint_index": 13,
+    "traffic": "traffic_red",
+    "fork": "left",
+    "outside_reference_corridor": false,
+    "cone_gates_crossed": 4,
+    "cone_route_correct": true,
+    "four_corners_inside_bay": true
+  },
+  "limitations": [
+    "Reference corridor is approximate and is not official lane departure scoring.",
+    "Footprint overlap is a geometry proxy; no physics contact score is asserted.",
+    "Facilities and their evaluation positions are practice assumptions in config.yaml.",
+    "This observer never publishes commands or supplies ground truth to answer.py."
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "image": "000013_interval.jpg",
+  "sim_time": 1.3900000000000001,
+  "image_stamp": 1.268,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 1.268,
+    "age": 0.12200000000000011,
+    "objects": [
+      {
+        "name": "slow",
+        "bbox": [
+          0.8101837158203125,
+          0.0,
+          1.0,
+          0.279237174987793
+        ],
+        "truncated": true,
+        "confidence": 0.9916295409202576,
+        "area": 0.053003762961016034,
+        "center": [
+          0.9050918579101562,
+          0.1396185874938965
+        ]
+      },
+      {
+        "name": "traffic_red",
+        "bbox": [
+          0.6099885940551758,
+          0.16872755686442056,
+          0.6570793151855469,
+          0.31304225921630857
+        ],
+        "truncated": false,
+        "confidence": 0.8713752031326294,
+        "area": 0.006795883403465268,
+        "center": [
+          0.6335339546203613,
+          0.24088490804036458
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.0003068495785699099,
+      "lane_heading": 0.006858152188779676,
+      "lane_age": 0.03200000000000003,
+      "front": 2.369607925415039,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "line_distance": 0.9256675896132697,
+      "stop_candidates": [
+        {
+          "distance": 0.9307875894988067,
+          "thickness": 0.04653937947494033,
+          "complete": true
+        }
+      ],
+      "stage": "pedestrian",
+      "speed": 0.16,
+      "published_speed": 0.16
+    },
+    "image_age": 0.08200000000000007,
+    "scan_age": 0.016000000000000014,
+    "received_sim_time": 1.346,
+    "publisher_age": 0.08200000000000007
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

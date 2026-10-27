@@ -1,0 +1,74 @@
+{
+  "image": "000446_interval.jpg",
+  "sim_time": 51.048,
+  "image_stamp": 50.934,
+  "controller_state": "pedestrian_approach",
+  "detections": {
+    "stamp": 50.8,
+    "age": 0.24800000000000466,
+    "objects": [
+      {
+        "name": "pedestrian",
+        "bbox": [
+          0.8764335632324218,
+          0.0024698893229166668,
+          0.9996406555175781,
+          0.27608057657877605
+        ],
+        "truncated": true,
+        "confidence": 0.9719704985618591,
+        "area": 0.03371077719493769,
+        "center": [
+          0.938037109375,
+          0.13927523295084634
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.008418258497480622,
+      "lane_heading": 0.08447757731355122,
+      "dash_heading": null,
+      "traffic_stop_completed": false,
+      "lane_age": 0.10000000000000142,
+      "front": 12.0,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "wide_objects": 0,
+      "narrow_centers": [],
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": 0.677930788066605,
+      "stop_candidates": [
+        {
+          "distance": 0.6909307875894988,
+          "thickness": 0.03937947494033413,
+          "complete": true
+        },
+        {
+          "distance": 1.2422434367541766,
+          "thickness": 0.028639618138424822,
+          "complete": true
+        }
+      ],
+      "stage": "pedestrian",
+      "speed": 0.13,
+      "published_speed": 0.13
+    },
+    "image_age": 0.016000000000005343,
+    "scan_age": 0.016000000000005343,
+    "received_sim_time": 50.946,
+    "publisher_age": 0.15000000000000568
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

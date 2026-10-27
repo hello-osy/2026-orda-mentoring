@@ -1,0 +1,46 @@
+{
+  "image": "000531_pedestrian_line_crossed.jpg",
+  "sim_time": 60.494,
+  "image_stamp": 60.468,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 60.2,
+    "age": 0.29399999999999693,
+    "objects": [],
+    "control": {
+      "lane_valid": true,
+      "lane_error": 0.0001662919499156601,
+      "lane_heading": 0.2202250478476826,
+      "lane_age": 0.09999999999999432,
+      "front": 12.0,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "line_distance": 0.5066730313839252,
+      "stop_candidates": [
+        {
+          "distance": 0.5226730310262531,
+          "thickness": 0.03937947494033413,
+          "complete": true
+        }
+      ],
+      "stage": "fork",
+      "speed": 0.16,
+      "published_speed": 0.16
+    },
+    "image_age": 0.14999999999999858,
+    "scan_age": 0.015999999999998238,
+    "received_sim_time": 60.346,
+    "publisher_age": 0.14999999999999858
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

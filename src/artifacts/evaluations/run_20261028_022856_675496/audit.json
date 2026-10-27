@@ -1,0 +1,729 @@
+{
+  "scope": "Full course from configured spawn, actual RGB/lidar/YOLO controller. Read-only audit; no audit commands or ground truth supplied to the controller.",
+  "evaluation_report": "/home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/evaluations/run_20261028_022856_675496/report.json",
+  "status": "course_complete",
+  "passed": false,
+  "elapsed_sim_seconds": 209.064,
+  "criteria": {
+    "ordered_checkpoints_and_parked": true,
+    "slow_speed": true,
+    "pedestrian_stop_3_seconds_at_line": true,
+    "traffic_crossed_on_green": true,
+    "correct_fork": true,
+    "cones_undisturbed": true,
+    "cone_route_correct": false,
+    "no_obstacle_footprint_overlap_proxy": true,
+    "traffic_stop_at_line": true
+  },
+  "checkpoints_count": 13,
+  "checkpoints_required": 13,
+  "checkpoints": [
+    {
+      "name": "start",
+      "elapsed": 0.0,
+      "point": [
+        1.25,
+        5.570000000000002
+      ]
+    },
+    {
+      "name": "bump_exit",
+      "elapsed": 12.446,
+      "point": [
+        3.1574841633098436,
+        5.57910689753536
+      ]
+    },
+    {
+      "name": "first_corner",
+      "elapsed": 37.942,
+      "point": [
+        9.432784915952041,
+        5.291766652241902
+      ]
+    },
+    {
+      "name": "zigzag_exit",
+      "elapsed": 53.99,
+      "point": [
+        9.582880092400913,
+        3.0369469779563247
+      ]
+    },
+    {
+      "name": "pedestrian_exit",
+      "elapsed": 63.13,
+      "point": [
+        9.57809708396377,
+        2.1451188765811517
+      ]
+    },
+    {
+      "name": "three_lane_entry",
+      "elapsed": 69.556,
+      "point": [
+        9.232507344141501,
+        1.0487583798029072
+      ]
+    },
+    {
+      "name": "obstacle_exit",
+      "elapsed": 101.07,
+      "point": [
+        5.346466551526801,
+        0.6889316080947774
+      ]
+    },
+    {
+      "name": "fork_branch",
+      "elapsed": 115.768,
+      "point": [
+        3.670035416204082,
+        1.4583702008728965
+      ],
+      "branch": "right"
+    },
+    {
+      "name": "left_corner",
+      "elapsed": 133.15,
+      "point": [
+        0.8056798578231248,
+        1.2615230136823117
+      ]
+    },
+    {
+      "name": "cones_exit",
+      "elapsed": 152.672,
+      "point": [
+        0.4710138186826594,
+        3.6889728466234066
+      ]
+    },
+    {
+      "name": "traffic_approach",
+      "elapsed": 161.39,
+      "point": [
+        1.4746392588290993,
+        4.865497454133209
+      ]
+    },
+    {
+      "name": "traffic_exit",
+      "elapsed": 174.222,
+      "point": [
+        3.8351307849040484,
+        4.8402699340690996
+      ]
+    },
+    {
+      "name": "parking_approach",
+      "elapsed": 181.186,
+      "point": [
+        5.665179493910973,
+        4.837723040965597
+      ]
+    }
+  ],
+  "selected_fork": "right",
+  "mission_stops": {
+    "pedestrian": {
+      "best_hold": 3.186,
+      "closest_stopped_error": 0.034560193014225415,
+      "hold_since": null,
+      "crossed": true,
+      "crossing": {
+        "elapsed": 61.256,
+        "speed": 0.15986029448084768,
+        "signal": "traffic_red",
+        "hold_before_crossing": 3.186
+      },
+      "previous_distance": -0.789587128221571,
+      "signed_front_distance_range_while_hold_m": [
+        0.034560193014225415,
+        0.034560193014225415
+      ],
+      "sign_convention": "Positive is before the line. Physical near-line stopped duration comes from evaluator.best_hold."
+    },
+    "traffic": {
+      "best_hold": 0.3739999999999952,
+      "closest_stopped_error": 0.03586586961012328,
+      "hold_since": null,
+      "crossed": true,
+      "crossing": {
+        "elapsed": 171.46,
+        "speed": 0.3196823254441511,
+        "signal": "traffic_green",
+        "hold_before_crossing": 0.3739999999999952
+      },
+      "previous_distance": -0.7905934173506353,
+      "signed_front_distance_range_while_hold_m": [
+        0.03810534842295343,
+        0.03810534842295343
+      ],
+      "sign_convention": "Positive is before the line. Physical near-line stopped duration comes from evaluator.best_hold."
+    }
+  },
+  "traffic_stop_policy": {
+    "required_at_line": true,
+    "minimum_hold_seconds": 0.2,
+    "rule": "Stop once at the line and cross on green."
+  },
+  "speed": {
+    "slow_max_measured_m_per_s": 0.16373368074105848,
+    "overall_max_measured_m_per_s": 0.31997916195639686
+  },
+  "cone_route": {
+    "passed": false,
+    "missing_gates": [],
+    "wrong_side_gates": [
+      2
+    ],
+    "crossings": [
+      {
+        "index": 0,
+        "model": "cone_0",
+        "cone": [
+          0.63,
+          2.1
+        ],
+        "required_side": "right",
+        "body_center": [
+          0.8265031444147004,
+          2.1
+        ],
+        "sim_time": 139.1788749188847,
+        "signed_side_clearance_m": 0.1965031444147004,
+        "correct": true
+      },
+      {
+        "index": 1,
+        "model": "cone_1",
+        "cone": [
+          0.94,
+          2.6
+        ],
+        "required_side": "left",
+        "body_center": [
+          0.6627919783356404,
+          2.6
+        ],
+        "sim_time": 143.24888582358165,
+        "signed_side_clearance_m": 0.27720802166435954,
+        "correct": true
+      },
+      {
+        "index": 2,
+        "model": "cone_2",
+        "cone": [
+          0.63,
+          3.1
+        ],
+        "required_side": "right",
+        "body_center": [
+          0.4312079231123222,
+          3.1
+        ],
+        "sim_time": 147.8887336636047,
+        "signed_side_clearance_m": -0.1987920768876778,
+        "correct": false
+      },
+      {
+        "index": 3,
+        "model": "cone_3",
+        "cone": [
+          0.94,
+          3.6
+        ],
+        "required_side": "left",
+        "body_center": [
+          0.4347618045379128,
+          3.6
+        ],
+        "sim_time": 151.82982861851522,
+        "signed_side_clearance_m": 0.5052381954620871,
+        "correct": true
+      }
+    ],
+    "reference": "Body centre at rear axle plus half wheelbase; northbound crossings only."
+  },
+  "cones_disturbed_full_evaluator": [],
+  "cone_actual_pose_audit": {
+    "topic": "/world/orda/dynamic_pose/info",
+    "read_only": true,
+    "scope": "Observed from audit attachment onward; evaluator separately observes full run.",
+    "started_wall": 1793122165.1831815,
+    "cones": {
+      "cone_0": {
+        "expected_xy": [
+          0.63,
+          2.1
+        ],
+        "first_sim_time": 15.676,
+        "samples": 17265,
+        "maximum_xy_displacement_m": 1.879052010812644e-07,
+        "maximum_abs_roll_pitch_rad": 4.896665294212642e-07,
+        "last_sim_time": 209.524,
+        "position": [
+          0.6299998631264393,
+          2.0999998712599792,
+          0.13999914079649467
+        ],
+        "roll": 4.896665294212642e-07,
+        "pitch": -4.365253134163467e-07,
+        "final_xy_displacement_m": 1.879052010812644e-07
+      },
+      "cone_1": {
+        "expected_xy": [
+          0.94,
+          2.6
+        ],
+        "first_sim_time": 15.676,
+        "samples": 17265,
+        "maximum_xy_displacement_m": 1.713039105498649e-07,
+        "maximum_abs_roll_pitch_rad": 4.120032006044542e-07,
+        "last_sim_time": 209.524,
+        "position": [
+          0.9399998702490913,
+          2.5999998881530892,
+          0.13999912940293574
+        ],
+        "roll": 3.586736444574291e-07,
+        "pitch": -4.120032006044542e-07,
+        "final_xy_displacement_m": 1.713039105498649e-07
+      },
+      "cone_2": {
+        "expected_xy": [
+          0.63,
+          3.1
+        ],
+        "first_sim_time": 15.676,
+        "samples": 17265,
+        "maximum_xy_displacement_m": 1.8674359453165368e-07,
+        "maximum_abs_roll_pitch_rad": 5.414363195422368e-07,
+        "last_sim_time": 209.524,
+        "position": [
+          0.6299998502609369,
+          3.0999998884142346,
+          0.13999921726457293
+        ],
+        "roll": 3.8877117210292527e-07,
+        "pitch": -5.414363195422368e-07,
+        "final_xy_displacement_m": 1.8674359453165368e-07
+      },
+      "cone_3": {
+        "expected_xy": [
+          0.94,
+          3.6
+        ],
+        "first_sim_time": 15.676,
+        "samples": 17265,
+        "maximum_xy_displacement_m": 1.3480465139679552e-07,
+        "maximum_abs_roll_pitch_rad": 1.739707045909794e-07,
+        "last_sim_time": 209.524,
+        "position": [
+          0.9399998967759007,
+          3.599999913298908,
+          0.13999989296792842
+        ],
+        "roll": 1.7387579980344183e-07,
+        "pitch": -1.739707045909794e-07,
+        "final_xy_displacement_m": 1.3480465139679552e-07
+      }
+    },
+    "finished_wall": 1793122488.345688
+  },
+  "obstacle_footprint_overlap_proxy": [],
+  "parking": {
+    "rear_pose": [
+      6.848706041907405,
+      4.147049567051091,
+      -2.0276892234716293e-08,
+      1.5587475753681796
+    ],
+    "corners": [
+      [
+        6.7418586743284745,
+        4.4093559528701425
+      ],
+      [
+        6.9618427055564585,
+        4.406705291691163
+      ],
+      [
+        6.957963101467225,
+        4.08472866416657
+      ],
+      [
+        6.737979070239241,
+        4.087379325345549
+      ]
+    ],
+    "bounds": [
+      6.63,
+      3.97,
+      7.13,
+      4.57
+    ],
+    "all_corners_inside": true,
+    "minimum_margin_m": 0.10797907023924136,
+    "stationary_inside_seconds": 3.0139999999999816
+  },
+  "trajectory": {
+    "samples": 1805,
+    "distance_m": 32.64820429282381,
+    "plot": "/home/osy/OSY_STUDY/261027/2026-orda-mentoring/src/artifacts/evaluations/run_20261028_022856_675496/trajectory.png",
+    "visual_audit": "Inspected trajectory.png. Actual right/B branch selected. Route then drifts left/outside the painted left-side road during cones, passing cone index2 on its wrong side. Traffic crossing and final T-bay footprint are visually consistent with telemetry. Thus course_complete is true but overall passed is false.",
+    "outside_approximate_corridor_samples": 0,
+    "non_exempt_lane_samples": 1666
+  },
+  "sensor_timing": {
+    "freshness_wait_sim_seconds": 0.7280000000000183,
+    "ages_sim_seconds": {
+      "age": {
+        "median": 0.1560000000000059,
+        "p95": 0.376300000000004,
+        "maximum": 0.8380000000000081
+      },
+      "image_age": {
+        "median": 0.08199999999999363,
+        "p95": 0.3160000000000025,
+        "maximum": 0.8500000000000085
+      },
+      "scan_age": {
+        "median": 0.03200000000001069,
+        "p95": 0.0660000000000025,
+        "maximum": 0.08400000000000318
+      }
+    }
+  },
+  "limitations": [
+    "Reference corridor is approximate and is not official lane departure scoring.",
+    "Footprint overlap is a geometry proxy; no physics contact score is asserted.",
+    "Facilities and their evaluation positions are practice assumptions in config.yaml.",
+    "This observer never publishes commands or supplies ground truth to answer.py.",
+    "Cone detailed observer starts at its recorded first_sim_time; full-run cone disturbance checks are supplied independently by evaluator."
+  ],
+  "frozen_provenance": {
+    "answer_sha256": "4b0c74e5d0662a11eb607e0e03f66997640d0e001584fab385f39c2a79d85588",
+    "weights_sha256": "d38071be8e8d3e2b7809d0bb9dd7d8f159b709efd44068029fce1a4bfd613c6e"
+  },
+  "config_difference_from_main": {
+    "scene.fork_initial": [
+      "left",
+      "right"
+    ],
+    "scene.random_fork": [
+      true,
+      false
+    ]
+  },
+  "failure_analysis": {
+    "criterion": "cone_route_correct",
+    "wrong_gate": 2,
+    "description": "No cone was displaced. Nevertheless the third cone was bypassed to the outside: body centre x0.43121 at y3.1 instead of required x>0.63. This route failure is independent of collision criteria.",
+    "causal_inference": "Cone mode allows paint-edge crossing and current local planner did not constrain the required inner side. Fork bias was already zero; after turning west past the second cone, road-memory planning maintained north-west motion before returning.",
+    "timeline": [
+      {
+        "sim_time": 136.892,
+        "rear_pose": [
+          0.7562374079181994,
+          1.7235980409789087,
+          1.3757184027774314
+        ],
+        "command": [
+          0.08583690971136093,
+          -0.22750000655651093
+        ],
+        "control": {
+          "lane_valid": true,
+          "lane_error": 0.10154405765560683,
+          "lane_heading": 0.11518966136186651,
+          "dash_heading": 0.11002862845095486,
+          "traffic_stop_completed": false,
+          "lane_age": 0.5159999999999911,
+          "front": 0.783287763595581,
+          "rear": 12.0,
+          "blocked": true,
+          "avoiding": true,
+          "planner_failed": false,
+          "cone_clearance": true,
+          "narrow_objects": 1,
+          "wide_objects": 0,
+          "road_memory": true,
+          "road_heading": 0.22654417705778698,
+          "road_center": 0.03981834450507693,
+          "lost_lane_distance": 0.0,
+          "fork_remaining": 0.0,
+          "fork_bias": 0.0,
+          "fork_pending": false,
+          "fork_target": 0.0,
+          "line_distance": null,
+          "stop_candidates": [],
+          "stage": "traffic",
+          "speed": 0.07751937984496257,
+          "published_speed": 0.07751937984496257
+        },
+        "image_age": 0.5660000000000025,
+        "scan_age": 0.03200000000001069
+      },
+      {
+        "sim_time": 138.894,
+        "rear_pose": [
+          0.8135381809532719,
+          1.9634017065545086,
+          1.4332812809175088
+        ],
+        "command": [
+          0.12999999523162842,
+          0.29249998927116394
+        ],
+        "control": {
+          "lane_valid": false,
+          "lane_error": 0.0,
+          "lane_heading": 0.0,
+          "dash_heading": 0.1520748214699639,
+          "traffic_stop_completed": false,
+          "lane_age": 0.7819999999999823,
+          "front": 0.545284628868103,
+          "rear": 12.0,
+          "blocked": true,
+          "avoiding": true,
+          "planner_failed": false,
+          "cone_clearance": true,
+          "narrow_objects": 4,
+          "wide_objects": 0,
+          "road_memory": true,
+          "road_heading": 0.18896762323791322,
+          "road_center": 0.10510222229501243,
+          "lost_lane_distance": 0.09722409318822409,
+          "fork_remaining": 0.0,
+          "fork_bias": 0.0,
+          "fork_pending": false,
+          "fork_target": 0.0,
+          "line_distance": null,
+          "stop_candidates": [],
+          "stage": "traffic",
+          "speed": 0.13,
+          "published_speed": 0.13
+        },
+        "image_age": 0.16599999999999682,
+        "scan_age": 0.03200000000001069
+      },
+      {
+        "sim_time": 140.892,
+        "rear_pose": [
+          0.7993703393187276,
+          2.223839128032645,
+          1.793662138627505
+        ],
+        "command": [
+          0.12999999523162842,
+          0.19499999284744263
+        ],
+        "control": {
+          "lane_valid": true,
+          "lane_error": -0.039310939112999106,
+          "lane_heading": -0.20807482399410943,
+          "dash_heading": -0.20567494138978348,
+          "traffic_stop_completed": false,
+          "lane_age": 0.04999999999998295,
+          "front": 0.7927688956260681,
+          "rear": 12.0,
+          "blocked": true,
+          "avoiding": true,
+          "planner_failed": false,
+          "cone_clearance": true,
+          "narrow_objects": 1,
+          "wide_objects": 0,
+          "road_memory": true,
+          "road_heading": -0.17953463697301011,
+          "road_center": 0.10299195958911733,
+          "lost_lane_distance": 0.0,
+          "fork_remaining": 0.0,
+          "fork_bias": 0.0,
+          "fork_pending": false,
+          "fork_target": 0.0,
+          "line_distance": null,
+          "stop_candidates": [],
+          "stage": "traffic",
+          "speed": 0.13,
+          "published_speed": 0.13
+        },
+        "image_age": 0.03200000000001069,
+        "scan_age": 0.03200000000001069
+      },
+      {
+        "sim_time": 142.892,
+        "rear_pose": [
+          0.718764067570002,
+          2.466520365568473,
+          1.9552626999703375
+        ],
+        "command": [
+          0.12999999523162842,
+          0.06499999761581421
+        ],
+        "control": {
+          "lane_valid": true,
+          "lane_error": -0.2571594724576741,
+          "lane_heading": -0.38905191475635487,
+          "dash_heading": null,
+          "traffic_stop_completed": false,
+          "lane_age": 0.04999999999998295,
+          "front": 0.5399839282035828,
+          "rear": 12.0,
+          "blocked": true,
+          "avoiding": true,
+          "planner_failed": false,
+          "cone_clearance": true,
+          "narrow_objects": 0,
+          "wide_objects": 0,
+          "road_memory": true,
+          "road_heading": -0.355234373026399,
+          "road_center": 0.029949048526101137,
+          "lost_lane_distance": 0.0,
+          "fork_remaining": 0.0,
+          "fork_bias": 0.0,
+          "fork_pending": false,
+          "fork_target": 0.0,
+          "line_distance": null,
+          "stop_candidates": [],
+          "stage": "traffic",
+          "speed": 0.13,
+          "published_speed": 0.13
+        },
+        "image_age": 0.09999999999999432,
+        "scan_age": 0.03200000000001069
+      },
+      {
+        "sim_time": 144.888,
+        "rear_pose": [
+          0.6259685192950059,
+          2.678405726016464,
+          2.002873793445485
+        ],
+        "command": [
+          0.07751937955617905,
+          0.032499998807907104
+        ],
+        "control": {
+          "lane_valid": true,
+          "lane_error": -0.3680201885392825,
+          "lane_heading": -0.5189339173704893,
+          "dash_heading": null,
+          "traffic_stop_completed": false,
+          "lane_age": 0.5159999999999911,
+          "front": 12.0,
+          "rear": 12.0,
+          "blocked": true,
+          "avoiding": true,
+          "planner_failed": false,
+          "cone_clearance": true,
+          "narrow_objects": 1,
+          "wide_objects": 0,
+          "road_memory": true,
+          "road_heading": -0.40724448027461546,
+          "road_center": -0.059688464000874845,
+          "lost_lane_distance": 0.0,
+          "fork_remaining": 0.0,
+          "fork_bias": 0.0,
+          "fork_pending": false,
+          "fork_target": 0.0,
+          "line_distance": null,
+          "stop_candidates": [],
+          "stage": "traffic",
+          "speed": 0.07751937984496257,
+          "published_speed": 0.07751937984496257
+        },
+        "image_age": 0.5660000000000025,
+        "scan_age": 0.03200000000001069
+      },
+      {
+        "sim_time": 146.89,
+        "rear_pose": [
+          0.5253408527859498,
+          2.894194849625521,
+          2.0071988078129466
+        ],
+        "command": [
+          0.12800000607967377,
+          0.0
+        ],
+        "control": {
+          "lane_valid": true,
+          "lane_error": -0.5351712927674663,
+          "lane_heading": -0.4590915333545014,
+          "dash_heading": null,
+          "traffic_stop_completed": false,
+          "lane_age": 0.11599999999998545,
+          "front": 12.0,
+          "rear": 0.8697177171707153,
+          "blocked": false,
+          "avoiding": true,
+          "planner_failed": false,
+          "cone_clearance": true,
+          "narrow_objects": 2,
+          "wide_objects": 0,
+          "road_memory": true,
+          "road_heading": -0.41334263758524764,
+          "road_center": -0.15344486118508704,
+          "lost_lane_distance": 0.0,
+          "fork_remaining": 0.0,
+          "fork_bias": 0.0,
+          "fork_pending": false,
+          "fork_target": 0.0,
+          "line_distance": null,
+          "stop_candidates": [],
+          "stage": "traffic",
+          "speed": 0.128,
+          "published_speed": 0.128
+        },
+        "image_age": 0.16599999999999682,
+        "scan_age": 0.03200000000001069
+      },
+      {
+        "sim_time": 148.89,
+        "rear_pose": [
+          0.4280246371723716,
+          3.125483861233801,
+          1.832095144508145
+        ],
+        "command": [
+          0.12800000607967377,
+          -0.29249998927116394
+        ],
+        "control": {
+          "lane_valid": true,
+          "lane_error": -0.5663858754523625,
+          "lane_heading": -0.19934762825196523,
+          "dash_heading": null,
+          "traffic_stop_completed": false,
+          "lane_age": 0.44999999999998863,
+          "front": 12.0,
+          "rear": 1.1186577081680298,
+          "blocked": false,
+          "avoiding": true,
+          "planner_failed": false,
+          "cone_clearance": true,
+          "narrow_objects": 1,
+          "wide_objects": 0,
+          "road_memory": true,
+          "road_heading": -0.2533309162705585,
+          "road_center": -0.24592482040402877,
+          "lost_lane_distance": 0.0,
+          "fork_remaining": 0.0,
+          "fork_bias": 0.0,
+          "fork_pending": false,
+          "fork_target": 0.0,
+          "line_distance": null,
+          "stop_candidates": [],
+          "stage": "traffic",
+          "speed": 0.08888888888889114,
+          "published_speed": 0.08888888888889114
+        },
+        "image_age": 0.03200000000001069,
+        "scan_age": 0.03200000000001069
+      }
+    ]
+  }
+}

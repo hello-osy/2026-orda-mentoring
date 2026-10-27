@@ -1,0 +1,21 @@
+{
+  "image": "000006_controller_state.jpg",
+  "sim_time": 0.624,
+  "image_stamp": 0.534,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": -1000000000.0,
+    "age": 1000000000.624,
+    "objects": [],
+    "control": {
+      "required_camera": true,
+      "published_speed": 0.0,
+      "speed": 0.0
+    },
+    "image_age": 0.04999999999999999,
+    "scan_age": 0.04999999999999999,
+    "received_sim_time": 0.44,
+    "publisher_age": 1000000000.45
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

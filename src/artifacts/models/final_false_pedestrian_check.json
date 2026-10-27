@@ -1,0 +1,115 @@
+[
+  {
+    "image": "000346_controller_state.jpg",
+    "detections": [
+      {
+        "class": "parking",
+        "confidence": 0.9289613366127014,
+        "xyxy": [
+          485.8210754394531,
+          17.073970794677734,
+          610.919677734375,
+          137.81466674804688
+        ]
+      }
+    ]
+  },
+  {
+    "image": "000349_controller_state.jpg",
+    "detections": [
+      {
+        "class": "parking",
+        "confidence": 0.7685645222663879,
+        "xyxy": [
+          505.3373107910156,
+          0.733123779296875,
+          639.5506591796875,
+          135.82025146484375
+        ]
+      }
+    ]
+  },
+  {
+    "image": "000362_controller_state.jpg",
+    "detections": [
+      {
+        "class": "parking",
+        "confidence": 0.9311441779136658,
+        "xyxy": [
+          528.78466796875,
+          0.918121337890625,
+          639.90771484375,
+          134.36203002929688
+        ]
+      }
+    ]
+  },
+  {
+    "image": "000366_controller_state.jpg",
+    "detections": [
+      {
+        "class": "parking",
+        "confidence": 0.6035242080688477,
+        "xyxy": [
+          561.6153564453125,
+          0.0,
+          639.7239990234375,
+          131.0644073486328
+        ]
+      }
+    ]
+  },
+  {
+    "image": "000369_controller_state.jpg",
+    "detections": [
+      {
+        "class": "parking",
+        "confidence": 0.6035242080688477,
+        "xyxy": [
+          561.6153564453125,
+          0.0,
+          639.7239990234375,
+          131.0644073486328
+        ]
+      }
+    ]
+  },
+  {
+    "image": "000370_controller_state.jpg",
+    "detections": [
+      {
+        "class": "parking",
+        "confidence": 0.6035242080688477,
+        "xyxy": [
+          561.6153564453125,
+          0.0,
+          639.7239990234375,
+          131.0644073486328
+        ]
+      }
+    ]
+  },
+  {
+    "image": "000372_controller_state.jpg",
+    "detections": [
+      {
+        "class": "parking",
+        "confidence": 0.6035242080688477,
+        "xyxy": [
+          561.6153564453125,
+          0.0,
+          639.7239990234375,
+          131.0644073486328
+        ]
+      }
+    ]
+  },
+  {
+    "image": "000374_controller_state.jpg",
+    "detections": []
+  },
+  {
+    "image": "000376_controller_state.jpg",
+    "detections": []
+  }
+]

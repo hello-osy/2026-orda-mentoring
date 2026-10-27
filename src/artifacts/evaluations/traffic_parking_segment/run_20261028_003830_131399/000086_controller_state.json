@@ -1,0 +1,76 @@
+{
+  "image": "000086_controller_state.jpg",
+  "sim_time": 9.68,
+  "image_stamp": 9.6,
+  "controller_state": "traffic_hold",
+  "detections": {
+    "stamp": 9.6,
+    "age": 0.08000000000000007,
+    "objects": [
+      {
+        "name": "parking",
+        "bbox": [
+          0.44547238349914553,
+          0.25832780202229816,
+          0.4764413356781006,
+          0.30457871754964194
+        ],
+        "truncated": false,
+        "confidence": 0.9223291873931885,
+        "area": 0.0014323423911991994,
+        "center": [
+          0.46095685958862304,
+          0.2814532597859701
+        ]
+      },
+      {
+        "name": "traffic_yellow",
+        "bbox": [
+          0.018232589960098265,
+          0.0,
+          0.19835729598999025,
+          0.3238633155822754
+        ],
+        "truncated": true,
+        "confidence": 0.90010666847229,
+        "area": 0.05833578451312348,
+        "center": [
+          0.10829494297504424,
+          0.1619316577911377
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": 0.11469968121232711,
+      "lane_heading": -0.45370103448140575,
+      "lane_age": 0.06599999999999895,
+      "front": 3.256772756576538,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": true,
+      "narrow_objects": 1,
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "line_distance": 0.039068087282400354,
+      "stop_candidates": [
+        {
+          "distance": 0.5835322195704056,
+          "thickness": 0.03579952267303103,
+          "complete": true
+        }
+      ],
+      "stage": "traffic",
+      "speed": 0.0,
+      "published_speed": 0.0
+    },
+    "image_age": 0.05000000000000071,
+    "scan_age": 0.05000000000000071,
+    "received_sim_time": 9.648,
+    "publisher_age": 0.05000000000000071
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

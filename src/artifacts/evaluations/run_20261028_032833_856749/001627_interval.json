@@ -1,0 +1,74 @@
+{
+  "image": "001627_interval.jpg",
+  "sim_time": 184.896,
+  "image_stamp": 184.868,
+  "controller_state": "parking_align",
+  "detections": {
+    "stamp": 184.6,
+    "age": 0.29599999999999227,
+    "objects": [
+      {
+        "name": "parking",
+        "bbox": [
+          0.20027556419372558,
+          0.0724276860555013,
+          0.360029935836792,
+          0.29031473795572915
+        ],
+        "truncated": false,
+        "confidence": 0.9402109384536743,
+        "area": 0.0348084090654811,
+        "center": [
+          0.2801527500152588,
+          0.18137121200561523
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.009425866864800127,
+      "lane_heading": 0.0021467271759636483,
+      "dash_heading": null,
+      "traffic_stop_completed": true,
+      "lane_age": 0.15000000000000568,
+      "front": 1.1985509395599365,
+      "rear": 2.601257562637329,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "wide_objects": 1,
+      "narrow_centers": [],
+      "road_memory": false,
+      "road_heading": -0.16236500489479694,
+      "road_center": 0.08592226929037754,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": 0.5679522675712179,
+      "stop_candidates": [
+        {
+          "distance": 0.5799522673031026,
+          "thickness": 0.021479713603818618,
+          "complete": true
+        },
+        {
+          "distance": 1.3210023866348448,
+          "thickness": 0.03221957040572792,
+          "complete": true
+        }
+      ],
+      "stage": "parking",
+      "speed": 0.08,
+      "published_speed": 0.08
+    },
+    "image_age": 0.20000000000001705,
+    "scan_age": 0.0660000000000025,
+    "received_sim_time": 184.792,
+    "publisher_age": 0.20000000000001705
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

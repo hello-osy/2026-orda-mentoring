@@ -1,0 +1,14 @@
+{"event": "controller_state", "elapsed": 0.0, "state": "waiting for answer"}
+{"event": "checkpoint", "elapsed": 0.0, "name": "start", "point": [1.25, 5.570000000000002]}
+{"event": "controller_state", "elapsed": 0.116, "state": "waiting for fresh sensors / detector"}
+{"event": "controller_state", "elapsed": 0.23, "state": "lane"}
+{"event": "checkpoint", "elapsed": 12.241999999999999, "name": "bump_exit", "point": [3.155251287433528, 5.579681419182014]}
+{"event": "checkpoint", "elapsed": 37.434, "name": "first_corner", "point": [9.424363814394141, 5.299060584385184]}
+{"event": "controller_state", "elapsed": 44.588, "state": "pedestrian_approach"}
+{"event": "checkpoint", "elapsed": 53.288, "name": "zigzag_exit", "point": [9.583144325265746, 3.039229855391671]}
+{"event": "controller_state", "elapsed": 56.596, "state": "pedestrian_hold"}
+{"event": "controller_state", "elapsed": 59.892, "state": "lane"}
+{"event": "pedestrian_line_crossed", "elapsed": 60.722, "speed": 0.15972098605357804, "signal": "traffic_red", "hold_before_crossing": 3.2960000000000065}
+{"event": "checkpoint", "elapsed": 63.03, "name": "pedestrian_exit", "point": [9.579120386751171, 2.1365038361872863]}
+{"event": "checkpoint", "elapsed": 69.11, "name": "three_lane_entry", "point": [9.24051230963167, 1.058292127234463]}
+{"event": "finished", "elapsed": 108.594, "reason": "stationary_timeout"}

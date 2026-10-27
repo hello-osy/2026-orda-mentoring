@@ -1,0 +1,14 @@
+{
+  "image": "000547_controller_state.jpg",
+  "sim_time": 64.21,
+  "image_stamp": 64.2,
+  "controller_state": "lane",
+  "detections": {
+    "received_sim_time": 64.14,
+    "stamp": 63.334,
+    "age": 0.8759999999999906,
+    "publisher_age": 0.8160000000000025,
+    "objects": []
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

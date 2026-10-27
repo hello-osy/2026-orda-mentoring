@@ -1,0 +1,46 @@
+{
+  "run": "full02",
+  "status": "stationary_timeout",
+  "elapsed_sim_seconds": 55.594,
+  "last_pose": {
+    "elapsed": 55.594,
+    "sim_time": 55.596000000000004,
+    "x": 7.756688951340749,
+    "y": 5.5821170714176,
+    "z": -1.8883447430728673e-08,
+    "yaw": -0.010536342423900877,
+    "roll": 3.635949714386892e-10,
+    "pitch": 8.608804855114278e-09,
+    "speed_measured": 0.0,
+    "speed_command": 0.0,
+    "steering_command": -0.007823933847248554,
+    "state": "lane",
+    "checkpoint_index": 2,
+    "traffic": "traffic_green",
+    "fork": "left",
+    "outside_reference_corridor": false,
+    "four_corners_inside_bay": false
+  },
+  "checkpoints": [
+    "start",
+    "bump_exit"
+  ],
+  "pedestrian_stop_audit": "Not reached; no stop-position or 3-second-hold claim is possible.",
+  "detections_messages": 225,
+  "detected_object_counts": {
+    "slow": 16,
+    "traffic_red": 31,
+    "parking": 65,
+    "traffic_green": 35
+  },
+  "detection_age_seconds": {
+    "median": 0.2359999999999971,
+    "p95": 0.6159999999999997,
+    "max": 1.3719999999999999
+  },
+  "waiting_sensor_or_detector_sim_seconds": 2.0779999999999994,
+  "waiting_fraction": 0.03737813433104291,
+  "continuous_final_stop_start_elapsed": 40.902,
+  "failure_evidence": "Controller remained lane and commanded zero from40.796s. Last detector objects empty, age0.128s. Live lane-tracker state and lidar clearance were not recorded, so exact zero-command cause is not proven.",
+  "scope": "Read-only file audit; no commands or controller ground-truth inputs."
+}

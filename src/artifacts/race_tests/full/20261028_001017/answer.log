@@ -1,0 +1,32 @@
+[INFO] [1793113818.746473286] [orda_answer]: 정답 코드 시작: YOLO + camera lane + lidar; absolute pose is unused.
+[INFO] [1793113820.162243514] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113820.467434813] [orda_answer]: lane
+[INFO] [1793113830.986301970] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113831.040240493] [orda_answer]: lane
+[INFO] [1793113838.786796081] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113840.154338213] [orda_answer]: lane
+[INFO] [1793113840.663004808] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113841.226313675] [orda_answer]: lane
+[INFO] [1793113844.357825789] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113844.610833465] [orda_answer]: lane
+[INFO] [1793113845.314289072] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113845.472550785] [orda_answer]: lane
+[INFO] [1793113847.092097200] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113847.248608944] [orda_answer]: lane
+[INFO] [1793113858.778974746] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113858.982357482] [orda_answer]: lane
+[INFO] [1793113866.615664114] [orda_answer]: pedestrian_approach
+[INFO] [1793113871.123974454] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113871.381518843] [orda_answer]: pedestrian_approach
+[INFO] [1793113879.670785720] [orda_answer]: pedestrian_hold
+[INFO] [1793113880.240196251] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113881.098543033] [orda_answer]: pedestrian_hold
+[INFO] [1793113884.393031952] [orda_answer]: lane
+[INFO] [1793113884.737086985] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113884.801620635] [orda_answer]: lane
+[INFO] [1793113890.059721201] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113890.520858176] [orda_answer]: lane
+[INFO] [1793113893.237408268] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113893.842407740] [orda_answer]: lane
+[INFO] [1793113895.216228992] [orda_answer]: waiting for fresh sensors / detector
+[INFO] [1793113895.268793666] [orda_answer]: lane

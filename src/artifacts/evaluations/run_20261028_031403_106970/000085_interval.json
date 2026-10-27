@@ -1,0 +1,79 @@
+{
+  "image": "000085_interval.jpg",
+  "sim_time": 9.6,
+  "image_stamp": 9.6,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 9.268,
+    "age": 0.33199999999999896,
+    "objects": [
+      {
+        "name": "traffic_green",
+        "bbox": [
+          0.7318324089050293,
+          0.0,
+          0.8545891761779785,
+          0.3204700469970703
+        ],
+        "truncated": true,
+        "confidence": 0.996002733707428,
+        "area": 0.03933986697717046,
+        "center": [
+          0.793210792541504,
+          0.16023502349853516
+        ]
+      },
+      {
+        "name": "parking",
+        "bbox": [
+          0.5473109722137451,
+          0.26351079940795896,
+          0.5769672870635987,
+          0.3066304842631022
+        ],
+        "truncated": false,
+        "confidence": 0.6071649789810181,
+        "area": 0.0012787709502905878,
+        "center": [
+          0.5621391296386719,
+          0.2850706418355306
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.00027264670215600975,
+      "lane_heading": -0.004255811663935578,
+      "dash_heading": -0.01349193270936852,
+      "traffic_stop_completed": false,
+      "lane_age": 0.08199999999999896,
+      "front": 1.4249794483184814,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "wide_objects": 0,
+      "narrow_centers": [],
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": null,
+      "stop_candidates": [],
+      "stage": "pedestrian",
+      "speed": 0.16,
+      "published_speed": 0.16
+    },
+    "image_age": 0.13199999999999967,
+    "scan_age": 0.06600000000000072,
+    "received_sim_time": 9.396,
+    "publisher_age": 0.13199999999999967
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

@@ -1,0 +1,41 @@
+{
+  "partial_test": true,
+  "full_course_tested": false,
+  "normal_yolo_and_camera_alignment": true,
+  "blackout": {
+    "start": 10.3,
+    "end": 12.338000000000001,
+    "dropped": 22
+  },
+  "maximum_image_age": 2.282,
+  "maximum_detector_age": 2.282,
+  "stale_image_sequence_samples": 7,
+  "all_stale_samples_camera_optional": true,
+  "parked_stationary_seconds": 3.0,
+  "final_pose": [
+    6.8436289383127535,
+    4.150107267482899,
+    -2.027689194328275e-08,
+    1.5458374891508242
+  ],
+  "final_corners": [
+    [
+      6.952072347164197,
+      4.086381079171668
+    ],
+    [
+      6.732140867400487,
+      4.091871453379708
+    ],
+    [
+      6.960108258505057,
+      4.408280790462191
+    ],
+    [
+      6.740176778741347,
+      4.413771164670232
+    ]
+  ],
+  "minimum_bay_margin": 0.10214086740048689,
+  "any_fault": false
+}

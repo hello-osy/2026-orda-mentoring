@@ -1,0 +1,76 @@
+{
+  "image": "000184_controller_state.jpg",
+  "sim_time": 21.152,
+  "image_stamp": 20.934,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 20.934,
+    "age": 0.21799999999999997,
+    "objects": [
+      {
+        "name": "traffic_green",
+        "bbox": [
+          0.023428767919540405,
+          7.727940877278646e-05,
+          0.20763344764709474,
+          0.3283450444539388
+        ],
+        "truncated": true,
+        "confidence": 0.9913679957389832,
+        "area": 0.06046845852502486,
+        "center": [
+          0.11553110778331757,
+          0.1642111619313558
+        ]
+      },
+      {
+        "name": "parking",
+        "bbox": [
+          0.4707270622253418,
+          0.2579308827718099,
+          0.5023921012878418,
+          0.3048071543375651
+        ],
+        "truncated": false,
+        "confidence": 0.9333131313323975,
+        "area": 0.0014843389702339966,
+        "center": [
+          0.4865595817565918,
+          0.2813690185546875
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.0887929938348455,
+      "lane_heading": 0.7416709382776142,
+      "lane_age": 0.11599999999999966,
+      "front": 3.194312572479248,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": true,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "line_distance": null,
+      "stop_candidates": [
+        {
+          "distance": 0.5262529832935561,
+          "thickness": 0.028639618138424822,
+          "complete": true
+        }
+      ],
+      "stage": "parking",
+      "speed": 0.13,
+      "published_speed": 0.13
+    },
+    "image_age": 0.16600000000000037,
+    "scan_age": 0.03200000000000003,
+    "received_sim_time": 21.092,
+    "publisher_age": 0.16600000000000037
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

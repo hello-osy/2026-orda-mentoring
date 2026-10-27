@@ -1,0 +1,101 @@
+{
+  "status": "stationary_timeout",
+  "last": {
+    "elapsed": 108.59400000000001,
+    "sim_time": 108.596,
+    "x": 6.2348452604532625,
+    "y": 1.1549231181205921,
+    "z": -1.8769188522838043e-08,
+    "yaw": 1.5661694975636635,
+    "roll": 1.18147261246217e-09,
+    "pitch": 9.94016103662644e-09,
+    "speed_measured": 0.0,
+    "speed_command": 0.0,
+    "steering_command": -0.33370262384414673,
+    "state": "lane",
+    "checkpoint_index": 6,
+    "traffic": "traffic_green",
+    "fork": "left",
+    "outside_reference_corridor": false,
+    "four_corners_inside_bay": false
+  },
+  "checkpoints": [
+    "start",
+    "bump_exit",
+    "first_corner",
+    "zigzag_exit",
+    "pedestrian_exit",
+    "three_lane_entry"
+  ],
+  "pedestrian": {
+    "best_hold": 3.137999999999998,
+    "closest_stopped_error": 0.02195431968193784,
+    "hold_since": null,
+    "crossed": true,
+    "crossing": {
+      "elapsed": 59.635999999999996,
+      "speed": 0.1560935674408536,
+      "signal": "traffic_yellow",
+      "hold_before_crossing": 3.137999999999998
+    },
+    "previous_distance": -0.7896466997834424
+  },
+  "hold_state_duration": 3.0080000000000027,
+  "hold_front_error_range": [
+    0.02195431968193784,
+    0.02195431968193784
+  ],
+  "waiting_seconds": 0.122,
+  "ages": {
+    "age": {
+      "median": 0.1440000000000019,
+      "p95": 0.29400000000000315,
+      "maximum": 0.5220000000000056
+    },
+    "image_age": {
+      "median": 0.0660000000000025,
+      "p95": 0.25,
+      "maximum": 0.5320000000000107
+    },
+    "scan_age": {
+      "median": 0.03200000000001069,
+      "p95": 0.0660000000000025,
+      "maximum": 0.0660000000000025
+    }
+  },
+  "last_detection": {
+    "stamp": 108.268,
+    "age": 0.12600000000000477,
+    "objects": [],
+    "control": {
+      "lane_valid": false,
+      "lane_error": 0.0,
+      "lane_heading": 0.0,
+      "lane_age": 15.949999999999989,
+      "front": 2.8349273204803467,
+      "rear": 0.7249460816383362,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "line_distance": 0.3544152744630071,
+      "stage": "fork",
+      "speed": 0.0,
+      "published_speed": 0.0
+    },
+    "image_age": 0.0660000000000025,
+    "scan_age": 0.0660000000000025,
+    "received_sim_time": 108.394,
+    "publisher_age": 0.132000000000005
+  },
+  "run": "full04",
+  "scope": "Read-only actual Gazebo trajectory/detection/control audit. No controller ground-truth feedback.",
+  "pedestrian_position_pass": true,
+  "pedestrian_three_second_hold_pass": true,
+  "failure_evidence": {
+    "avoidance_phase": "75-89s passed south of the middle-lane obstacle without footprint overlap.",
+    "lane_selection_jump": "At88.14s lane_error+.294m,89.14s-.128m,90.15s-.588m,91.14s-.708m.",
+    "avoidance_release": "At90.15s avoiding=false, steering=-.472rad. Continued large negative steering turned north.",
+    "lane_loss": "At93.15s lane_valid=false; at94.14s stopped heading1.566rad.",
+    "measured_outcome": "108.594s stationary_timeout;6orderedcheckpoints reached; no obstacle footprint overlap or approximate-corridor warnings."
+  }
+}

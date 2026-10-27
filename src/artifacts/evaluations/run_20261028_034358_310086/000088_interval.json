@@ -1,0 +1,80 @@
+{
+  "image": "000088_interval.jpg",
+  "sim_time": 10.044,
+  "image_stamp": 9.868,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 9.868,
+    "age": 0.17600000000000016,
+    "objects": [
+      {
+        "name": "traffic_green",
+        "bbox": [
+          0.74285888671875,
+          0.0,
+          0.8739347457885742,
+          0.3203703244527181
+        ],
+        "truncated": true,
+        "confidence": 0.988701581954956,
+        "area": 0.041992815498118334,
+        "center": [
+          0.8083968162536621,
+          0.16018516222635906
+        ]
+      },
+      {
+        "name": "parking",
+        "bbox": [
+          0.547627067565918,
+          0.2625936508178711,
+          0.5784088134765625,
+          0.30719432830810545
+        ],
+        "truncated": false,
+        "confidence": 0.725493848323822,
+        "area": 0.0013728867219469977,
+        "center": [
+          0.5630179405212402,
+          0.2848939895629883
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.0008364497905444068,
+      "lane_heading": 0.00410443610388386,
+      "dash_heading": -0.009275848132955688,
+      "traffic_stop_completed": false,
+      "lane_age": 0.049999999999998934,
+      "front": 1.3978686332702637,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "wide_objects": 0,
+      "narrow_centers": [],
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": null,
+      "stop_candidates": [],
+      "stage": "pedestrian",
+      "speed": 0.16,
+      "published_speed": 0.16,
+      "required_camera": true
+    },
+    "image_age": 0.03200000000000003,
+    "scan_age": 0.03200000000000003,
+    "received_sim_time": 9.894,
+    "publisher_age": 0.03200000000000003
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

@@ -1,0 +1,75 @@
+{
+  "image": "001598_interval.jpg",
+  "sim_time": 184.132,
+  "image_stamp": 184.134,
+  "controller_state": "parking_align",
+  "detections": {
+    "stamp": 183.934,
+    "age": 0.1980000000000075,
+    "objects": [
+      {
+        "name": "parking",
+        "bbox": [
+          0.21071629524230956,
+          0.08393853505452474,
+          0.36467747688293456,
+          0.2902219772338867
+        ],
+        "truncated": false,
+        "confidence": 0.9331961274147034,
+        "area": 0.03175964251083011,
+        "center": [
+          0.28769688606262206,
+          0.18708025614420573
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": 0.002306295921241883,
+      "lane_heading": -0.056764863217190084,
+      "dash_heading": null,
+      "traffic_stop_completed": true,
+      "lane_age": 0.0660000000000025,
+      "front": 1.2552883625030518,
+      "rear": 2.541621685028076,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "wide_objects": 1,
+      "narrow_centers": [],
+      "road_memory": false,
+      "road_heading": -0.17016597496287772,
+      "road_center": 0.05405985035472147,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": 0.6212116468961161,
+      "stop_candidates": [
+        {
+          "distance": 0.626491646778043,
+          "thickness": 0.025059665871121718,
+          "complete": true
+        },
+        {
+          "distance": 1.3711217183770883,
+          "thickness": 0.03937947494033413,
+          "complete": true
+        }
+      ],
+      "stage": "parking",
+      "speed": 0.08,
+      "published_speed": 0.08,
+      "required_camera": true
+    },
+    "image_age": 0.11600000000001387,
+    "scan_age": 0.05000000000001137,
+    "received_sim_time": 184.044,
+    "publisher_age": 0.11600000000001387
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

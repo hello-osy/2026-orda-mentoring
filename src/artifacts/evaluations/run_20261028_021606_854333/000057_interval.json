@@ -1,0 +1,75 @@
+{
+  "image": "000057_interval.jpg",
+  "sim_time": 6.554,
+  "image_stamp": 6.534,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 6.334,
+    "age": 0.22000000000000064,
+    "objects": [
+      {
+        "name": "traffic_red",
+        "bbox": [
+          0.6615850448608398,
+          0.08235031763712565,
+          0.7409393310546875,
+          0.3165141741434733
+        ],
+        "truncated": false,
+        "confidence": 0.989736795425415,
+        "area": 0.01858190568545979,
+        "center": [
+          0.7012621879577636,
+          0.19943224589029948
+        ]
+      },
+      {
+        "name": "parking",
+        "bbox": [
+          0.5446235179901123,
+          0.2669220288594564,
+          0.5733568668365479,
+          0.30120261510213214
+        ],
+        "truncated": false,
+        "confidence": 0.5893743634223938,
+        "area": 0.0009849960431711224,
+        "center": [
+          0.55899019241333,
+          0.2840623219807943
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.004358705241931204,
+      "lane_heading": -0.09362434150793413,
+      "dash_heading": -0.001883460765378754,
+      "traffic_stop_completed": false,
+      "lane_age": 0.016000000000000014,
+      "front": 1.5689377784729004,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "line_distance": 0.10411932530382317,
+      "stop_candidates": [],
+      "stage": "pedestrian",
+      "speed": 0.16,
+      "published_speed": 0.16
+    },
+    "image_age": 0.06600000000000072,
+    "scan_age": 0.06600000000000072,
+    "received_sim_time": 6.398,
+    "publisher_age": 0.06600000000000072
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

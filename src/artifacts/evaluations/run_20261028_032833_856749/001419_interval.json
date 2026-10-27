@@ -1,0 +1,90 @@
+{
+  "image": "001419_interval.jpg",
+  "sim_time": 161.302,
+  "image_stamp": 161.268,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 161.2,
+    "age": 0.10200000000000387,
+    "objects": [
+      {
+        "name": "traffic_red",
+        "bbox": [
+          0.28867669105529786,
+          0.12783711751302082,
+          0.3543919563293457,
+          0.31432437896728516
+        ],
+        "truncated": false,
+        "confidence": 0.9635581374168396,
+        "area": 0.0122550598566977,
+        "center": [
+          0.32153432369232177,
+          0.221080748240153
+        ]
+      },
+      {
+        "name": "parking",
+        "bbox": [
+          0.42144160270690917,
+          0.2687536875406901,
+          0.44865145683288576,
+          0.30665467580159506
+        ],
+        "truncated": false,
+        "confidence": 0.8982424139976501,
+        "area": 0.0010312803618095737,
+        "center": [
+          0.43504652976989744,
+          0.2877041816711426
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": 0.022667722371839148,
+      "lane_heading": 0.009009585736514123,
+      "dash_heading": 0.04083323773454028,
+      "traffic_stop_completed": false,
+      "lane_age": 0.05000000000001137,
+      "front": 1.914340853691101,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": true,
+      "narrow_objects": 1,
+      "wide_objects": 0,
+      "narrow_centers": [
+        [
+          0.41961351142493614,
+          0.3167913049483627
+        ]
+      ],
+      "road_memory": false,
+      "road_heading": -0.16236500489479694,
+      "road_center": 0.08592226929037754,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": 1.131603648405912,
+      "stop_candidates": [
+        {
+          "distance": 1.1455847255369929,
+          "thickness": 0.03937947494033413,
+          "complete": true
+        }
+      ],
+      "stage": "traffic",
+      "speed": 0.3090453737109489,
+      "published_speed": 0.3090453737109489
+    },
+    "image_age": 0.03200000000001069,
+    "scan_age": 0.03200000000001069,
+    "received_sim_time": 161.294,
+    "publisher_age": 0.10000000000002274
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

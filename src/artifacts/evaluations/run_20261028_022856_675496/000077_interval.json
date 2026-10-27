@@ -1,0 +1,78 @@
+{
+  "image": "000077_interval.jpg",
+  "sim_time": 8.842,
+  "image_stamp": 8.668,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 8.534,
+    "age": 0.30799999999999983,
+    "objects": [
+      {
+        "name": "traffic_green",
+        "bbox": [
+          0.7083963394165039,
+          0.010112253824869792,
+          0.8174241065979004,
+          0.3186252911885579
+        ],
+        "truncated": false,
+        "confidence": 0.9995357990264893,
+        "area": 0.03363648761011367,
+        "center": [
+          0.7629102230072021,
+          0.16436877250671386
+        ]
+      },
+      {
+        "name": "parking",
+        "bbox": [
+          0.5472162246704102,
+          0.2636164983113607,
+          0.5761323928833008,
+          0.30502274831136067
+        ],
+        "truncated": false,
+        "confidence": 0.8020864725112915,
+        "area": 0.0011973100900650024,
+        "center": [
+          0.5616743087768554,
+          0.2843196233113607
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.011929143576682861,
+      "lane_heading": -0.0028898232933409385,
+      "dash_heading": 0.00791288704400428,
+      "traffic_stop_completed": false,
+      "lane_age": 0.06599999999999895,
+      "front": 1.5446968078613281,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "wide_objects": 0,
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": null,
+      "stop_candidates": [],
+      "stage": "pedestrian",
+      "speed": 0.16,
+      "published_speed": 0.16
+    },
+    "image_age": 0.11599999999999966,
+    "scan_age": 0.05000000000000071,
+    "received_sim_time": 8.646,
+    "publisher_age": 0.11599999999999966
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

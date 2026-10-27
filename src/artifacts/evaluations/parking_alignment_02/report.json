@@ -1,0 +1,105 @@
+{
+  "passed": false,
+  "controller_state": "fault: parking alignment timeout",
+  "start_pose": [
+    5.8,
+    4.84,
+    0.003,
+    0,
+    0,
+    -0.05
+  ],
+  "end_pose": [
+    6.925414175863363,
+    4.837247659793852,
+    -1.9125544925557847e-08,
+    2.3343340592480925e-11,
+    6.169198127328651e-09,
+    -0.001535616298309283
+  ],
+  "all_four_corners_inside": false,
+  "minimum_margin_m": -0.37734120265480176,
+  "corners": [
+    [
+      7.186582785855527,
+      4.946846734401082
+    ],
+    [
+      7.186244950402675,
+      4.726846993793946
+    ],
+    [
+      6.864245330059504,
+      4.727341462047666
+    ],
+    [
+      6.8645831655123555,
+      4.947341202654802
+    ]
+  ],
+  "parking_neighbor_overlap_proxy": [],
+  "transitions": [
+    {
+      "elapsed": 0.0,
+      "state": "lane",
+      "x": 5.799999999999996,
+      "y": 4.839999999999995,
+      "yaw": -0.049999999999999975,
+      "lane_valid": true,
+      "lane_error": 0.0309448062722511,
+      "lane_heading": 0.031717466214893304,
+      "camera_stop_distance": 1.4105011933174225,
+      "tracked_line_distance": 1.4105011933174225,
+      "speed_command": 0.13,
+      "steering_command": 0.024999999999999967,
+      "odom_speed": 0.0,
+      "lidar_front": 1.4930338859558105,
+      "lidar_rear": 1.7858667373657227
+    },
+    {
+      "elapsed": 0.16599999999993997,
+      "state": "parking_align",
+      "x": 5.801129036355543,
+      "y": 4.8399393723807265,
+      "yaw": -0.049780085782178074,
+      "lane_valid": true,
+      "lane_error": 0.031037478770313386,
+      "lane_heading": 0.031528079107798354,
+      "camera_stop_distance": 1.4105011933174225,
+      "tracked_line_distance": 1.4105011933174225,
+      "speed_command": 0.08,
+      "steering_command": 0.019579918814849245,
+      "odom_speed": 0.021999999931532344,
+      "lidar_front": 1.491909384727478,
+      "lidar_rear": 1.7869199514389038
+    },
+    {
+      "elapsed": 14.179999999999836,
+      "state": "fault: parking alignment timeout",
+      "x": 6.919558159029735,
+      "y": 4.837255750854998,
+      "yaw": -0.0012195923597537403,
+      "lane_valid": true,
+      "lane_error": -0.011243260524739184,
+      "lane_heading": 0.054822299675541274,
+      "camera_stop_distance": 1.0238663484486874,
+      "tracked_line_distance": 0.30329584743769167,
+      "speed_command": 0.0,
+      "steering_command": -0.015590979895244845,
+      "odom_speed": 0.07999999821366455,
+      "lidar_front": 12.0,
+      "lidar_rear": 3.1734461784362793
+    }
+  ],
+  "answer_sha256": "f3fac123bf1ed8ef08a36e4095e938db7e5a2b52a0389f032d9bc6cd8890f890",
+  "elapsed_sim_seconds": 15.215999999999894,
+  "control_inputs": [
+    "real RGB image",
+    "real lidar",
+    "real wheel odometry",
+    "simulation clock",
+    "synthetic confirmed parking trigger"
+  ],
+  "ground_truth_usage": "Output evaluation and scenario initialization only, never controller feedback.",
+  "scope": "Camera alignment and timed maneuver test; YOLO recognition is intentionally bypassed."
+}

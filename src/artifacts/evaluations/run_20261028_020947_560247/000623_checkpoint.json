@@ -1,0 +1,42 @@
+{
+  "image": "000623_checkpoint.jpg",
+  "sim_time": 71.198,
+  "image_stamp": 71.068,
+  "controller_state": "lane",
+  "detections": {
+    "stamp": 71.0,
+    "age": 0.1979999999999933,
+    "objects": [],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.17783955030348977,
+      "lane_heading": 0.027725422845102647,
+      "dash_heading": -0.3781695317324666,
+      "traffic_stop_completed": false,
+      "lane_age": 0.031999999999996476,
+      "front": 1.1119407415390015,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "line_distance": null,
+      "stop_candidates": [],
+      "stage": "fork",
+      "speed": 0.16,
+      "published_speed": 0.16
+    },
+    "image_age": 0.08200000000000784,
+    "scan_age": 0.016000000000005343,
+    "received_sim_time": 71.142,
+    "publisher_age": 0.15000000000000568
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

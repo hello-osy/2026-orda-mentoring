@@ -1,0 +1,74 @@
+{
+  "image": "000434_interval.jpg",
+  "sim_time": 49.242,
+  "image_stamp": 49.134,
+  "controller_state": "pedestrian_approach",
+  "detections": {
+    "stamp": 49.0,
+    "age": 0.24199999999999733,
+    "objects": [
+      {
+        "name": "pedestrian",
+        "bbox": [
+          0.8233180999755859,
+          0.0011456807454427083,
+          1.0,
+          0.279668935139974
+        ],
+        "truncated": true,
+        "confidence": 0.9937724471092224,
+        "area": 0.049210017787409015,
+        "center": [
+          0.911659049987793,
+          0.14040730794270834
+        ]
+      }
+    ],
+    "control": {
+      "lane_valid": true,
+      "lane_error": -0.013310348829828058,
+      "lane_heading": 0.015238209289336644,
+      "dash_heading": null,
+      "traffic_stop_completed": false,
+      "lane_age": 0.04999999999999716,
+      "front": 12.0,
+      "rear": 12.0,
+      "blocked": false,
+      "avoiding": false,
+      "planner_failed": false,
+      "cone_clearance": false,
+      "narrow_objects": 0,
+      "wide_objects": 0,
+      "narrow_centers": [],
+      "road_memory": false,
+      "road_heading": 0.0,
+      "road_center": 0.0,
+      "lost_lane_distance": 0.0,
+      "fork_remaining": 0.0,
+      "fork_bias": 0.0,
+      "fork_pending": false,
+      "fork_target": 0.0,
+      "line_distance": 0.8204689739854548,
+      "stop_candidates": [
+        {
+          "distance": 0.8269689737470167,
+          "thickness": 0.03579952267303103,
+          "complete": true
+        },
+        {
+          "distance": 1.3711217183770883,
+          "thickness": 0.03937947494033413,
+          "complete": true
+        }
+      ],
+      "stage": "pedestrian",
+      "speed": 0.13,
+      "published_speed": 0.13
+    },
+    "image_age": 0.10000000000000142,
+    "scan_age": 0.03200000000000358,
+    "received_sim_time": 49.098,
+    "publisher_age": 0.10000000000000142
+  },
+  "note": "Latest detector result; image and inference stamps may differ. Debug only."
+}

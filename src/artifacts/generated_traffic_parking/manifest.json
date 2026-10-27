@@ -1,0 +1,228 @@
+{
+  "world": "orda",
+  "robot": "limo",
+  "signs": [
+    {
+      "name": "sign_slow",
+      "class_name": "slow",
+      "label": 7,
+      "pose": [
+        2.4,
+        5.15,
+        0.36,
+        0,
+        0,
+        0
+      ],
+      "active": true,
+      "group": "slow",
+      "size": [
+        0.22,
+        0.22
+      ]
+    },
+    {
+      "name": "sign_pedestrian",
+      "class_name": "pedestrian",
+      "label": 6,
+      "pose": [
+        9.15,
+        2.55,
+        0.36,
+        0,
+        0,
+        -1.57079632679
+      ],
+      "active": true,
+      "group": "pedestrian",
+      "size": [
+        0.22,
+        0.22
+      ]
+    },
+    {
+      "name": "sign_parking",
+      "class_name": "parking",
+      "label": 8,
+      "pose": [
+        7.9,
+        5.15,
+        0.36,
+        0,
+        0,
+        0
+      ],
+      "active": true,
+      "group": "parking",
+      "size": [
+        0.22,
+        0.22
+      ]
+    },
+    {
+      "name": "sign_traffic_red",
+      "class_name": "traffic_red",
+      "label": 1,
+      "pose": [
+        3.85,
+        5.2,
+        0.38,
+        0,
+        0,
+        0
+      ],
+      "active": true,
+      "group": "traffic",
+      "size": [
+        0.14,
+        0.32
+      ]
+    },
+    {
+      "name": "sign_traffic_yellow",
+      "class_name": "traffic_yellow",
+      "label": 2,
+      "pose": [
+        3.85,
+        5.2,
+        0.38,
+        0,
+        0,
+        0
+      ],
+      "active": false,
+      "group": "traffic",
+      "size": [
+        0.14,
+        0.32
+      ]
+    },
+    {
+      "name": "sign_traffic_green",
+      "class_name": "traffic_green",
+      "label": 3,
+      "pose": [
+        3.85,
+        5.2,
+        0.38,
+        0,
+        0,
+        0
+      ],
+      "active": false,
+      "group": "traffic",
+      "size": [
+        0.14,
+        0.32
+      ]
+    },
+    {
+      "name": "sign_left",
+      "class_name": "left",
+      "label": 4,
+      "pose": [
+        3.9,
+        0.94,
+        0.36,
+        0,
+        0,
+        3.14159265359
+      ],
+      "active": true,
+      "group": "fork",
+      "size": [
+        0.22,
+        0.22
+      ]
+    },
+    {
+      "name": "sign_right",
+      "class_name": "right",
+      "label": 5,
+      "pose": [
+        3.9,
+        0.94,
+        0.36,
+        0,
+        0,
+        3.14159265359
+      ],
+      "active": false,
+      "group": "fork",
+      "size": [
+        0.22,
+        0.22
+      ]
+    },
+    {
+      "name": "sign_advertisement_0",
+      "class_name": "advertisement_0",
+      "label": 0,
+      "pose": [
+        4.15,
+        5.24,
+        0.41,
+        0,
+        0,
+        0
+      ],
+      "active": true,
+      "group": "advertisement",
+      "size": [
+        0.26,
+        0.3
+      ]
+    },
+    {
+      "name": "sign_advertisement_1",
+      "class_name": "advertisement_1",
+      "label": 0,
+      "pose": [
+        4.15,
+        5.24,
+        0.41,
+        0,
+        0,
+        0
+      ],
+      "active": false,
+      "group": "advertisement",
+      "size": [
+        0.26,
+        0.3
+      ]
+    },
+    {
+      "name": "sign_advertisement_2",
+      "class_name": "advertisement_2",
+      "label": 0,
+      "pose": [
+        4.15,
+        5.24,
+        0.41,
+        0,
+        0,
+        0
+      ],
+      "active": false,
+      "group": "advertisement",
+      "size": [
+        0.26,
+        0.3
+      ]
+    }
+  ],
+  "track_extent_m": [
+    10,
+    6
+  ],
+  "coordinate_origin": "CAD mat lower left",
+  "spawn_pose": [
+    1.8,
+    4.84,
+    0.003,
+    0,
+    0,
+    0
+  ]
+}
