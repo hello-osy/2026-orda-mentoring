@@ -1,7 +1,8 @@
 """센서만 사용하는 교육용 정답 예제: 흰색 → sliding window → scan line → PID.
 
-입력은 config.yaml 하나입니다. 월드 좌표, 정답 라벨, 경로 waypoint는 읽지 않습니다.
-주차 시간표와 카메라 보정값은 차량/현장에 맞게 YAML에서 조정해야 합니다.
+사용자는 이 파일과 같은 폴더의 best.pt만 수정·교체합니다.
+주행 파라미터는 아래 ANSWER_CONFIG에 있습니다. config.yaml은 시뮬레이터 설정입니다.
+월드 좌표, 정답 라벨, 경로 waypoint는 읽지 않습니다.
 """
 import math
 import json
@@ -13,6 +14,179 @@ import time
 import cv2
 import numpy as np
 import yaml
+
+
+# 사용자 주행 설정: 속도, 차선 인식, PID, 회피, 주차 시간표
+ANSWER_CONFIG = {'rate_hz': 20.0,
+ 'debug_rate_hz': 5.0,
+ 'sensor_timeout': 0.7,
+ 'odometry_timeout': 0.7,
+ 'base_speed': 0.4,
+ 'slow_speed': 0.2,
+ 'minimum_curve_speed': 0.15,
+ 'detector': {'enabled': True,
+              'confidence': 0.45,
+              'image_size': 320,
+              'device': 'cpu',
+              'rate_hz': 5.0,
+              'timeout': 1.5,
+              'minimum_area': 0.0006,
+              'confirm_frames': 2,
+              'minimum_area_by_class': {'parking': 0.02,
+                                        'pedestrian': 0.012,
+                                        'traffic_red': 0.025,
+                                        'traffic_yellow': 0.025,
+                                        'traffic_green': 0.025,
+                                        'left': 0.006,
+                                        'right': 0.006,
+                                        'slow': 0.004},
+              'cpu_threads': 2,
+              'edge_margin': 0.01,
+              'allow_truncated_classes': ['traffic_red', 'traffic_yellow', 'traffic_green'],
+              'shutdown_timeout': 5.0},
+ 'lane': {'white_min': [0, 0, 165],
+          'white_max': [179, 85, 255],
+          'view_width': 2.4,
+          'near': 0.2,
+          'far': 1.7,
+          'width_px': 480,
+          'height_px': 420,
+          'lane_width': 0.55,
+          'windows': 12,
+          'margin': 0.17,
+          'minimum_pixels': 25,
+          'lookahead': 0.65,
+          'heading_gain': 0.0,
+          'lost_grace': 1.2,
+          'smoothing': 0.55,
+          'stop_min_width': 0.32,
+          'stop_max_thickness': 0.13,
+          'component_min_height': 0.24,
+          'fit_min_span': 0.16,
+          'abnormal_fit_residual': 0.035,
+          'histogram_band_height': 0.12,
+          'max_missing_windows': 1,
+          'dash_min_height': 0.12,
+          'dash_max_aspect': 0.25,
+          'dash_heading_max_angle': 1.2,
+          'dash_heading_length_cap': 0.3,
+          'dash_heading_angle_tolerance': 0.1,
+          'dash_heading_min_components': 2,
+          'dash_heading_support_ratio': 0.6,
+          'identity_gate': 0.45,
+          'histogram_smooth_pixels': 9,
+          'minimum_peak': 4,
+          'max_peaks': 8,
+          'peak_suppression_ratio': 0.75,
+          'target_history_weight': 0.35,
+          'pair_width_min_ratio': 0.7,
+          'pair_width_max_ratio': 1.75,
+          'pair_width_weight': 0.3,
+          'fit_minimum_windows': 3,
+          'solid_row_fraction': 0.85,
+          'fit_samples': 50,
+          'stop_lane_width_ratio': 0.38,
+          'stop_row_coverage': 0.7,
+          'stop_edge_margin_pixels': 2,
+          'heading_smoothing': 0.2,
+          'abnormal_error_scale': 1.0,
+          'closed_hole_min_area': 0.003},
+ 'pid': {'kp': 1.3,
+         'ki': 0.03,
+         'kd': 0.11,
+         'integral_limit': 0.25,
+         'derivative_alpha': 0.25,
+         'feedback_gain': 0.35},
+ 'lidar': {'trigger_distance': 0.85,
+           'emergency_distance': 0.18,
+           'front_half_angle': 0.3,
+           'avoidance_speed': 0.13,
+           'planning_distance': 1.0,
+           'planning_turn_distance': 0.4,
+           'planning_heading_limit': 1.2,
+           'lane_change_limit': 0.65,
+           'activation_distance': 1.2,
+           'planning_margin': 0.025,
+           'release_distance': 0.25,
+           'cluster_gap': 0.12,
+           'small_object_min_width': 0.025,
+           'small_object_max_width': 0.12,
+           'small_object_range': 1.8,
+           'small_object_clearance': 0.03,
+           'cone_inside_required': True,
+           'cone_side_deadband': 0.02,
+           'cone_inside_margin': 0.01,
+           'cone_turn_distances': [0.1, 0.25, 0.4],
+           'cone_planning_distance': 0.8,
+           'road_heading_limit': 0.75,
+           'road_release_heading': 0.18,
+           'road_release_error': 0.3,
+           'road_half_width': 0.78,
+           'small_object_memory_distance': 0.8,
+           'planning_point_range': 3.0,
+           'cluster_min_points': 3,
+           'wide_object_half_width': 0.9,
+           'small_object_half_width': 0.75,
+           'planning_steps': 35,
+           'planning_steering_samples': 33,
+           'planning_return_samples': 33,
+           'planning_refine_on_failure': True,
+           'planning_heading_clip': 0.8,
+           'road_heading_slack': 0.03,
+           'planning_cost_heading': 1.0,
+           'planning_cost_lateral': 2.0,
+           'planning_cost_steering_change': 0.8,
+           'planning_cost_clearance': 0.1,
+           'planning_clearance_cap': 0.5,
+           'vision_memory_distance': 2.0,
+           'road_gap_range': 1.8,
+           'road_gap_min_width': 0.005,
+           'road_gap_center_width': 0.3,
+           'planning_reference_distance': 0.65,
+           'planning_cost_return_steering': 0.6,
+           'planning_cost_reference': 1.5,
+           'road_default_bias': 0.3},
+ 'missions': {'sign_cooldown': 12.0,
+              'slow_seconds': 14.0,
+              'fork_bias': 0.55,
+              'pedestrian_wait': 3.2,
+              'stop_offset': 0.015,
+              'stop_tolerance': 0.025,
+              'stop_approach_speed': 0.13,
+              'traffic_require_stop': True,
+              'traffic_min_stop': 0.3,
+              'stop_gain': 0.9,
+              'stopped_speed': 0.012,
+              'approach_timeout': 15.0,
+              'stop_line_memory': 8.0,
+              'line_missing_timeout': 2.0,
+              'line_match_tolerance': 0.1,
+              'enforce_order': True,
+              'sequence': ['slow', 'pedestrian', 'fork', 'traffic', 'parking'],
+              'fork_distance': 5.0,
+              'fork_wait_for_obstacles': True,
+              'fork_clear_distance': 0.2,
+              'pedestrian_require_line': True,
+              'trigger_line_max_distance': 1.5,
+              'trigger_line_freshness': 0.4,
+              'fork_align_tolerance': 0.12},
+ 'parking': {'require_camera_during_sequence': False,
+             'enabled': True,
+             'align_timeout': 24.0,
+             'align_speed': 0.08,
+             'line_distance': 0.15,
+             'distance_tolerance': 0.025,
+             'lateral_tolerance': 0.035,
+             'heading_tolerance': 0.09,
+             'stable_seconds': 0.6,
+             'sequence': [{'seconds': 2.1, 'speed': 0.12, 'steering': 0},
+                          {'seconds': 6.65, 'speed': -0.1, 'steering': -0.5},
+                          {'seconds': 3.0, 'speed': -0.1, 'steering': 0},
+                          {'seconds': 3.2, 'speed': 0, 'steering': 0}]},
+ 'max_image_travel': 0.04,
+ 'curve_speed_gain': 0.6}
+
+YOLO_CLASSES = ['traffic_red', 'traffic_yellow', 'traffic_green', 'left', 'right', 'pedestrian', 'slow', 'parking']
 
 
 def clip(value, low, high):
@@ -28,6 +202,7 @@ class PID:
         self.integral = 0.0
         self.previous = None
         self.derivative = 0.0
+        self.terms = dict(p=0.0, i=0.0, d=0.0, total=0.0)
 
     def update(self, error, dt):
         c = self.config
@@ -38,7 +213,9 @@ class PID:
         alpha = c['derivative_alpha']
         self.derivative = alpha * derivative + (1 - alpha) * self.derivative
         self.previous = error
-        return c['kp'] * error + c['ki'] * self.integral + c['kd'] * self.derivative
+        p, i, d = c['kp'] * error, c['ki'] * self.integral, c['kd'] * self.derivative
+        self.terms = dict(p=p, i=i, d=d, total=p+i+d)
+        return p+i+d
 
 
 def estimate_dash_heading(bird, config):
@@ -230,6 +407,7 @@ class LaneVision:
         fit_spans = {}
         solid_boundaries = {}
         fit_residuals = []
+        windows = []
         for start, side in starts:
             current = float(start)
             selected = []
@@ -240,6 +418,8 @@ class LaneVision:
                 high = h - window * h // c['windows']
                 inside = ((nonzero_y >= low) & (nonzero_y < high) &
                           (np.abs(nonzero_x - current) < c['margin'] * scale))
+                windows.append(dict(side=side, x0=float(current-c['margin']*scale),
+                                    x1=float(current+c['margin']*scale), y0=low, y1=high))
                 indices = np.flatnonzero(inside)
                 if len(indices) >= c['minimum_pixels']:
                     mean = float(np.mean(nonzero_x[indices]))
@@ -263,7 +443,9 @@ class LaneVision:
                     solid_boundaries[side] = len(np.unique(ys)) / (np.ptp(ys) + 1) > c.get('solid_row_fraction', .85)
                     fit_residuals.append(float(np.sqrt(np.mean((xs - np.polyval(fits[side], ys)) ** 2))) / scale)
         result = dict(valid=False, error=0.0, heading=0.0, abnormal=False,
-                      stop_distance=None, stop_candidates=[], center_px=w / 2, mask=bird,
+                      stop_distance=None, stop_candidates=[], center_px=w / 2, mask=bird, lane_mask=lane_mask,
+                      windows=windows, fits={side: fit.tolist() for side, fit in fits.items()},
+                      fit_spans=fit_spans,
                       dash_heading=estimate_dash_heading(bird, c))
         if fits:
             self.previous_fits = {side: fit.copy() for side, fit in fits.items()}
@@ -917,6 +1099,8 @@ class Driver:
                 self.transition('fault: obstacle during parking', now)
             speed = 0.0
         self.debug = dict(lane_valid=lane['valid'], lane_error=lane['error'], lane_heading=lane['heading'],
+                          pid=dict(self.pid.terms), pid_error=self.pid.previous,
+                          pid_feedback_gain=c['pid'].get('feedback_gain', .35),
                           dash_heading=lane.get('dash_heading'),
                           traffic_stop_completed=self.traffic_stop_completed,
                           lane_age=now-self.last_lane_time, front=scan['front'], rear=scan['rear'],
@@ -950,24 +1134,22 @@ def main(config_path=None):
         config_path = sys.argv[1]
     path = Path(config_path).resolve()
     config = yaml.safe_load(path.read_text())
-    root = Path(__file__).resolve().parents[3]
+    config['answer'] = ANSWER_CONFIG
     c = config['answer']
     detector = None
     if c['detector']['enabled']:
-        weights = Path(c['detector']['weights'])
-        if not weights.is_absolute():
-            weights = root / weights
+        weights = Path(__file__).with_name('best.pt')
         if not weights.is_file():
-            raise SystemExit(f'학습 가중치가 없습니다: {weights}\nrecord → extract → train 순서로 실행하세요. 차선만 시험하려면 answer.detector.enabled: false.')
+            raise SystemExit(f'YOLO 모델이 없습니다: {weights}\nanswer.py 옆에 best.pt 파일을 넣으세요.')
         from ultralytics import YOLO
         detector = YOLO(str(weights))
         import torch
         threads = int(c['detector'].get('cpu_threads', config['environment'].get('cpu_threads', 2)))
         torch.set_num_threads(threads)
         detector.add_callback('on_predict_start', lambda _: torch.set_num_threads(threads))
-        expected = set(config['dataset']['classes'])
+        expected = set(YOLO_CLASSES)
         if set(detector.names.values()) != expected:
-            raise SystemExit('가중치 클래스가 대회 8종과 다릅니다. train.sh로 학습한 best.pt를 지정하세요.')
+            raise SystemExit('모델의 클래스 이름은 answer.py의 YOLO_CLASSES 8종과 같아야 합니다. best.pt를 확인하세요.')
 
     class AnswerNode(Node):
         def __init__(self):
@@ -1084,15 +1266,11 @@ def main(config_path=None):
                              lane=self.lane_cache is not None, detector=not self.stop_event.is_set())
             sensor_ready, required_camera = sensor_status(c, self.driver.state, ages, available)
             self.driver.debug['required_camera'] = required_camera
-            if now - self.detection_debug_stamp >= 1.0 / c['debug_rate_hz']:
-                packet = dict(stamp=detection_stamp, age=now-detection_stamp, objects=detections,
-                              control=self.driver.debug, image_age=now-image_stamp, scan_age=now-self.scan_stamp)
-                self.detection_output.publish(String(data=json.dumps(packet)))
-                self.detection_debug_stamp = now
             if not sensor_ready or not math.isfinite(self.velocity) or not math.isfinite(self.angular_velocity):
                 self.publish(0.0, 0.0)
                 self.driver.debug['published_speed'] = 0.0
                 self.driver.debug['speed'] = 0.0
+                speed, steering = 0.0, 0.0
                 self.driver.sensor_failure(now)
                 state = 'waiting for fresh sensors / detector'
             else:
@@ -1119,16 +1297,28 @@ def main(config_path=None):
                 self.driver.debug['speed'] = speed
                 self.driver.debug['required_camera'] = required_camera
                 if now - self.debug_stamp >= 1.0 / c['debug_rate_hz']:
-                    debug = cv2.cvtColor(lane['mask'], cv2.COLOR_GRAY2BGR)
-                    row = int(self.vision.row_at(c['lane']['lookahead']))
-                    center = int(lane['center_px'])
-                    cv2.line(debug, (0, row), (debug.shape[1] - 1, row), (0, 180, 0), 1)
-                    cv2.circle(debug, (center, row), 6, (0, 0, 255), -1)
-                    cv2.putText(debug, f'{state} [{self.driver.stage()}] v={speed:.2f} steer={steering:.2f}', (8, 22), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 255), 1)
-                    message = self.bridge.cv2_to_imgmsg(debug, 'bgr8')
-                    message.header.stamp = self.get_clock().now().to_msg()
+                    message = self.bridge.cv2_to_imgmsg(lane['lane_mask'], 'mono8')
+                    stamp = float(lane['stamp'])
+                    message.header.stamp.sec = int(stamp)
+                    message.header.stamp.nanosec = int((stamp-int(stamp))*1e9)
                     self.debug.publish(message)
                     self.debug_stamp = now
+            # Telemetry follows the actual published command, including safety stops.
+            if now - self.detection_debug_stamp >= 1.0 / c['debug_rate_hz']:
+                lane = self.lane_cache or {}
+                keys = ('valid', 'error', 'heading', 'center_px', 'forward', 'windows',
+                        'fits', 'fit_spans', 'center_fit', 'fit_near', 'fit_far')
+                control = dict(self.driver.debug, steering=steering, speed=speed,
+                               state=state, sensor_ready=sensor_ready,
+                               controller_state=self.driver.state)
+                packet = dict(stamp=detection_stamp, age=now-detection_stamp, objects=detections,
+                              control=control, image_age=now-image_stamp, scan_age=now-self.scan_stamp,
+                              image_stamp=image_stamp, lane_stamp=lane.get('stamp'),
+                              lane={key: lane[key] for key in keys if key in lane},
+                              display=dict(lane=c['lane'], pid=c['pid'], detector=dict(timeout=c['detector']['timeout']),
+                                           sensor_timeout=c['sensor_timeout']))
+                self.detection_output.publish(String(data=json.dumps(packet)))
+                self.detection_debug_stamp = now
             if state != self.last_state:
                 self.get_logger().info(state)
                 self.status.publish(String(data=state))

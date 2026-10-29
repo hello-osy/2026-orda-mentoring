@@ -1,7 +1,0 @@
-[1;33m[Wrn] [SDFFeatures.cc:351] [0m[1;33mDART: Cone is not a supported collision geomerty[0m[1;33m primitive, using generated mesh of a cone instead[0m[1;33m[0m
-[1;33m[Wrn] [SDFFeatures.cc:351] [0m[1;33mDART: Cone is not a supported collision geomerty[0m[1;33m primitive, using generated mesh of a cone instead[0m[1;33m[0m
-[1;33m[Wrn] [SDFFeatures.cc:351] [0m[1;33mDART: Cone is not a supported collision geomerty[0m[1;33m primitive, using generated mesh of a cone instead[0m[1;33m[0m
-[1;33m[Wrn] [SDFFeatures.cc:351] [0m[1;33mDART: Cone is not a supported collision geomerty[0m[1;33m primitive, using generated mesh of a cone instead[0m[1;33m[0m
-[1;33m[Wrn] [Ogre2Camera.cc:423] [0m[1;33mOgre2Camera::SetVisibilityMask: Mask bits [0m[1;33mc0000000[0m[1;33m are set but will be ignored as they conflict with the [0m[1;33mreserved bits used internally by the ogre2 backend.[0m[1;33m[0m
-[1;33m[Wrn] [Ogre2Camera.cc:423] [0m[1;33mOgre2Camera::SetVisibilityMask: Mask bits [0m[1;33mc0000000[0m[1;33m are set but will be ignored as they conflict with the [0m[1;33mreserved bits used internally by the ogre2 backend.[0m[1;33m[0m
-[1;33m[Wrn] [Ogre2RenderTarget.cc:696] [0m[1;33mAnti-aliasing level of '[0m[1;33m0[0m[1;33m' [0m[1;33mis not supported; valid FSAA levels are: [0m[1;33m[ 1 2 4 ][0m[1;33m. Setting to 1[0m[1;33m[0m

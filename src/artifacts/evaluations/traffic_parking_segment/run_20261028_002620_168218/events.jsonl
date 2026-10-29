@@ -1,7 +1,0 @@
-{"event": "controller_state", "elapsed": 0.0, "state": "waiting for answer"}
-{"event": "checkpoint", "elapsed": 0.0, "name": "traffic_approach", "point": [1.8, 4.84]}
-{"event": "controller_state", "elapsed": 0.13, "state": "waiting for fresh sensors / detector"}
-{"event": "controller_state", "elapsed": 0.34400000000000003, "state": "lane"}
-{"event": "controller_state", "elapsed": 0.466, "state": "traffic_approach"}
-{"event": "controller_state", "elapsed": 3.6420000000000003, "state": "traffic_hold"}
-{"event": "finished", "elapsed": 17.398, "reason": "stationary_timeout"}

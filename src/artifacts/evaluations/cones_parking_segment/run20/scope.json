@@ -1,8 +1,0 @@
-{
-  "scope": "Independent lower-left corner through four cones, signal and parking; not a full course test.",
-  "inputs": "Actual camera, lidar, odometry velocity and final YOLO; no absolute pose used by controller.",
-  "result": "parked",
-  "cone_max_position_change_m": 1.879052010812644e-07,
-  "cone_max_tilt_radians": 6.665667666895824e-07,
-  "source": "Controller-agent actual Gazebo segment run20"
-}

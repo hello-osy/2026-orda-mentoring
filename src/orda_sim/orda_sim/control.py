@@ -12,7 +12,7 @@ from rclpy.qos import QoSProfile, DurabilityPolicy, ReliabilityPolicy
 from ackermann_msgs.msg import AckermannDriveStamped
 from geometry_msgs.msg import Twist
 from rosgraph_msgs.msg import Clock as ClockMessage
-from std_msgs.msg import Bool, String
+from std_msgs.msg import String
 from gz.transport13 import Node as GazeboNode
 from gz.msgs10.pose_pb2 import Pose
 from gz.msgs10.boolean_pb2 import Boolean
@@ -29,7 +29,6 @@ class Adapter(Node):
         self.last_command = -math.inf
         self.sim_time = 0.0
         self.last_clock = -math.inf
-        self.collecting = False
         self.stop_scene = threading.Event()
         self.gz = GazeboNode()
         self.publisher = self.create_publisher(Twist, config['topics']['cmd_vel'], 10)
@@ -37,7 +36,6 @@ class Adapter(Node):
         self.create_subscription(ClockMessage, '/clock', self.on_clock, 10)
         transient = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL,
                                reliability=ReliabilityPolicy.RELIABLE)
-        self.create_subscription(Bool, config['topics']['collection_active'], self.on_collection, transient)
         self.status = self.create_publisher(String, '/simulation/scene', transient)
         self.create_timer(1 / config['simulator']['command_rate'], self.tick,
                           clock=Clock(clock_type=ClockType.STEADY_TIME))
@@ -58,12 +56,9 @@ class Adapter(Node):
         self.sim_time = message.clock.sec + message.clock.nanosec * 1e-9
         self.last_clock = time.monotonic()
 
-    def on_collection(self, message):
-        self.collecting = message.data
-
     def tick(self):
         now = time.monotonic()
-        safe = (not self.collecting and now - self.last_command < self.c['simulator']['command_timeout']
+        safe = (now - self.last_command < self.c['simulator']['command_timeout']
                 and now - self.last_clock < self.c['simulator']['clock_timeout'])
         message = Twist()
         if safe:
@@ -93,9 +88,6 @@ class Adapter(Node):
         selected = c['fork_initial']
         previous = {}
         while not self.stop_scene.wait(0.1):
-            if self.collecting:
-                previous.clear()
-                continue
             durations = c['traffic_seconds']
             phase = self.sim_time % sum(durations)
             traffic = 'traffic_red' if phase < durations[0] else (
@@ -112,9 +104,6 @@ class Adapter(Node):
                 group = item['group']
                 if group not in target or previous.get(group) == target[group]:
                     continue
-                if self.collecting:
-                    all_ok = False
-                    break
                 active = item.get('class_name') == target[group] or item['name'] == target[group]
                 all_ok = self.move(item, active) and all_ok
             if all_ok:

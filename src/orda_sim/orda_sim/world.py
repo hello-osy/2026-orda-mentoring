@@ -29,10 +29,6 @@ def box_geometry(size):
     return f"<geometry><box><size>{numbers(size)}</size></box></geometry>"
 
 
-def label_plugin(label):
-    return f'<plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>{label}</label></plugin>'
-
-
 def mesh_file(path, vertices, texture):
     """One textured quad. Vertices are counterclockwise when seen from the front."""
     positions = numbers([number for vertex in vertices for number in vertex])
@@ -156,7 +152,7 @@ def sign_texture(kind, path):
     cv2.imwrite(str(path), im)
 
 
-def sign_model(name, kind, pose, size, label, active, output, post_radius):
+def sign_model(name, kind, pose, size, active, output, post_radius):
     width, height = size
     texture = output / f"{kind}.png"
     sign_texture(kind, texture)
@@ -168,14 +164,12 @@ def sign_model(name, kind, pose, size, label, active, output, post_radius):
     if not active:
         actual[2] = -10
     board = box_geometry([.02, width, height])
-    tag = label_plugin(label) if label else ""
-    # The post is intentionally not included in the semantic class box.
     post_height = max(.05, pose[2] - height/2)
     post_z = -(height/2 + post_height/2)
     return f'''<model name="{name}"><static>true</static><pose>{numbers(actual)}</pose>
 <link name="panel"><collision name="plate_collision">{board}</collision>
 <visual name="back">{board}{material([.05,.05,.05,1])}</visual>
-<visual name="face">{mesh_geometry(mesh)}{texture_material(texture)}{tag}<cast_shadows>false</cast_shadows></visual>
+<visual name="face">{mesh_geometry(mesh)}{texture_material(texture)}<cast_shadows>false</cast_shadows></visual>
 <collision name="post_collision"><pose>0 0 {post_z} 0 0 0</pose><geometry><cylinder><radius>{post_radius}</radius><length>{post_height}</length></cylinder></geometry></collision>
 <visual name="post"><pose>0 0 {post_z} 0 0 0</pose><geometry><cylinder><radius>{post_radius}</radius><length>{post_height}</length></cylinder></geometry>{material([.25,.25,.25,1])}</visual>
 </link></model>'''
@@ -227,7 +221,7 @@ def robot_model(robot, topics):
     camera_spec = f'<horizontal_fov>{math.radians(camera["hfov_deg"])}</horizontal_fov><image><width>{camera["width"]}</width><height>{camera["height"]}</height><format>R8G8B8</format></image><clip><near>{camera["near"]}</near><far>{camera["far"]}</far></clip>'
     parts.append(f'<link name="camera_link"><pose>{numbers(pose)}</pose>{inertia(.01,.01,.01,.01)}')
     parts.append(f'<sensor name="rgb" type="camera"><topic>{topics["image"]}</topic><always_on>true</always_on><update_rate>{camera["rate_hz"]}</update_rate><camera>{camera_spec}</camera></sensor>')
-    parts.append(f'<sensor name="boxes" type="boundingbox_camera"><topic>{topics["boxes"]}</topic><always_on>true</always_on><update_rate>{camera["rate_hz"]}</update_rate><camera><box_type>visible_2d</box_type>{camera_spec}</camera></sensor></link>')
+    parts.append('</link>')
     parts.append('<joint name="camera_fixed" type="fixed"><parent>base_link</parent><child>camera_link</child></joint>')
     lidar = robot["lidar"]
     parts.append(f'''<link name="lidar_link"><pose>{lidar['x']} {lidar['y']} {lidar['z']} 0 0 0</pose>{inertia(.01,.01,.01,.01)}
@@ -267,20 +261,20 @@ def generate_world(config, output_dir):
     xml.append('<light name="sun" type="directional"><pose>0 0 10 0 0 0</pose><diffuse>.8 .8 .8 1</diffuse><direction>0.1 0.2 -1</direction><cast_shadows>false</cast_shadows></light>')
     xml.append(f'<model name="cad_track"><static>true</static><link name="mat"><collision name="ground"><geometry><plane><normal>0 0 1</normal><size>30 30</size></plane></geometry></collision><visual name="cad_paint">{mesh_geometry(track_mesh)}{texture_material(output / "track.png")}</visual></link></model>')
     manifest = {"world": world["name"], "robot": robot["name"], "signs": [], "track_extent_m": [10, 6], "coordinate_origin": "CAD mat lower left", "spawn_pose": robot["spawn"]}
-    specs = [("slow", "slow", scene["slow_pose"], True, 7),
-             ("pedestrian", "pedestrian", scene["pedestrian_pose"], True, 6),
-             ("parking", "parking", scene["parking_pose"], True, 8)]
+    specs = [("slow", "slow", scene["slow_pose"], True),
+             ("pedestrian", "pedestrian", scene["pedestrian_pose"], True),
+             ("parking", "parking", scene["parking_pose"], True)]
     for index, kind in enumerate(["traffic_red", "traffic_yellow", "traffic_green"]):
-        specs.append(("traffic", kind, scene["traffic_pose"], index == 0, index + 1))
-    for kind, label in [("left", 4), ("right", 5)]:
-        specs.append(("fork", kind, scene["fork_pose"], scene["fork_initial"] == kind, label))
+        specs.append(("traffic", kind, scene["traffic_pose"], index == 0))
+    for kind in ["left", "right"]:
+        specs.append(("fork", kind, scene["fork_pose"], scene["fork_initial"] == kind))
     for index in range(3):
-        specs.append(("advertisement", f"advertisement_{index}", scene["advertisement_pose"], index == 0, 0))
-    for group, kind, pose, active, label in specs:
+        specs.append(("advertisement", f"advertisement_{index}", scene["advertisement_pose"], index == 0))
+    for group, kind, pose, active in specs:
         name = "sign_" + kind
         size = scene["signal_size"] if group == "traffic" else scene["advertisement_size"] if group == "advertisement" else [scene["sign_size"]] * 2
-        xml.append(sign_model(name, kind, pose, size, label, active, output, scene["post_radius"]))
-        manifest["signs"].append({"name": name, "class_name": kind, "label": label, "pose": pose, "active": active, "group": group, "size": size})
+        xml.append(sign_model(name, kind, pose, size, active, output, scene["post_radius"]))
+        manifest["signs"].append({"name": name, "class_name": kind, "pose": pose, "active": active, "group": group, "size": size})
     bump = scene["bump"]
     geometry = f'<geometry><cylinder><radius>{bump["radius"]}</radius><length>{bump["width"]}</length></cylinder></geometry>'
     pose = list(bump["pose"])

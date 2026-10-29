@@ -1,8 +1,0 @@
-[INFO] [1793124289.686675128] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
-[INFO] [1793124289.687665725] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/camera/image_raw (gz.msgs.Image) -> /camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
-[INFO] [1793124289.689013326] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/camera/camera_info (gz.msgs.CameraInfo) -> /camera/camera_info (sensor_msgs/msg/CameraInfo)] (Lazy 0)
-[INFO] [1793124289.689289330] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/scan (gz.msgs.LaserScan) -> /scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
-[INFO] [1793124289.689524958] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/model/limo/odometry (gz.msgs.Odometry) -> /odom (nav_msgs/msg/Odometry)] (Lazy 0)
-[INFO] [1793124289.690422721] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/model/limo/cmd_vel (geometry_msgs/msg/Twist) -> /model/limo/cmd_vel (gz.msgs.Twist)] (Lazy 0)
-[INFO] [1793124289.717480505] [ros_gz_bridge]: Passing message from ROS geometry_msgs/msg/Twist to Gazebo gz.msgs.Twist (showing msg only once per type)
-[INFO] [1793124808.038339551] [rclcpp]: signal_handler(SIGINT/SIGTERM)

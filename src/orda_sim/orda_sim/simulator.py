@@ -5,6 +5,8 @@ import subprocess
 import time
 import fcntl
 import re
+import sys
+import xml.etree.ElementTree as ET
 import yaml
 from .common import project_path
 from .world import generate_world
@@ -64,12 +66,23 @@ def run(config):
     command = ['gz', 'sim', '-r', '-v', str(config['simulator']['verbosity'])]
     if config['simulator']['headless']:
         command += ['-s']
+    else:
+        # A smaller viewport reduces CPU software-rendering cost.
+        gui_file = generated / 'gui.config'
+        window = ET.Element('window')
+        ET.SubElement(window, 'width').text = str(config['simulator']['gui_width'])
+        ET.SubElement(window, 'height').text = str(config['simulator']['gui_height'])
+        plugins = ET.parse(world).findall('./world/gui/plugin')
+        gui_file.write_text(ET.tostring(window, encoding='unicode') + '\n' +
+                            '\n'.join(ET.tostring(plugin, encoding='unicode') for plugin in plugins))
+        command += ['--gui-config', str(gui_file)]
     if config['simulator']['egl_headless']:
         command += ['--headless-rendering']
     command.append(str(world))
     processes = []
     files = []
     node = None
+    viewer_warned = False
     try:
         for name, args in [('gazebo', command), ('bridge', ['ros2', 'run', 'ros_gz_bridge', 'parameter_bridge',
                             '--ros-args', '-p', 'config_file:=' + str(bridge_file)])]:
@@ -87,6 +100,12 @@ def run(config):
                         raise RuntimeError('EGL 보정 라이브러리 없음. setup.sh를 실행하세요.')
                     env['LD_PRELOAD'] = str(shim) + (':' + env['LD_PRELOAD'] if env.get('LD_PRELOAD') else '')
             processes.append(subprocess.Popen(args, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True))
+        if config['viewer'].get('auto_start', False) and not config['simulator']['headless']:
+            log = (log_dir / 'viewer.log').open('w')
+            files.append(log)
+            processes.append(subprocess.Popen(
+                [sys.executable, '-m', 'orda_sim.entry', 'view', config['_config_path']],
+                stdout=log, stderr=subprocess.STDOUT, start_new_session=True))
         rclpy.init(signal_handler_options=SignalHandlerOptions.NO)
         node = Adapter(config, json.loads((generated / 'manifest.json').read_text()))
         print(f'Gazebo 시작: {world}\n로그: {log_dir}\n종료: Ctrl+C', flush=True)
@@ -94,6 +113,9 @@ def run(config):
             for name, process in zip(['Gazebo', 'ROS bridge'], processes):
                 if process.poll() is not None:
                     raise RuntimeError(f'{name} 종료({process.returncode}). {log_dir} 로그 확인')
+            if len(processes) > 2 and processes[2].poll() not in (None, 0) and not viewer_warned:
+                print(f'시각화 창 종료: {log_dir / "viewer.log"} 확인', flush=True)
+                viewer_warned = True
             rclpy.spin_once(node, timeout_sec=0.1)
     except KeyboardInterrupt:
         pass
