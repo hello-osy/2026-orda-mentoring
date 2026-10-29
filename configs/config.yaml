@@ -289,7 +289,6 @@ viewer:
   rate_hz: 10.0
   frame_cache: 60
   stale_wall_seconds: 2.0
-  steering_arrow_pixels: 80
   window_positions:
   - - 20
     - 40

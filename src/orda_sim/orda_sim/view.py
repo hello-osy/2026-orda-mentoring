@@ -110,12 +110,6 @@ def camera_overlay(frame, packet, config):
     else:
         label(image, 'LANE NOT DETECTED - no measured x', h-88, RED)
     steering = control.get('steering', 0.0)
-    base = (w-55, h-12)
-    length = config['viewer']['steering_arrow_pixels']
-    tip = (int(base[0]-length*math.sin(steering)), int(base[1]-length*math.cos(steering)))
-    cv2.line(image, base, (base[0], base[1]-length), CYAN, 1)
-    cv2.arrowedLine(image, base, tip, GREEN, 3, tipLength=.18)
-    label(image, 'GREEN arrow = published steering (+left)', h-44, GREEN)
     label(image, f"v={control.get('speed', 0):+.3f}m/s  steer={steering:+.3f}rad ({math.degrees(steering):+.1f}deg)", 22)
     label(image, str(control.get('state', 'Waiting for answer telemetry')), 44, CYAN)
     pid = control.get('pid', {})
