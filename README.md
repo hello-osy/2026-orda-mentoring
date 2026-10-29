@@ -6,6 +6,8 @@ Gazebo + ROS 2 시뮬레이터입니다. **사용자는 아래 두 파일만 수
 - (src/orda_sim/orda_sim/best.pt): YOLO 모델.
 
 **설치** — Ubuntu 24.04 + ROS 2 Jazzy 기준입니다. 일반 Ubuntu와 **WSL2 + WSLg의 Ubuntu 24.04**에서 같은 명령을 사용합니다.
+/2026-orda-mentoring 경로에서 명령어를 실행하세요.
+
 
 ```bash
 bash scripts/setup.sh configs/config.yaml
