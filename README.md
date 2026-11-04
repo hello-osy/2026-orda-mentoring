@@ -24,3 +24,12 @@ bash scripts/simulator.sh configs/config.yaml
 ```bash
 bash scripts/answer.sh configs/config.yaml
 ```
+
+**역할 분담 — 모두 `answer.py`에서 작업합니다.**
+
+- 차선 2명: `LaneVision`·`LaneDriving`(인식/PID), `LaneChange`(전방 차량 감지/차선 변경)
+- 주차 1명: `Parking`(진입 정렬/주차 시간표)
+- 라바콘 1명: `ConeDriving`·`cone_steering`(라바콘 안쪽 통과)
+- 공통: `Driver`(제어 선택/정지 조건), `AnswerNode`(센서 수신/YOLO/최종 `/drive` 발행)
+
+각 담당의 파라미터는 파일 상단 `ANSWER_CONFIG`에 있습니다. 시뮬레이터는 차량 장애물을 차로마다 1대씩 총 3대 배치하며, 라바콘은 반지름 4.5cm·높이 24cm입니다.

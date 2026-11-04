@@ -1,193 +1,108 @@
-"""센서만 사용하는 교육용 정답 예제: 흰색 → sliding window → scan line → PID.
+"""2회차 역할 분담: 차선 2명 / 주차 1명 / 라바콘 1명.
 
-사용자는 이 파일과 같은 폴더의 best.pt만 수정·교체합니다.
-주행 파라미터는 아래 ANSWER_CONFIG에 있습니다. config.yaml은 시뮬레이터 설정입니다.
-월드 좌표, 정답 라벨, 경로 waypoint는 읽지 않습니다.
+1. LaneVision, LaneDriving, LaneChange: 차선 인식·PID·차선 변경
+2. Parking: 정렬 후 T자 주차
+3. ConeDriving: 라바콘 인식·회피
+4. Driver, AnswerNode: 미션 선택·센서 수신·최종 제어 발행 (공통)
+
+사용자는 이 파일과 옆의 best.pt만 수정한다. 거리 m, 속도 m/s, 조향 rad(+좌회전).
+주행 제어기는 (속도, 조향), 주차 제어기는 (속도, 조향, 상태)를 반환한다.
+토픽은 공통부에서만 발행한다.
 """
 import math
 import json
 from pathlib import Path
 import sys
 import threading
-import time
-
 import cv2
 import numpy as np
 import yaml
 
 
-# 사용자 주행 설정: 속도, 차선 인식, PID, 회피, 주차 시간표
-ANSWER_CONFIG = {'rate_hz': 20.0,
- 'debug_rate_hz': 5.0,
- 'sensor_timeout': 0.7,
- 'odometry_timeout': 0.7,
- 'base_speed': 0.4,
- 'slow_speed': 0.2,
- 'minimum_curve_speed': 0.15,
- 'detector': {'enabled': True,
-              'confidence': 0.45,
-              'image_size': 320,
-              'device': 'cpu',
-              'rate_hz': 5.0,
-              'timeout': 1.5,
-              'minimum_area': 0.0006,
-              'confirm_frames': 2,
-              'minimum_area_by_class': {'parking': 0.02,
-                                        'pedestrian': 0.012,
-                                        'traffic_red': 0.025,
-                                        'traffic_yellow': 0.025,
-                                        'traffic_green': 0.025,
-                                        'left': 0.006,
-                                        'right': 0.006,
-                                        'slow': 0.004},
-              'cpu_threads': 2,
-              'edge_margin': 0.01,
-              'allow_truncated_classes': ['traffic_red', 'traffic_yellow', 'traffic_green'],
-              'shutdown_timeout': 5.0},
- 'lane': {'white_min': [0, 0, 165],
-          'white_max': [179, 85, 255],
-          'view_width': 2.4,
-          'near': 0.2,
-          'far': 1.7,
-          'width_px': 480,
-          'height_px': 420,
-          'lane_width': 0.55,
-          'windows': 12,
-          'margin': 0.17,
-          'minimum_pixels': 25,
-          'lookahead': 0.65,
-          'heading_gain': 0.0,
-          'lost_grace': 1.2,
-          'smoothing': 0.55,
-          'stop_min_width': 0.32,
-          'stop_max_thickness': 0.13,
-          'component_min_height': 0.24,
-          'fit_min_span': 0.16,
-          'abnormal_fit_residual': 0.035,
-          'histogram_band_height': 0.12,
-          'max_missing_windows': 1,
-          'dash_min_height': 0.12,
-          'dash_max_aspect': 0.25,
-          'dash_heading_max_angle': 1.2,
-          'dash_heading_length_cap': 0.3,
-          'dash_heading_angle_tolerance': 0.1,
-          'dash_heading_min_components': 2,
-          'dash_heading_support_ratio': 0.6,
-          'identity_gate': 0.45,
-          'histogram_smooth_pixels': 9,
-          'minimum_peak': 4,
-          'max_peaks': 8,
-          'peak_suppression_ratio': 0.75,
-          'target_history_weight': 0.35,
-          'pair_width_min_ratio': 0.7,
-          'pair_width_max_ratio': 1.75,
-          'pair_width_weight': 0.3,
-          'fit_minimum_windows': 3,
-          'solid_row_fraction': 0.85,
-          'fit_samples': 50,
-          'stop_lane_width_ratio': 0.38,
-          'stop_row_coverage': 0.7,
-          'stop_edge_margin_pixels': 2,
-          'heading_smoothing': 0.2,
-          'abnormal_error_scale': 1.0,
-          'closed_hole_min_area': 0.003},
- 'pid': {'kp': 1.3,
-         'ki': 0.03,
-         'kd': 0.11,
-         'integral_limit': 0.25,
-         'derivative_alpha': 0.25,
-         'feedback_gain': 0.35},
- 'lidar': {'trigger_distance': 0.85,
-           'emergency_distance': 0.18,
-           'front_half_angle': 0.3,
-           'avoidance_speed': 0.13,
-           'planning_distance': 1.0,
-           'planning_turn_distance': 0.4,
-           'planning_heading_limit': 1.2,
-           'lane_change_limit': 0.65,
-           'activation_distance': 1.2,
-           'planning_margin': 0.025,
-           'release_distance': 0.25,
-           'cluster_gap': 0.12,
-           'small_object_min_width': 0.025,
-           'small_object_max_width': 0.12,
-           'small_object_range': 1.8,
-           'small_object_clearance': 0.03,
-           'cone_inside_required': True,
-           'cone_side_deadband': 0.02,
-           'cone_inside_margin': 0.01,
-           'cone_turn_distances': [0.1, 0.25, 0.4],
-           'cone_planning_distance': 0.8,
-           'road_heading_limit': 0.75,
-           'road_release_heading': 0.18,
-           'road_release_error': 0.3,
-           'road_half_width': 0.78,
-           'small_object_memory_distance': 0.8,
-           'planning_point_range': 3.0,
-           'cluster_min_points': 3,
-           'wide_object_half_width': 0.9,
-           'small_object_half_width': 0.75,
-           'planning_steps': 35,
-           'planning_steering_samples': 33,
-           'planning_return_samples': 33,
-           'planning_refine_on_failure': True,
-           'planning_heading_clip': 0.8,
-           'road_heading_slack': 0.03,
-           'planning_cost_heading': 1.0,
-           'planning_cost_lateral': 2.0,
-           'planning_cost_steering_change': 0.8,
-           'planning_cost_clearance': 0.1,
-           'planning_clearance_cap': 0.5,
-           'vision_memory_distance': 2.0,
-           'road_gap_range': 1.8,
-           'road_gap_min_width': 0.005,
-           'road_gap_center_width': 0.3,
-           'planning_reference_distance': 0.65,
-           'planning_cost_return_steering': 0.6,
-           'planning_cost_reference': 1.5,
-           'road_default_bias': 0.3},
- 'missions': {'sign_cooldown': 12.0,
-              'slow_seconds': 14.0,
-              'fork_bias': 0.55,
-              'pedestrian_wait': 3.2,
-              'stop_offset': 0.015,
-              'stop_tolerance': 0.025,
-              'stop_approach_speed': 0.13,
-              'traffic_require_stop': True,
-              'traffic_min_stop': 0.3,
-              'stop_gain': 0.9,
-              'stopped_speed': 0.012,
-              'approach_timeout': 15.0,
-              'stop_line_memory': 8.0,
-              'line_missing_timeout': 2.0,
-              'line_match_tolerance': 0.1,
-              'enforce_order': True,
-              'sequence': ['slow', 'pedestrian', 'fork', 'traffic', 'parking'],
-              'fork_distance': 5.0,
-              'fork_wait_for_obstacles': True,
-              'fork_clear_distance': 0.2,
-              'pedestrian_require_line': True,
-              'trigger_line_max_distance': 1.5,
-              'trigger_line_freshness': 0.4,
-              'fork_align_tolerance': 0.12},
- 'parking': {'require_camera_during_sequence': False,
-             'enabled': True,
-             'align_timeout': 24.0,
-             'align_speed': 0.08,
-             'line_distance': 0.15,
-             'distance_tolerance': 0.025,
-             'lateral_tolerance': 0.035,
-             'heading_tolerance': 0.09,
-             'stable_seconds': 0.6,
-             'sequence': [{'seconds': 2.1, 'speed': 0.12, 'steering': 0},
-                          {'seconds': 6.65, 'speed': -0.1, 'steering': -0.5},
-                          {'seconds': 3.0, 'speed': -0.1, 'steering': 0},
-                          {'seconds': 3.2, 'speed': 0, 'steering': 0}]},
- 'max_image_travel': 0.04,
- 'curve_speed_gain': 0.6}
+# ======================================================================
+# 0. 담당별 설정 — 주행 파라미터는 여기서 수정
+# ======================================================================
+
+ANSWER_CONFIG = {
+    'rate_hz': 20.0, 'debug_rate_hz': 5.0, 'sensor_timeout': 0.7, 'odometry_timeout': 0.7,
+    'base_speed': 0.4, 'slow_speed': 0.2, 'minimum_curve_speed': 0.15,
+    'detector': {
+        'enabled': True, 'confidence': 0.45, 'image_size': 320, 'device': 'cpu', 'rate_hz': 5.0,
+        'timeout': 1.5, 'minimum_area': 0.0006, 'confirm_frames': 2,
+        'minimum_area_by_class': {
+            'parking': 0.02, 'pedestrian': 0.012, 'traffic_red': 0.025, 'traffic_yellow': 0.025,
+            'traffic_green': 0.025, 'left': 0.006, 'right': 0.006, 'slow': 0.004,
+        },
+        'cpu_threads': 2, 'edge_margin': 0.01,
+        'allow_truncated_classes': ['traffic_red', 'traffic_yellow', 'traffic_green'],
+        'shutdown_timeout': 5.0,
+    },
+    'lane': {
+        'white_min': [0, 0, 165], 'white_max': [179, 85, 255], 'view_width': 2.4, 'near': 0.2,
+        'far': 1.7, 'width_px': 480, 'height_px': 420, 'lane_width': 0.55, 'windows': 12, 'margin': 0.17,
+        'minimum_pixels': 25, 'lookahead': 0.65, 'lost_grace': 1.2,
+        'smoothing': 0.55, 'stop_min_width': 0.32, 'stop_max_thickness': 0.13,
+        'component_min_height': 0.24, 'fit_min_span': 0.16, 'abnormal_fit_residual': 0.035,
+        'histogram_band_height': 0.12, 'max_missing_windows': 1, 'dash_min_height': 0.12,
+        'dash_max_aspect': 0.25, 'dash_heading_max_angle': 1.2, 'dash_heading_length_cap': 0.3,
+        'dash_heading_angle_tolerance': 0.1, 'dash_heading_min_components': 2,
+        'dash_heading_support_ratio': 0.6, 'identity_gate': 0.45, 'histogram_smooth_pixels': 9,
+        'minimum_peak': 4, 'max_peaks': 8, 'peak_suppression_ratio': 0.75, 'target_history_weight': 0.35,
+        'pair_width_min_ratio': 0.7, 'pair_width_max_ratio': 1.75, 'pair_width_weight': 0.3,
+        'fit_minimum_windows': 3, 'solid_row_fraction': 0.85, 'fit_samples': 50,
+        'stop_lane_width_ratio': 0.38, 'stop_row_coverage': 0.7, 'stop_edge_margin_pixels': 2,
+        'closed_hole_min_area': 0.003,
+    },
+    'pid': {
+        'kp': 1.3, 'ki': 0.03, 'kd': 0.11, 'integral_limit': 0.25, 'derivative_alpha': 0.25,
+        'feedback_gain': 0.35,
+    },
+    'lidar': {
+        'emergency_distance': 0.18, 'front_half_angle': 0.3,
+        'avoidance_speed': 0.13, 'planning_margin': 0.025, 'cluster_gap': 0.12,
+        'small_object_min_width': 0.015, 'small_object_max_width': 0.12, 'small_object_range': 1.8,
+        'small_object_clearance': 0.025, 'cone_inside_required': True, 'cone_side_deadband': 0.02,
+        'cone_inside_margin': 0.18, 'cone_row_spacing': 1.0, 'cone_spacing_tolerance': 0.2, 'cone_turn_distances': [0.1, 0.25, 0.4],
+        'cone_planning_distance': 0.8, 'road_heading_limit': 0.75, 'small_object_memory_distance': 0.8,
+        'planning_point_range': 3.0, 'cluster_min_points': 2, 'wide_object_half_width': 0.9,
+        'small_object_half_width': 0.75, 'planning_steps': 35, 'planning_steering_samples': 33,
+    },
+    'missions': {
+        'sign_cooldown': 12.0, 'slow_seconds': 14.0, 'fork_bias': 0.55, 'pedestrian_wait': 3.2,
+        'stop_offset': 0.015, 'stop_tolerance': 0.025, 'stop_approach_speed': 0.13,
+        'traffic_require_stop': True, 'traffic_min_stop': 0.3, 'stop_gain': 0.9, 'stopped_speed': 0.012,
+        'approach_timeout': 15.0, 'stop_line_memory': 8.0, 'line_missing_timeout': 2.0,
+        'line_match_tolerance': 0.1, 'enforce_order': True,
+        'sequence': ['slow', 'pedestrian', 'fork', 'traffic', 'parking'], 'fork_distance': 5.0,
+        'fork_wait_for_obstacles': True, 'fork_clear_distance': 0.1, 'pedestrian_require_line': True,
+        'trigger_line_max_distance': 1.5, 'trigger_line_freshness': 0.4,
+    },
+    'parking': {
+        'require_camera_during_sequence': False, 'enabled': True, 'align_timeout': 24.0,
+        'align_speed': 0.08, 'line_distance': 0.15, 'distance_tolerance': 0.025,
+        'lateral_tolerance': 0.035, 'heading_tolerance': 0.09, 'stable_seconds': 0.6,
+        'sequence': [
+            {'seconds': 2.1, 'speed': 0.12, 'steering': 0},
+            {'seconds': 6.65, 'speed': -0.1, 'steering': -0.5},
+            {'seconds': 3.0, 'speed': -0.1, 'steering': 0},
+            {'seconds': 3.2, 'speed': 0, 'steering': 0},
+        ],
+    },
+    'max_image_travel': 0.04, 'curve_speed_gain': 0.6,
+    # 차선 번호: 0=오른쪽, 1=가운데, 2=왼쪽 (진행 방향 기준)
+    'lane_change': {
+        'lane_count': 3, 'initial_lane': 1, 'lane_width': 0.52, 'trigger_distance': 1.15,
+        'check_distance': 1.8, 'lookahead': 0.55, 'speed': 0.18, 'margin': 0.035, 'safety_horizon': 0.3,
+        'finish_error': 0.025, 'finish_heading': 0.035, 'max_distance': 3.0,
+    },
+}
 
 YOLO_CLASSES = ['traffic_red', 'traffic_yellow', 'traffic_green', 'left', 'right', 'pedestrian', 'slow', 'parking']
 
+
+# ======================================================================
+# 1. 차선 담당 2명 — 인식 / 일반 차선 / 차선 변경
+# ======================================================================
 
 def clip(value, low, high):
     return float(max(low, min(high, value)))
@@ -508,7 +423,279 @@ class LaneVision:
                         result['stop_distance'] = float(distance)
         return result
 
+class LaneDriving:
+    """차선 담당①: 차선 오차 → 기본 조향 + PID. 반환값은 (속도, 조향)."""
+    def __init__(self, config, robot):
+        self.c, self.robot = config, robot
+        self.pid = PID(config['pid'])
+        self.steering = 0.0
+        self.last_seen = -1e9
 
+    def update(self, lane, now, dt, slow=False):
+        c = self.c
+        if lane['valid']:
+            self.last_seen = lane.get('stamp', now)
+            error = lane['error']
+            distance = lane.get('forward', c['lane']['lookahead'])
+            geometric = math.atan2(2*self.robot['wheelbase']*error, distance**2+error**2)
+            self.steering = clip(geometric+c['pid']['feedback_gain']*self.pid.update(error, dt),
+                                 -self.robot['max_steering'], self.robot['max_steering'])
+        speed = max(c['minimum_curve_speed'], c['base_speed']*(1-c['curve_speed_gain']*
+                    abs(self.steering)/self.robot['max_steering']))
+        if slow or lane['abnormal'] or not lane['valid']:
+            speed = min(speed, c['slow_speed'], c['base_speed']/2, .2)
+        if now-self.last_seen > c['lane']['lost_grace']:
+            speed = 0.0
+        return speed, self.steering
+
+
+class LaneChange:
+    """차선 담당②: 전방 차량 감지 → 빈 옆 차로 선택 → 한 차로 이동 → 차선 복귀.
+
+    offset은 카메라로 측정한 도로 방향 기준 횡이동 거리. odom의 속도만 적분한다.
+    지도 좌표나 장애물 차량의 배치 좌표는 사용하지 않는다.
+    """
+    def __init__(self, config, robot):
+        self.c, self.robot = config['lane_change'], robot
+        self.active = False
+        self.index = self.c['initial_lane']
+        self.heading = self.offset = self.target = self.travel = 0.0
+        self.waiting = False
+
+    def update(self, lane, scan, velocity, yaw_rate, dt, enabled, requested=0):
+        self.waiting = False
+        points = body_points(scan, self.robot)
+        self.heading -= yaw_rate*dt
+        if self.active:
+            self.offset -= velocity*math.sin(self.heading)*dt
+            self.travel += abs(velocity)*dt
+            error = self.target-self.offset
+            if abs(error) < self.c['finish_error'] and abs(self.heading) < self.c['finish_heading']:
+                self.active = False
+                self.index += 1 if self.target > 0 else -1
+                return None
+            distance = self.c['lookahead']
+            x = distance*math.cos(self.heading)-error*math.sin(self.heading)
+            y = distance*math.sin(self.heading)+error*math.cos(self.heading)
+            steering = clip(math.atan2(2*self.robot['wheelbase']*y, x*x+y*y),
+                            -self.robot['max_steering'], self.robot['max_steering'])
+            safe = path_clearance(points, steering, self.robot, self.c['safety_horizon']) >= self.c['margin']
+            speed = self.c['speed'] if safe and self.travel < self.c['max_distance'] else 0.0
+            return speed, steering
+        if not enabled or not lane['valid'] or (not requested and not scan['wide_objects']):
+            return None
+        # 갈림길의 꺾인 경계선 대신 직전 차선 변경의 도로 방향을 이어 쓴다.
+        heading = self.heading if requested else lane['heading']
+        forward = points[:, 0]*math.cos(heading)+points[:, 1]*math.sin(heading)
+        left = -points[:, 0]*math.sin(heading)+points[:, 1]*math.cos(heading)
+        # 차체가 진행할 통로 안의 전방 장애물만 확인한다.
+        blocked = np.any((forward > 0) & (forward < self.c['trigger_distance']) &
+                         (np.abs(left) < self.robot['width']/2+self.c['margin']))
+        if not blocked and not requested:
+            return None
+        directions = [(requested, 'left' if requested > 0 else 'right')] if requested else [(1, 'left'), (-1, 'right')]
+        for direction, side in directions:
+            if not 0 <= self.index+direction < self.c['lane_count'] or (not requested and lane.get('solid', {}).get(side, False)):
+                continue
+            target = direction*self.c['lane_width']
+            occupied = (forward > -self.robot['length']) & (forward < self.c['check_distance'])
+            occupied &= np.abs(left-target) < self.robot['width']/2+self.c['margin']
+            if np.any(occupied):
+                continue
+            self.active = True
+            # 코너 출구에서도 차량 방향이 아닌 도로 방향으로 한 차로 이동한다.
+            center = 0.0 if requested else lane['error']*math.cos(heading)-lane.get('forward', .65)*math.sin(heading)
+            self.heading, self.offset, self.target, self.travel = heading, 0.0, target+center, 0.0
+            return self.update(lane, scan, 0.0, 0.0, dt, enabled)
+        self.waiting = True
+        return 0.0, 0.0  # 옆 차로가 막혀 있으면 정지하고 다음 센서 입력을 기다린다.
+
+
+# ======================================================================
+# 2. 주차 담당 1명 — 진입 정렬 / 전진·후진 / 정차
+# ======================================================================
+
+class Parking:
+    """주차 담당: 진입 거리·차선 중심·방향 정렬 → 전진/후진 시간표 → 정차."""
+    def __init__(self, config):
+        self.c = config['parking']
+        self.stop_speed = config['missions']['stopped_speed']
+        self.state = 'parking_align'
+        self.started = self.step_started = 0.0
+        self.stable_since = None
+        self.index = 0
+
+    def start(self, now):
+        self.state, self.started, self.stable_since = 'parking_align', now, None
+        self.index = 0
+
+    def update(self, lane, line_distance, velocity, now, steering):
+        c = self.c
+        speed = 0.0
+        if self.state == 'parking_align':
+            if now-self.started > c['align_timeout']:
+                self.state = 'fault: parking alignment timeout'
+            elif lane['valid'] and line_distance is not None:
+                error = line_distance-c['line_distance']
+                speed = clip(.8*error, -c['align_speed'], c['align_speed'])
+                aligned = (abs(error) <= c['distance_tolerance'] and
+                           abs(lane['error']) <= c['lateral_tolerance'] and
+                           abs(lane['heading']) <= c['heading_tolerance'])
+                if aligned:
+                    speed = 0.0
+                if aligned and abs(velocity) <= self.stop_speed:
+                    if self.stable_since is None:
+                        self.stable_since = now
+                    if now-self.stable_since >= c['stable_seconds']:
+                        self.state, self.step_started = 'parking_sequence', now
+                else:
+                    self.stable_since = None
+        if self.state == 'parking_sequence':
+            sequence = c['sequence']
+            while self.index < len(sequence) and now-self.step_started >= sequence[self.index]['seconds']:
+                self.step_started += sequence[self.index]['seconds']
+                self.index += 1
+            if self.index == len(sequence):
+                self.state, speed = 'parked', 0.0
+            else:
+                step = sequence[self.index]
+                speed, steering = step['speed'], step['steering']
+        return speed, steering, self.state
+
+
+# ======================================================================
+# 3. 라바콘 담당 1명 — 안쪽 통과 / 충돌 회피
+# ======================================================================
+
+def passes_inside_cones(path_forward, path_lateral, cones, road_center, config):
+    """Pass each measured cone on the side toward the remembered road centre."""
+    if not len(cones):
+        return True
+    if np.any(np.diff(path_forward) <= 0):
+        return False
+    side = road_center - cones[:, 1]
+    future = ((cones[:, 0] > path_forward[0]) & (cones[:, 0] <= path_forward[-1]) &
+              (np.abs(side) > config.get('cone_side_deadband', .02)))
+    crossing = np.interp(cones[future, 0], path_forward, path_lateral)
+    inside = (crossing - cones[future, 1]) * np.sign(side[future])
+    return bool(np.all(inside >= config.get('cone_inside_margin', .01)))
+
+def cone_steering(scan, road_heading, road_center, robot, config, previous):
+    """라바콘 담당: 두 번 조향하는 짧은 경로 후보에서 충돌·바깥 통과를 제외."""
+    points = body_points(scan, robot)
+    centers = body_points({'points': scan['narrow_centers']}, robot)
+    cosine, sine = math.cos(road_heading), math.sin(road_heading)
+    cones = np.column_stack((centers[:, 0]*cosine+centers[:, 1]*sine,
+                             -centers[:, 0]*sine+centers[:, 1]*cosine))
+    distance = config['cone_planning_distance']
+    step = distance/config['planning_steps']
+    choices = np.linspace(-robot['max_steering'], robot['max_steering'], config['planning_steering_samples'])
+    best = None
+    for switch in config['cone_turn_distances']:
+        for first in choices:
+            for second in choices:
+                x = y = theta = 0.0
+                path = []
+                for index in range(config['planning_steps']):
+                    steering = first if index*step < switch else second
+                    theta += math.tan(steering)/robot['wheelbase']*step
+                    x += math.cos(theta)*step
+                    y += math.sin(theta)*step
+                    path.append((x+robot['wheelbase']/2*math.cos(theta),
+                                 y+robot['wheelbase']/2*math.sin(theta), theta))
+                path = np.asarray(path)
+                forward = np.r_[robot['wheelbase']/2*cosine, path[:, 0]*cosine+path[:, 1]*sine]
+                lateral = np.r_[-robot['wheelbase']/2*sine, -path[:, 0]*sine+path[:, 1]*cosine]
+                if np.max(np.abs(path[:, 2]-road_heading)) > max(config['road_heading_limit'], abs(road_heading)+.03):
+                    continue
+                if not passes_inside_cones(forward, lateral, cones, road_center, config):
+                    continue
+                clearance = footprint_clearance(points, path, robot)
+                if clearance < config['planning_margin']+config['small_object_clearance']:
+                    continue
+                cost = (2*(lateral[-1]-road_center)**2 + (theta-road_heading)**2 +
+                        .8*(first-previous)**2 + .6*second**2 - .1*min(clearance, .5))
+                if best is None or cost < best[0]:
+                    best = cost, first
+    return None if best is None else float(best[1])
+
+
+class ConeDriving:
+    """라바콘 담당: 좁은 라이다 군집을 인식하고 도로 중심 쪽으로 통과한다."""
+    def __init__(self, config, robot):
+        self.c, self.robot = config['lidar'], robot
+        self.active = False
+        self.remaining = self.heading = self.center = self.previous = 0.0
+        self.done = False
+
+    def update(self, lane, scan, velocity, yaw_rate, dt, enabled):
+        if not enabled or self.done:
+            self.active = False
+            return None
+        if self.active:
+            self.heading -= yaw_rate*dt
+            self.center += velocity*math.sin(self.heading)*dt
+        detected = scan['narrow_objects'] > 0 and scan['wide_objects'] == 0
+        if detected and not self.active:
+            # 같은 쪽 라바콘 사이의 방향으로 도로 축을 잡는다.
+            # 진입 코너의 곡선이나 라바콘에 가린 흰 선을 기준으로 삼지 않는다.
+            cones = np.asarray(scan['narrow_centers'], dtype=float).reshape(-1, 2)
+            directions = []
+            for i, first in enumerate(cones):
+                for second in cones[i+1:]:
+                    delta = second-first if second[0] > first[0] else first-second
+                    if abs(np.linalg.norm(delta)-self.c['cone_row_spacing']) < self.c['cone_spacing_tolerance']:
+                        directions.append(math.atan2(delta[1], delta[0]))
+            if len(cones) >= 3 and directions:
+                heading = float(np.median(directions))
+                if abs(heading) < .35:
+                    cones += [self.robot['lidar']['x'], self.robot['lidar'].get('y', 0)]
+                    left = -cones[:, 0]*math.sin(heading)+cones[:, 1]*math.cos(heading)
+                    self.heading, self.center = heading, float((left.min()+left.max())/2)
+                    self.active = True
+        self.remaining = self.c['small_object_memory_distance'] if detected else max(0, self.remaining-abs(velocity)*dt)
+        if self.active and self.remaining <= 0:
+            self.done = True  # 구간 통과 후 표지판 기둥을 라바콘으로 다시 취급하지 않는다.
+            self.active = False
+        if not self.active:
+            return None
+        steering = cone_steering(scan, self.heading, self.center, self.robot, self.c, self.previous)
+        if steering is None:
+            return 0.0, 0.0
+        self.previous = steering
+        return self.c['avoidance_speed'], steering
+
+
+# ======================================================================
+# 4. 공통 — 라이다 처리 / 미션 선택 / ROS 센서 수신·제어 발행
+# ======================================================================
+
+def body_points(scan, robot):
+    points = np.asarray(scan['points'], dtype=float).reshape(-1, 2).copy()
+    points += [robot['lidar']['x'], robot['lidar'].get('y', 0.0)]
+    return points
+
+
+def footprint_clearance(points, path, robot):
+    """차량을 점이 아닌 직사각형으로 검사한다. path의 좌표는 차체 중심."""
+    if len(points) == 0:
+        return float('inf')
+    dx, dy = points[None, :, 0]-path[:, None, 0], points[None, :, 1]-path[:, None, 1]
+    cosine, sine = np.cos(path[:, 2, None]), np.sin(path[:, 2, None])
+    longitudinal = np.maximum(np.abs(dx*cosine+dy*sine)-robot['length']/2, 0)
+    lateral = np.maximum(np.abs(-dx*sine+dy*cosine)-robot['width']/2, 0)
+    return float(np.hypot(longitudinal, lateral).min())
+
+
+def path_clearance(points, steering, robot, distance):
+    curvature = math.tan(steering)/robot['wheelbase']
+    travel = np.linspace(0, distance, 16)
+    angle = travel*curvature
+    x = travel if abs(curvature) < 1e-6 else np.sin(angle)/curvature
+    y = np.zeros_like(travel) if abs(curvature) < 1e-6 else (1-np.cos(angle))/curvature
+    path = np.column_stack((x+robot['wheelbase']/2*np.cos(angle),
+                            y+robot['wheelbase']/2*np.sin(angle), angle))
+    return footprint_clearance(points, path, robot)
 def scan_sectors(ranges, angle_min, angle_increment, range_min, range_max, config):
     """Validate scan data and expose measured local obstacle clusters."""
     values = np.asarray(ranges, dtype=float)
@@ -545,207 +732,6 @@ def scan_sectors(ranges, angle_min, angle_increment, range_min, range_max, confi
                 narrow_objects=narrow_objects, narrow_centers=narrow_centers,
                 wide_objects=wide_objects, valid_fraction=float(np.mean(valid)))
 
-
-def lane_obstructed(scan, lane, robot, config):
-    """Side posts are visible to lidar but do not obstruct the camera lane."""
-    if scan['front'] < config['trigger_distance']:
-        return True
-    points = np.asarray(scan.get('points', []), dtype=float).reshape(-1, 2)
-    if not len(points):
-        return False
-    forward = points[:, 0] + robot.get('lidar', {}).get('x', .10)
-    lateral = points[:, 1] + robot.get('lidar', {}).get('y', 0.0)
-    fit = lane.get('center_fit', [0.0, 0.0, lane['error']])
-    center = np.polyval(fit, forward)
-    half_width = robot['width']/2 + config.get('planning_margin', .025)
-    if scan.get('allow_edge_crossing', False):
-        half_width += config.get('small_object_clearance', .04)
-    inside = (forward > 0) & (forward < config.get('activation_distance', 1.2))
-    if 'fit_far' in lane:
-        inside &= forward <= lane['fit_far']
-    if 'fit_near' in lane:
-        inside &= forward >= lane['fit_near']
-    return bool(np.any(inside & (np.abs(lateral-center) < half_width)))
-
-
-def road_gap(scan, robot, heading, road_center, desired, config):
-    """Choose a free lateral corridor from lidar, in the remembered road frame."""
-    points = np.asarray(scan.get('points', []), dtype=float).reshape(-1, 2).copy()
-    if not len(points):
-        return desired
-    points[:, 0] += robot.get('lidar', {}).get('x', .10)
-    points[:, 1] += robot.get('lidar', {}).get('y', 0.0)
-    cosine, sine = math.cos(heading), math.sin(heading)
-    forward = points[:, 0]*cosine + points[:, 1]*sine
-    lateral = -points[:, 0]*sine + points[:, 1]*cosine - road_center
-    lateral = lateral[(forward > 0) & (forward < config.get('road_gap_range', 1.8))]
-    margin = robot['width']/2 + config.get('planning_margin', .025)
-    bound = config.get('road_half_width', .78) - margin
-    intervals = sorted((max(-bound, y-margin), min(bound, y+margin)) for y in lateral
-                       if y+margin > -bound and y-margin < bound)
-    gaps = []
-    left = -bound
-    for low, high in intervals:
-        if low > left:
-            gaps.append((left, low))
-        left = max(left, high)
-    if left < bound:
-        gaps.append((left, bound))
-    candidates = []
-    for low, high in gaps:
-        if high-low < config.get('road_gap_min_width', .005):
-            continue
-        goal = (low+high)/2 if high-low < config.get('road_gap_center_width', .30) else clip(desired, low, high)
-        candidates.append((abs(goal-desired), -goal, goal))
-    return desired if not candidates else float(min(candidates)[2])
-
-
-def passes_inside_cones(path_forward, path_lateral, cones, road_center, config):
-    """Pass each measured cone on the side toward the remembered road centre."""
-    if not len(cones):
-        return True
-    if np.any(np.diff(path_forward) <= 0):
-        return False
-    side = road_center - cones[:, 1]
-    future = ((cones[:, 0] > path_forward[0]) & (cones[:, 0] <= path_forward[-1]) &
-              (np.abs(side) > config.get('cone_side_deadband', .02)))
-    crossing = np.interp(cones[future, 0], path_forward, path_lateral)
-    inside = (crossing - cones[future, 1]) * np.sign(side[future])
-    return bool(np.all(inside >= config.get('cone_inside_margin', .01)))
-
-
-def avoidance_steering(scan, lane, robot, config, previous, refine=False):
-    """Check short Ackermann paths with the real rectangular vehicle footprint."""
-    points = np.asarray(scan.get('points', []), dtype=float).reshape(-1, 2).copy()
-    if not len(points):
-        return None
-    points[:, 0] += robot.get('lidar', {}).get('x', 0.10)
-    points[:, 1] += robot.get('lidar', {}).get('y', 0.0)
-    horizon = config.get('planning_distance', 1.0)
-    if scan.get('allow_edge_crossing', False):
-        horizon = config.get('cone_planning_distance', .8)
-    margin = config.get('planning_margin', .025)
-    if scan.get('allow_edge_crossing', False):
-        margin += config.get('small_object_clearance', .04)
-    half_length = robot['length'] / 2
-    half_width = robot['width'] / 2
-    steps = int(config.get('planning_steps', 35))
-    samples = int(config.get('planning_steering_samples', 17))
-    return_samples = int(config.get('planning_return_samples', 9))
-    if steps < 1 or samples < 3 or return_samples < 3 or samples % 2 == 0 or return_samples % 2 == 0:
-        raise ValueError('planning_steps >= 1; steering sample counts must be odd and >= 3')
-    step = horizon / steps
-    heading_clip = config.get('planning_heading_clip', .8)
-    heading = clip(lane.get('heading', 0.0), -heading_clip, heading_clip)
-    cones = np.empty((0, 2))
-    if (scan.get('allow_edge_crossing', False) and lane.get('road_memory', False) and
-            config.get('cone_inside_required', True)):
-        centers = np.asarray(scan.get('narrow_centers', []), dtype=float).reshape(-1, 2).copy()
-        centers[:, 0] += robot.get('lidar', {}).get('x', .10)
-        centers[:, 1] += robot.get('lidar', {}).get('y', 0.0)
-        cones = np.column_stack((centers[:, 0]*math.cos(heading) + centers[:, 1]*math.sin(heading),
-                                 -centers[:, 0]*math.sin(heading) + centers[:, 1]*math.cos(heading)))
-    center_at_origin = lane['error'] - math.tan(heading) * lane.get('forward', .65)
-    center_fit = lane.get('center_fit', [0.0, math.tan(heading), center_at_origin])
-    solid = lane.get('solid', {})
-    candidates = []
-    preview = min(horizon, config.get('planning_reference_distance', .65))
-    target_y = center_fit[0]*preview*preview + center_fit[1]*preview + center_fit[2]
-    reference_steering = math.atan2(2*robot['wheelbase']*target_y, preview*preview+target_y*target_y)
-    steering_choices = np.linspace(-robot['max_steering'], robot['max_steering'], samples)
-    return_choices = np.linspace(-robot['max_steering'], robot['max_steering'], return_samples)
-    if refine:
-        # A narrow safe corridor can fall between the regular steering samples.
-        # Retry only a failed search; existing successful paths stay unchanged.
-        fine = robot['max_steering'] / (samples-1)
-        extra = np.clip([reference_steering, previous, -fine, fine],
-                        -robot['max_steering'], robot['max_steering'])
-        steering_choices = np.unique(np.r_[steering_choices, extra])
-        return_choices = np.unique(np.r_[return_choices, extra])
-    first_distances = [config.get('planning_turn_distance', .40)]
-    if scan.get('allow_edge_crossing', False):
-        first_distances = config.get('cone_turn_distances', [.10, .25, .40])
-    if not first_distances or any(distance <= 0 or distance > horizon for distance in first_distances):
-        raise ValueError('Arc switch distances must be positive and within the planning horizon')
-    for first_distance in first_distances:
-        for steering in steering_choices:
-            curvature = math.tan(steering) / robot['wheelbase']
-            for next_steering in return_choices:
-                return_curvature = math.tan(next_steering) / robot['wheelbase']
-                x, y, theta = 0.0, 0.0, 0.0
-                path_x, path_y, path_theta = [], [], []
-                for i in range(steps):
-                    k = curvature if i * step < first_distance else return_curvature
-                    theta += k * step
-                    x += math.cos(theta) * step
-                    y += math.sin(theta) * step
-                    path_x.append(x + robot['wheelbase']/2 * math.cos(theta))
-                    path_y.append(y + robot['wheelbase']/2 * math.sin(theta))
-                    path_theta.append(theta)
-                end = clip(x, lane.get('fit_near', .2), lane.get('fit_far', horizon))
-                goal_heading = math.atan(2*center_fit[0]*end + center_fit[1])
-                if abs(theta - goal_heading) > config.get('planning_heading_limit', 1.2):
-                    continue
-                if lane.get('road_memory', False) and max(abs(t-heading) for t in path_theta) > max(config.get('road_heading_limit', .75), abs(heading)+config.get('road_heading_slack', .03)):
-                    continue
-                x, y, theta_path = np.asarray(path_x), np.asarray(path_y), np.asarray(path_theta)
-                cosine, sine = np.cos(theta_path), np.sin(theta_path)
-                road_offset = y * math.cos(heading) - x * math.sin(heading)
-                if np.max(np.abs(road_offset)) > config.get('lane_change_limit', .65):
-                    continue
-                if len(cones):
-                    forward = np.r_[robot['wheelbase']/2*math.cos(heading),
-                                    x*math.cos(heading) + y*math.sin(heading)]
-                    lateral = np.r_[-robot['wheelbase']/2*math.sin(heading), road_offset]
-                    if not passes_inside_cones(forward, lateral, cones, lane['road_center'], config):
-                        continue
-                # Use measured curved boundaries. A tangent at the preview point
-                # extrapolated back to the car can incorrectly exclude every path.
-                inside_lane = True
-                if lane.get('road_memory', False) and 'road_center' in lane and not scan.get('allow_edge_crossing', False):
-                    relative = theta_path-heading
-                    extent = half_length*np.abs(np.sin(relative)) + (half_width+margin)*np.abs(np.cos(relative))
-                    if np.any(np.abs(road_offset-lane['road_center'])+extent > config.get('road_half_width', .78)):
-                        continue
-                elif not scan.get('allow_edge_crossing', False):
-                    for side, boundary in lane.get('boundaries', {}).items():
-                        if not solid.get(side, False):
-                            continue
-                        for longitudinal in [-half_length, half_length]:
-                            for lateral in [-half_width-margin, half_width+margin]:
-                                corner_x = x + longitudinal*cosine - lateral*sine
-                                corner_y = y + longitudinal*sine + lateral*cosine
-                                measured = (corner_x >= boundary['near']) & (corner_x <= boundary['far'])
-                                distance = corner_y - np.polyval(boundary['fit'], corner_x)
-                                outside = distance > 0 if side == 'left' else distance < 0
-                                if np.any(outside & measured):
-                                    inside_lane = False
-                    if not inside_lane:
-                        continue
-                # Transform each lidar hit into each future body frame. This keeps
-                # the narrow .22 m body passable in a .30 m gap between parked cars.
-                dx = points[None, :, 0] - x[:, None]
-                dy = points[None, :, 1] - y[:, None]
-                longitudinal = np.abs(dx*cosine[:, None] + dy*sine[:, None]) - half_length
-                lateral = np.abs(-dx*sine[:, None] + dy*cosine[:, None]) - half_width
-                separation = np.sqrt(np.maximum(longitudinal, 0)**2 + np.maximum(lateral, 0)**2)
-                clearance = float(separation.min())
-                if clearance < margin:
-                    continue
-                deviation = y[-1] - (center_fit[0]*end*end + center_fit[1]*end + center_fit[2])
-                cost = (config.get('planning_cost_heading', 1.0)*(theta-goal_heading)**2 +
-                        config.get('planning_cost_lateral', 2.0)*deviation**2 +
-                        config.get('planning_cost_steering_change', .8)*(steering-previous)**2 +
-                        config.get('planning_cost_return_steering', .6)*next_steering**2 +
-                        config.get('planning_cost_reference', 1.5)*(steering-reference_steering)**2 -
-                        config.get('planning_cost_clearance', .1)*min(clearance, config.get('planning_clearance_cap', .5)))
-                candidates.append((cost, steering))
-    if (not candidates and not refine and not scan.get('allow_edge_crossing', False) and
-            config.get('planning_refine_on_failure', True)):
-        return avoidance_steering(scan, lane, robot, config, previous, refine=True)
-    return None if not candidates else float(min(candidates)[1])
-
-
 def sensor_status(config, state, ages, available):
     """Require the inputs used by this state, keeping lidar/odometry mandatory."""
     timed_parking = state in ('parking_sequence', 'parked')
@@ -761,63 +747,40 @@ def sensor_status(config, state, ages, available):
         ready = ready and available['lane']
     return bool(ready), required_camera
 
-
 class Driver:
-    """Perception/state machine. Absolute vehicle pose is intentionally unused."""
+    """공통: 표지판·정지선 상태를 관리하고 담당별 제어기의 출력을 선택한다."""
     def __init__(self, config):
-        self.c = config['answer']
-        self.robot = config['robot']
-        self.pid = PID(self.c['pid'])
-        self.state = 'lane'
-        self.state_started = 0.0
-        self.last_time = None
-        self.last_lane_time = -1e9
-        self.last_steering = 0.0
-        self.last_heading = 0.0
-        self.last_lane_error = 0.0
-        self.last_lane_forward = .65
-        self.lost_lane_distance = 0.0
-        self.slow_until = 0.0
-        self.fork_remaining = 0.0
-        self.fork_bias = 0.0
-        self.fork_target = 0.0
-        self.fork_pending = False
-        self.fork_clear_distance = 0.0
-        self.cooldowns = {}
-        self.stopped_since = None
-        self.traffic_stop_completed = False
-        self.line_distance = None
+        self.c, self.robot = config['answer'], config['robot']
+        self.lane_driver = LaneDriving(self.c, self.robot)
+        self.lane_change = LaneChange(self.c, self.robot)
+        self.parking = Parking(self.c)
+        self.cones = ConeDriving(self.c, self.robot)
+        self.pid = self.lane_driver.pid
+        self.state, self.state_started = 'lane', 0.0
+        self.last_time = self.last_lane_stamp = self.last_detection_stamp = None
+        self.stopped_since = self.line_distance = None
         self.line_seen = -1e9
-        self.align_since = None
-        self.sequence_index = 0
-        self.sequence_started = 0.0
-        self.sign_counts = {}
-        self.last_detection_stamp = None
-        self.last_lane_stamp = None
+        self.slow_until = self.fork_remaining = self.fork_bias = self.fork_target = 0.0
+        self.fork_pending, self.fork_clear_distance = False, 0.0
+        self.fork_request = 0
+        self.traffic_stop_completed = False
         self.stage_index = 0
-        self.avoidance_previous = 0.0
-        self.avoiding = False
-        self.avoidance_clear_distance = 0.0
-        self.road_memory = False
-        self.road_heading = 0.0
-        self.road_center = 0.0
-        self.cone_remaining = 0.0
-        self.debug = {}
+        self.cooldowns, self.sign_counts, self.debug = {}, {}, {}
+
+    @property
+    def avoiding(self):
+        return self.lane_change.active or self.cones.active
 
     def transition(self, state, now):
-        self.state = state
-        self.state_started = now
-        self.stopped_since = None
-        self.align_since = None
+        self.state, self.state_started, self.stopped_since = state, now, None
         self.pid.reset()
         if state != 'lane':
-            self.avoiding = False
-            self.road_memory = False
-            self.cone_remaining = 0.0
+            self.lane_change.active = self.cones.active = False
+        if state == 'parking_align':
+            self.parking.start(now)
 
     def sensor_failure(self, now):
-        self.stopped_since = None
-        self.align_since = None
+        self.stopped_since = self.parking.stable_since = None
         if self.state == 'parking_sequence':
             self.transition('fault: sensor lost during parking', now)
 
@@ -842,18 +805,8 @@ class Driver:
         return {name for name in names
                 if self.sign_counts.get(name, 0) >= self.c['detector']['confirm_frames']}
 
-    def update(self, lane, scan, detections, detection_stamp, velocity, now, angular_velocity=0.0):
-        c = self.c
-        m = c['missions']
-        dt = 0.05 if self.last_time is None else clip(now - self.last_time, 0.001, 0.2)
-        if self.last_time is not None and now < self.last_time:
-            self.__init__({'answer': self.c, 'robot': self.robot})
-        self.last_time = now
-        if self.road_memory:
-            self.road_heading -= angular_velocity * dt
-            self.road_center += velocity * math.sin(self.road_heading) * dt
-        self.cone_remaining = max(0.0, self.cone_remaining-max(0.0, velocity)*dt)
-        self.fork_remaining = max(0.0, self.fork_remaining - max(0.0, velocity) * dt)
+    def update_stop_line(self, lane, velocity, now, dt):
+        m = self.c['missions']
         if self.line_distance is not None:
             self.line_distance -= velocity * dt
         image_stamp = lane.get('stamp', now)
@@ -874,6 +827,9 @@ class Driver:
             self.line_distance = None
         if self.state == 'lane' and self.line_distance is not None and self.line_distance < -0.05:
             self.line_distance = None
+
+    def update_signs(self, scan, detections, detection_stamp, velocity, now, dt):
+        c, m = self.c, self.c['missions']
         names = self.confirmed(detections, detection_stamp)
         ready = {name for name in names if now >= self.cooldowns.get(name, 0)}
         green_only = 'traffic_green' in names and not ({'traffic_red', 'traffic_yellow'} & names)
@@ -892,12 +848,16 @@ class Driver:
         # Read the arrow early, but finish the parked-car corridor before
         # changing sides. Require measured travel with no wide object ahead.
         if self.fork_pending:
-            if scan.get('wide_objects', 0) > 0:
+            if self.lane_change.active or scan.get('wide_objects', 0) > 0:
                 self.fork_clear_distance = 0.0
             else:
                 self.fork_clear_distance += max(0.0, velocity) * dt
             if self.fork_clear_distance >= m.get('fork_clear_distance', .20):
-                self.fork_bias = self.fork_target
+                # 표지판 방향으로 실제 한 차로 이동한 뒤 새 차선을 따른다.
+                direction = 1 if self.fork_target > 0 else -1
+                destination = self.c['lane_change']['lane_count']-1 if direction > 0 else 0
+                self.fork_request = direction if self.lane_change.index != destination else 0
+                self.fork_bias = 0.0
                 self.fork_pending = False
         if self.fork_remaining <= 0.0:
             self.fork_bias = 0.0
@@ -917,30 +877,10 @@ class Driver:
                     self.transition('pedestrian_approach', now)
             elif 'parking' in ready and c['parking']['enabled'] and self.allowed('parking'):
                 self.transition('parking_align', now)
-        if lane['valid']:
-            self.last_lane_time = image_stamp
-            self.last_lane_error = lane['error']
-            self.last_lane_forward = lane.get('forward', c['lane']['lookahead'])
-            self.lost_lane_distance = 0.0
-            alpha = c['lane'].get('heading_smoothing', .2)
-            self.last_heading = (1-alpha)*self.last_heading + alpha*lane['heading']
-            error = lane['error']
-            if lane['abnormal']:
-                error *= c['lane'].get('abnormal_error_scale', 1.0)
-            preview = lane.get('forward', c['lane']['lookahead'])
-            geometric = math.atan2(2 * self.robot['wheelbase'] * error, preview * preview + error * error)
-            steering = geometric + c['pid'].get('feedback_gain', 0.35) * self.pid.update(error, dt)
-            steering += c['lane']['heading_gain'] * self.last_heading
-            self.last_steering = clip(steering, -self.robot['max_steering'], self.robot['max_steering'])
-        steering = self.last_steering
-        speed = max(c['minimum_curve_speed'], c['base_speed'] * (1 - c.get('curve_speed_gain', .6) * abs(steering) / self.robot['max_steering']))
-        if now < self.slow_until or lane['abnormal']:
-            speed = min(speed, c['slow_speed'], c['base_speed'] / 2, 0.2)
-        if not lane['valid']:
-            self.lost_lane_distance += abs(velocity) * dt
-            speed = min(speed, c['slow_speed'])
-            if now - self.last_lane_time > c['lane']['lost_grace']:
-                speed = 0.0
+        return green_only
+
+    def stop_missions(self, speed, velocity, green_only, now):
+        m = self.c['missions']
         if self.state.endswith('_approach'):
             crossing_on_green = (self.state == 'traffic_approach' and green_only and
                                  (not m.get('traffic_require_stop', True) or self.traffic_stop_completed))
@@ -988,131 +928,54 @@ class Driver:
                 self.traffic_stop_completed = True
             if green_only and self.traffic_stop_completed:
                 self.transition('traffic_approach', now)
-        if self.state == 'parking_align':
-            p = c['parking']
-            speed = 0.0
-            if now - self.state_started > p['align_timeout']:
-                self.transition('fault: parking alignment timeout', now)
-            elif lane['valid'] and self.line_distance is not None:
-                distance_error = self.line_distance - p['line_distance']
-                speed = clip(distance_error * 0.8, -p['align_speed'], p['align_speed'])
-                aligned = (abs(distance_error) <= p['distance_tolerance'] and
-                           abs(lane['error']) <= p['lateral_tolerance'] and
-                           abs(lane['heading']) <= p['heading_tolerance'])
-                if aligned:
-                    speed = 0.0
-                    if abs(velocity) <= m['stopped_speed']:
-                        if self.align_since is None:
-                            self.align_since = now
-                        elif now - self.align_since >= p['stable_seconds']:
-                            self.sequence_index = 0
-                            self.sequence_started = now
-                            self.transition('parking_sequence', now)
-                else:
-                    self.align_since = None
-        if self.state == 'parking_sequence':
-            sequence = c['parking']['sequence']
-            while self.sequence_index < len(sequence) and now - self.sequence_started >= sequence[self.sequence_index]['seconds']:
-                self.sequence_started += sequence[self.sequence_index]['seconds']
-                self.sequence_index += 1
-            if self.sequence_index >= len(sequence):
+        return speed
+
+    def update(self, lane, scan, detections, detection_stamp, velocity, now, angular_velocity=0.0):
+        if self.last_time is not None and now < self.last_time:
+            self.__init__({'answer': self.c, 'robot': self.robot})
+        dt = .05 if self.last_time is None else clip(now-self.last_time, .001, .2)
+        self.last_time = now
+        self.fork_remaining = max(0, self.fork_remaining-max(0, velocity)*dt)
+        self.update_stop_line(lane, velocity, now, dt)
+        green_only = self.update_signs(scan, detections, detection_stamp, velocity, now, dt)
+        speed, steering = self.lane_driver.update(lane, now, dt, now < self.slow_until)
+        mode = self.state
+        if self.state == 'lane':
+            change = self.lane_change.update(lane, scan, velocity, angular_velocity, dt,
+                                            self.allowed('fork') or self.fork_remaining > 0, self.fork_request)
+            if self.fork_request and self.lane_change.active:
+                self.fork_request = 0
+            cone = None if change is not None else self.cones.update(
+                lane, scan, velocity, angular_velocity, dt, self.stage() == 'traffic' and self.fork_remaining <= 0)
+            if change is not None:
+                speed, steering = change
+                mode = 'lane_change' if self.lane_change.active else 'lane_change: waiting for clear lane'
+            elif cone is not None:
+                speed, steering = cone
+                mode = 'cones'
+        speed = self.stop_missions(speed, velocity, green_only, now)
+        if self.state in ('parking_align', 'parking_sequence'):
+            speed, steering, self.state = self.parking.update(lane, self.line_distance, velocity, now, steering)
+            if self.state == 'parked':
                 self.advance('parking')
-                self.transition('parked', now)
-                speed = 0.0
-            else:
-                step = sequence[self.sequence_index]
-                speed, steering = step['speed'], step['steering']
-        if self.state.startswith('fault') or self.state == 'parked':
-            speed = 0.0
-        # Lidar runs for all missions, including reversing during parking.
-        # Cones may legally be bypassed outside the painted lane. Trigger this
-        # only after the fork and from measured narrow lidar clusters. Their
-        # wider base needs more clearance than the thin slice at lidar height.
-        scan = dict(scan)
-        cone_hint = (self.state == 'lane' and self.stage() == 'traffic' and self.fork_remaining <= 0 and
-                     scan.get('narrow_objects', 0) > 0 and scan.get('wide_objects', 0) == 0)
-        if cone_hint:
-            self.cone_remaining = c['lidar'].get('small_object_memory_distance', .8)
-        scan['allow_edge_crossing'] = self.stage() == 'traffic' and self.cone_remaining > 0.0
-        blocked = lane_obstructed(scan, lane, self.robot, c['lidar'])
-        if blocked:
-            remember_road = (not self.avoiding and scan.get('wide_objects', 0) > 0 and
-                             (self.allowed('fork') or self.fork_remaining > 0))
-            if (remember_road or scan['allow_edge_crossing']) and not self.road_memory:
-                self.road_memory = True
-                self.road_heading = lane['heading'] if lane['valid'] else self.last_heading
-                if lane.get('dash_heading') is not None:
-                    self.road_heading = lane['dash_heading']
-                self.road_center = self.last_lane_error*math.cos(self.road_heading) - self.last_lane_forward*math.sin(self.road_heading)
-            self.avoiding = True
-            self.avoidance_clear_distance = 0.0
-        elif self.avoiding:
-            self.avoidance_clear_distance += max(0.0, velocity) * dt
-            aligned = not self.road_memory or (abs(self.road_heading) < c['lidar'].get('road_release_heading', .18) and
-                                                   abs(lane['error']) < c['lidar'].get('road_release_error', .30))
-            if self.road_memory and self.fork_bias != 0:
-                aligned = (abs(self.road_heading) < c['lidar'].get('road_release_heading', .18) and
-                           abs(self.road_center+self.fork_bias) < m.get('fork_align_tolerance', .12))
-            if self.road_memory and self.fork_pending:
-                aligned = False
-            if aligned and self.avoidance_clear_distance >= c['lidar'].get('release_distance', .25):
-                self.avoiding = False
-                self.road_memory = False
-        if (self.road_memory and self.avoiding and not lane['valid'] and self.state == 'lane' and
-                self.lost_lane_distance < c['lidar'].get('vision_memory_distance', 2.0)):
-            speed = c['lidar']['avoidance_speed']
-        planner_failed = False
-        if speed > 0 and self.avoiding and self.state == 'lane':
-            planning_lane = lane
-            if self.road_memory:
-                # Camera boundary identities can change while a parked car hides
-                # paint. Remember only the local road direction and lateral line,
-                # propagated with odometry velocities; never read absolute pose.
-                heading = self.road_heading
-                cosine = max(.2, math.cos(heading))
-                fit = [0.0, math.tan(heading), self.road_center/cosine]
-                half_road = c['lidar'].get('road_half_width', .78)
-                boundaries = {side: dict(fit=[0.0, fit[1], fit[2]+sign*half_road/cosine], near=0.0, far=2.0)
-                              for side, sign in [('left', 1), ('right', -1)]}
-                desired = 0.0
-                if not scan['allow_edge_crossing']:
-                    desired = self.fork_bias if self.fork_bias != 0 else c['lidar'].get('road_default_bias', .30)
-                    desired = road_gap(scan, self.robot, heading, self.road_center, desired, c['lidar'])
-                target_fit = [fit[0], fit[1], fit[2]+desired/cosine]
-                planning_lane = dict(lane, heading=heading, center_fit=target_fit, fit_near=0.0, fit_far=2.0,
-                                     solid=dict(left=True, right=True), boundaries=boundaries, road_memory=True, road_center=self.road_center)
-            planned = avoidance_steering(scan, planning_lane, self.robot, c['lidar'], self.avoidance_previous)
-            if planned is None:
-                if not blocked and lane['valid'] and not self.road_memory:
-                    self.avoiding = False
-                else:
-                    speed = 0.0
-                    planner_failed = True
-            else:
-                steering = planned
-                self.avoidance_previous = planned
-                speed = min(speed, c['lidar']['avoidance_speed'])
+        # 모든 담당의 제어 결과에 공통으로 적용하는 최종 정지 조건.
         clearance = scan['front'] if speed >= 0 else scan['rear']
-        if scan['valid_fraction'] < 0.5 or clearance < c['lidar']['emergency_distance']:
+        if scan['valid_fraction'] < .5 or clearance < self.c['lidar']['emergency_distance']:
             if self.state == 'parking_sequence':
-                # A paused time schedule must never resume at a later step.
                 self.transition('fault: obstacle during parking', now)
             speed = 0.0
-        self.debug = dict(lane_valid=lane['valid'], lane_error=lane['error'], lane_heading=lane['heading'],
-                          pid=dict(self.pid.terms), pid_error=self.pid.previous,
-                          pid_feedback_gain=c['pid'].get('feedback_gain', .35),
-                          dash_heading=lane.get('dash_heading'),
-                          traffic_stop_completed=self.traffic_stop_completed,
-                          lane_age=now-self.last_lane_time, front=scan['front'], rear=scan['rear'],
-                          blocked=blocked, avoiding=self.avoiding, planner_failed=planner_failed,
-                          cone_clearance=scan['allow_edge_crossing'], narrow_objects=scan.get('narrow_objects', 0),
-                          wide_objects=scan.get('wide_objects', 0),
-                          narrow_centers=scan.get('narrow_centers', []),
-                          road_memory=self.road_memory, road_heading=self.road_heading, road_center=self.road_center,
-                          lost_lane_distance=self.lost_lane_distance, fork_remaining=self.fork_remaining, fork_bias=self.fork_bias,
-                          fork_pending=self.fork_pending, fork_target=self.fork_target,
-                          line_distance=self.line_distance, stop_candidates=lane.get('stop_candidates', []), stage=self.stage(), speed=float(speed))
-        return float(speed), clip(steering, -self.robot['max_steering'], self.robot['max_steering']), self.state
+        if self.state.startswith('fault') or self.state == 'parked':
+            speed = 0.0
+        self.debug = dict(lane_valid=lane['valid'], lane_error=lane['error'],
+                          pid=dict(self.pid.terms), pid_feedback_gain=self.c['pid']['feedback_gain'],
+                          stage=self.stage(), front=scan['front'], rear=scan['rear'],
+                          lane_index=self.lane_change.index, lane_change_target=self.lane_change.target,
+                          lane_change_offset=self.lane_change.offset, lane_change_heading=self.lane_change.heading,
+                          line_distance=self.line_distance, fork_pending=self.fork_pending,
+                          fork_remaining=self.fork_remaining, fork_request=self.fork_request,
+                          avoiding=self.avoiding, cone_active=self.cones.active,
+                          cone_heading=self.cones.heading, cone_center=self.cones.center, speed=speed)
+        return float(speed), clip(steering, -self.robot['max_steering'], self.robot['max_steering']), mode if self.state == 'lane' else self.state
 
 
 def main(config_path=None):
