@@ -1,0 +1,307 @@
+# 실차(Jetson, Ubuntu 22.04 + ROS 2 Humble)용 설정. 시뮬레이터 설정은 config.yaml을 쓰세요.
+# 실차는 /clock이 없으므로 시스템 시간을 씁니다.
+use_sim_time: false
+# 실차 YDLidar는 무반사를 0으로 보낸다. answer.py에서 0을 inf(무반사)로 취급한다.
+lidar_zero_is_no_return: true
+
+environment:
+  ros_setup: /opt/ros/humble/setup.bash
+  ros_domain_id: 29
+  gz_partition: orda_mentoring
+  software_rendering: true
+  pip_packages:
+  - numpy==1.26.4
+  - opencv-python==4.11.0.86
+  - ultralytics==8.3.228
+  - PyYAML>=6.0,<7
+  gazebo_config_paths:
+  - /usr/share/gz
+  egl_software_only: true
+  cpu_threads: 2
+  apt_packages:
+  - python3-venv
+  - build-essential
+  - libegl-dev
+  - ros-jazzy-ros-gz-bridge
+  - ros-jazzy-cv-bridge
+  - gz-harmonic
+  - python3-yaml
+  - libgl1-mesa-dri
+  - libglx-mesa0
+  - libegl-mesa0
+  - libglib2.0-0t64
+  - libxcb-xinerama0
+  - libxcb-cursor0
+  - libxcb-xinput0
+  - libxkbcommon-x11-0
+  torch_packages:
+  - torch==2.6.0
+  - torchvision==0.21.0
+  torch_index: https://download.pytorch.org/whl/cpu
+  gazebo_repository:
+    package: gz-harmonic
+    key_url: https://packages.osrfoundation.org/gazebo.gpg
+    keyring: /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+    source_list: /etc/apt/sources.list.d/gazebo-stable.list
+    url: https://packages.osrfoundation.org/gazebo/ubuntu-stable
+    suite: noble
+    components: main
+    download_timeout: 30
+simulator:
+  headless: false
+  verbosity: 2
+  gui_width: 960
+  gui_height: 640
+  command_rate: 30.0
+  command_timeout: 0.4
+  clock_timeout: 2.0
+  service_timeout_ms: 500
+  egl_headless: true
+topics:
+  image: /camera/color/image_raw
+  camera_info: /camera/color/camera_info
+  scan: /scan
+  odometry: /odom
+  drive: /drive
+  cmd_vel: /model/limo/cmd_vel
+  debug_image: /answer/debug_image
+  detections: /answer/detections
+  status: /answer/status
+paths:
+  logs: src/runtime/logs
+  generated: src/runtime/generated
+world:
+  name: orda
+  step_size: 0.002
+  real_time_factor: 1.0
+  track_pixels_per_meter: 400
+  lane_color:
+  - 240
+  - 240
+  - 240
+  road_color:
+  - 34
+  - 34
+  - 34
+  lane_fill_width_m: 0.055
+  ambient:
+  - 0.8
+  - 0.8
+  - 0.8
+  - 1.0
+  gui_camera_pose:
+  - 5
+  - -4
+  - 10
+  - 0
+  - 0.96
+  - 1.57079632679
+robot:
+  name: limo
+  wheelbase: 0.2
+  width: 0.22
+  length: 0.322
+  wheel_radius: 0.05
+  wheel_width: 0.025
+  body_height: 0.11
+  mass: 4.8
+  max_speed: 0.6
+  max_steering: 0.52
+  max_acceleration: 1.0
+  spawn:
+  - 1.25
+  - 5.57
+  - 0.003
+  - 0
+  - 0
+  - 0
+  camera:
+    width: 480
+    height: 360
+    hfov_deg: 71.0
+    rate_hz: 15.0
+    x: 0.23
+    y: 0.0
+    z: 0.23
+    pitch: 0.2
+    near: 0.05
+    far: 12.0
+  lidar:
+    x: 0.1
+    y: 0.0
+    z: 0.16
+    samples: 720
+    rate_hz: 15.0
+    range_min: 0.06
+    range_max: 12.0
+  front_axle_x: 0.2
+  ground_clearance: 0.024
+scene:
+  sign_size: 0.22
+  signal_size:
+  - 0.14
+  - 0.32
+  post_radius: 0.012
+  slow_pose:
+  - 2.4
+  - 5.15
+  - 0.36
+  - 0
+  - 0
+  - 0
+  pedestrian_pose:
+  - 9.15
+  - 2.55
+  - 0.36
+  - 0
+  - 0
+  - -1.57079632679
+  fork_pose:
+  - 3.9
+  - 0.94
+  - 0.36
+  - 0
+  - 0
+  - 3.14159265359
+  traffic_pose:
+  - 3.85
+  - 5.2
+  - 0.38
+  - 0
+  - 0
+  - 0
+  parking_pose:
+  - 7.9
+  - 5.15
+  - 0.36
+  - 0
+  - 0
+  - 0
+  advertisement_pose:
+  - 4.15
+  - 5.24
+  - 0.41
+  - 0
+  - 0
+  - 0
+  advertisement_size:
+  - 0.26
+  - 0.3
+  fork_initial: left
+  bump:
+    pose:
+    - 3.2
+    - 5.57
+    - 0.0
+    - 0
+    - 0
+    - 0
+    width: 0.55
+    radius: 0.016
+  obstacles:
+  - - 7.6
+    - 0.94
+    - 0
+    - 0
+    - 0
+    - 3.14159265359
+  - - 5.4
+    - 0.42
+    - 0
+    - 0
+    - 0
+    - 3.14159265359
+  - - 6.5
+    - 1.46
+    - 0
+    - 0
+    - 0
+    - 3.14159265359
+  parking_obstacles:
+  - - 6.4
+    - 4.25
+    - 0
+    - 0
+    - 0
+    - -1.57079632679
+  - - 7.44
+    - 4.25
+    - 0
+    - 0
+    - 0
+    - -1.57079632679
+  cone_radius: 0.045
+  cone_height: 0.24
+  cone_mass: 0.12
+  cones:
+  - - 0.63
+    - 2.1
+  - - 0.94
+    - 2.6
+  - - 0.63
+    - 3.1
+  - - 0.94
+    - 3.6
+  traffic_seconds:
+  - 8.0
+  - 10.0
+  - 2.0
+  advertisement_seconds: 0.7
+  random_seed: 29
+  random_fork: true
+  obstacle_body_height: 0.18
+  obstacle_ground_clearance: 0.04
+  parking_reference:
+    enabled: true
+    pose:
+    - 7.4
+    - 4.84
+    - 0.002
+    - 0
+    - 0
+    - 0
+    length: 0.02
+    width: 0.55
+  fork_switch_after: 2.0
+viewer:
+  auto_start: true
+  panel_size: 500
+  preprocess_panel_size: 400
+  lidar_range: 2.5
+  rate_hz: 10.0
+  frame_cache: 60
+  stale_wall_seconds: 2.0
+  window_positions:
+  - - 20
+    - 40
+  - - 900
+    - 40
+  - - 20
+    - 510
+  window_sizes:
+  - - 800
+    - 400
+  - - 640
+    - 480
+  - - 500
+    - 500
+  display:
+    lane:
+      white_min:
+      - 0
+      - 0
+      - 165
+      white_max:
+      - 179
+      - 85
+      - 255
+      height_px: 420
+      width_px: 480
+      lookahead: 0.65
+      far: 1.7
+      near: 0.2
+    pid:
+      feedback_gain: 0.35
+    detector:
+      timeout: 1.5
+    sensor_timeout: 0.7

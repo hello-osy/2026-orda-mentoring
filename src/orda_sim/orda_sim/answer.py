@@ -704,14 +704,23 @@ def scan_sectors(ranges, angle_min, angle_increment, range_min, range_max, confi
     """Validate scan data and expose measured local obstacle clusters."""
     values = np.asarray(ranges, dtype=float)
     angles = angle_min + np.arange(len(values)) * angle_increment
+    if config.get('zero_is_no_return', False):
+        # 실차 YDLidar는 반사가 없는 방향을 inf가 아니라 0으로 보낸다(한 프레임의 50~60%).
+        # 그대로 두면 valid_fraction<0.5, front=0이 되어 속도가 항상 0으로 묶이므로 inf와 같게 취급한다.
+        # 주의: 최소 측정거리보다 가까운 물체도 0으로 올 수 있다.
+        values = np.where(values == 0.0, np.inf, values)
     # Positive infinity is a valid no-return. NaN/negative/zero is unknown and unsafe.
     clean = np.where(np.isposinf(values), range_max, values)
     valid = np.isfinite(clean) & (clean >= range_min)
     clean = np.where(valid, np.minimum(clean, range_max), 0.0)
     def minimum(center, half):
         delta = np.arctan2(np.sin(angles - center), np.cos(angles - center))
-        sector = clean[np.abs(delta) < half]
-        return float(np.min(sector)) if len(sector) else 0.0
+        in_sector = np.abs(delta) < half
+        sector = clean[in_sector & valid]
+        # 실차 라이다는 무반사를 0으로 보낸다. 무효 점만 있는 구간은 안전하게 0(막힘)으로 본다.
+        if len(sector) and np.mean(valid[in_sector]) >= .5:
+            return float(np.min(sector))
+        return 0.0
     front = minimum(0.0, config['front_half_angle'])
     rear = minimum(math.pi, config['front_half_angle'])
     hits = valid & (clean < min(range_max, config.get('planning_point_range', 3.0)))
@@ -1003,6 +1012,8 @@ def main(config_path=None):
     config = yaml.safe_load(path.read_text())
     config['answer'] = ANSWER_CONFIG
     c = config['answer']
+    # 실차 라이다(0 = 무반사) 대응. 시뮬레이터 config.yaml에는 키가 없으므로 기존 동작 그대로.
+    c['lidar']['zero_is_no_return'] = bool(config.get('lidar_zero_is_no_return', False))
     detector = None
     if c['detector']['enabled']:
         weights = Path(__file__).with_name('best.pt')
@@ -1020,7 +1031,9 @@ def main(config_path=None):
 
     class AnswerNode(Node):
         def __init__(self):
-            super().__init__('orda_answer', parameter_overrides=[Parameter('use_sim_time', value=True)])
+            # 시뮬레이터는 /clock(sim time), 실차(real_car.yaml)는 시스템 시간을 쓴다.
+            use_sim_time = bool(config.get('use_sim_time', True))
+            super().__init__('orda_answer', parameter_overrides=[Parameter('use_sim_time', value=use_sim_time)])
             self.bridge = CvBridge()
             self.driver = Driver(config)
             self.vision = LaneVision(c['lane'], config['robot']['camera'], config['robot']['front_axle_x'])

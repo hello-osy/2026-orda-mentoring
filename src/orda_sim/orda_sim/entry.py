@@ -14,6 +14,9 @@ def main():
     elif action == 'answer':
         from .answer import main as answer_main
         answer_main(filename)
+    elif action == 'real_drive':
+        from .real_drive import run
+        run(config)
     elif action == 'view':
         from .view import run
         run(config)
